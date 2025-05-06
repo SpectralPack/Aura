@@ -2,9 +2,9 @@
 --- MOD_NAME: Aura
 --- MOD_ID: Aura
 --- MOD_AUTHOR: [MathIsFun_, ChromaPIE, Bard, TwoBlueDogs]
---- MOD_DESCRIPTION: Adds animations to Jokers. Art by: Bard, Grassy311, RattlingSnow353, Solace, RadicaAprils, chloe_cromslor, and SadCube
+--- MOD_DESCRIPTION: Adds animations to Jokers. Art by: Bard, Grassy311, RattlingSnow353, Solace, RadicaAprils, chloe_cromslor, SadCube, and Mincoiin
 --- BADGE_COLOUR: 3469ab
---- VERSION: 0.03
+--- VERSION: 0.0311
 
 AnimatedJokers = {
     j_joker = { frames_per_row = 11, frames = 22 },
@@ -31,7 +31,7 @@ AnimatedJokers = {
     j_banner = {},
     j_mystic_summit = {},
     j_marble = {},
-    j_loyalty_cfard = {},
+    j_loyalty_card = { frames = 7 },
     j_8_ball = {},
     j_misprint = { frames_per_row = 13, frames = 65 },
     j_dusk = { frames_per_row = 13, frames = 78, fps = 5 },
@@ -51,7 +51,7 @@ AnimatedJokers = {
     j_business = { frames_per_row = 13, frames = 120 },
     j_supernova = {},
     j_ride_the_bus = { frames_per_row = 9, frames = 36 },
-    j_space = {},
+    j_space = { frames = 96 },
     j_egg = { frames_per_row = 4, frames = 8 },
     j_burglar = { frames_per_row = 19, frames = 76 },
     j_blackboard = { frames_per_row = 9, frames = 59, individual = true },
@@ -74,7 +74,7 @@ AnimatedJokers = {
     j_square = { frames_per_row = 11, frames = 22 },
     j_seance = {},
     j_riff_raff = { frames_per_row = 14, frames = 490 },
-    j_vampire = {},
+    j_vampire = { frames_per_row = 7, frames = 41},
     j_shortcut = {},
     j_hologram = {},
     j_vagabond = { frames = 30, fps = 5 },
@@ -100,7 +100,7 @@ AnimatedJokers = {
     j_lucky_cat = {},
     j_baseball = {},
     j_bull = {},
-    j_diet_cola = {},
+    j_diet_cola = { frames = 20 },
     j_trading = {},
     j_flash = { frames_per_row = 13, frames = 26, individual = true, immediate = true },
     j_popcorn = {},
@@ -119,7 +119,7 @@ AnimatedJokers = {
     j_swashbuckler = {},
     j_troubadour = {},
     j_certificate = { frames_per_row = 7, frames = 28 },
-    j_smeared = {},
+    j_smeared = { frames = 10 },
     j_throwback = {},
     j_hanging_chad = {},
     j_rough_gem = {},
@@ -158,16 +158,17 @@ AnimatedJokers = {
     j_chicot = {},
     j_perkeo = {}
 }
-AnimatedPlanets = { -- actually any consumable, not just planets
+AnimatedPlanets = {
     c_fool = {},
     c_magician = {},
     c_high_priestess = {},
     c_empress = {},
     c_emperor = {},
-    c_heirophant = {},
+    c_hierophant = {},
     c_lovers = { frames = 11 },
     c_chariot = {},
     c_justice = {},
+    c_hermit = {},
     c_wheel_of_fortune = { frames = 12 },
     c_strength = {},
     c_hanged_man = {},
@@ -175,9 +176,9 @@ AnimatedPlanets = { -- actually any consumable, not just planets
     c_temperance = {},
     c_devil = {},
     c_tower = {},
-    c_star = {},
-    c_moon = {},
     c_sun = {},
+    c_moon = {},
+    c_star = {},
     c_judgement = {},
     c_world = {},
     c_mercury = { frames = 24 },
@@ -189,11 +190,11 @@ AnimatedPlanets = { -- actually any consumable, not just planets
     c_uranus = { frames = 24 },
     c_neptune = { frames = 24 },
     c_pluto = { frames = 24 },
+    c_planet_x = { frames = 24 },
     c_ceres = { frames = 24 },
     c_eris = { frames = 24 },
-    c_planet_x = { frames = 24 },
     c_familiar = {},
-    c_grim = {}, 
+    c_grim = {},
     c_incantation = {},
     c_talisman = {},
     c_aura = {},
@@ -210,6 +211,40 @@ AnimatedPlanets = { -- actually any consumable, not just planets
     c_cryptid = {},
     c_soul = {},
     c_black_hole = {}
+}
+AnimatedVouchers = {
+    v_overstock = {},
+    v_overstock_plus = {},
+    v_clearance_sale = {},
+    v_liquidation = {},
+    v_hone = {},
+    v_glow_up = {},
+    v_reroll_surplus = {},
+    v_reroll_glut = {},
+    v_crystal_ball = {},
+    v_omen_globe = {},
+    v_telescope = {},
+    v_observatory = {},
+    v_grabber = {},
+    v_nacho_tong = {},
+    v_wasteful = { frames = 9 },
+    v_recyclomancy = {},
+    v_tarot_merchant = {},
+    v_tarot_tycoon = {},
+    v_planet_merchant = {},
+    v_planet_tycoon = {},
+    v_seed_money = {},
+    v_money_tree = {},
+    v_blank = {},
+    v_antimatter = {},
+    v_magic_trick = {},
+    v_illusion = {},
+    v_hieroglyph = {},
+    v_petroglyph = {},
+    v_directors_cut = {},
+    v_retcon = {},
+    v_paint_brush = {},
+    v_palette = {}
 }
 AnimatedIndividuals = {}
 
@@ -283,7 +318,34 @@ if SMODS.Atlas then
                 pos = { x = 0, y = 0, extra = v.extra and {x = 0, y = 0, atlas = "aura_"..k.."_extra"} },
             })
         else
-            SMODS[v and v.set or "Joker"]:take_ownership(k, {}, true)
+            SMODS[v and v.set or "Consumable"]:take_ownership(k, {}, true)
+        end
+    end
+    --Register all Vouchers/Sprites
+    for k, v in pairs(AnimatedVouchers) do
+        if v.frames then
+            --sprite
+            SMODS.Atlas {
+                key = k,
+                path = k .. ".png",
+                px = v.px or 71,
+                py = v.py or 95
+            }
+            if v.extra then
+                SMODS.Atlas {
+                    key = k.."_extra",
+                    path = k .. "_extra.png",
+                    px = v.px or 71,
+                    py = v.py or 95
+                }
+            end
+            --voucher override
+            SMODS[v.set or "Voucher"]:take_ownership(k, {
+                atlas = k,
+                pos = { x = 0, y = 0, extra = v.extra and {x = 0, y = 0, atlas = "aura_"..k.."_extra"} },
+            })
+        else
+            SMODS[v and v.set or "Voucher"]:take_ownership(k, {}, true)
         end
     end
 else
@@ -330,7 +392,7 @@ end
 local upd = Game.update
 
 function Aura.update_frame(dt, k, obj, jkr)
-    local anim = AnimatedJokers[k] or AnimatedPlanets[k]
+    local anim = AnimatedJokers[k] or AnimatedPlanets[k] or AnimatedVouchers[k]
     if anim and obj and (anim.frames or anim.individual) then
         local next_frame = false
         local next_frame_extra = false
@@ -401,6 +463,9 @@ function Game:update(dt)
         Aura.update_frame(dt, k, G.P_CENTERS[k])
     end
     for k, v in pairs(AnimatedPlanets) do
+        Aura.update_frame(dt, k, G.P_CENTERS[k])
+    end
+    for k, v in pairs(AnimatedVouchers) do
         Aura.update_frame(dt, k, G.P_CENTERS[k])
     end
     for _, v in pairs(AnimatedIndividuals) do
@@ -579,6 +644,23 @@ function Card:calculate_joker(context)
 
     return ret1, ret2
 end
+
+SMODS.Joker:take_ownership('loyalty_card',
+    { -- the table of properties you want to change
+   update = function(self, card, dt) -- change only update() to not mess with calculate()
+         if card.ability then
+            if card.ability.loyalty_remaining ~= card.children.center.sprite_pos_copy.x - 1 then -- loyalty_remaining is the. loyalty card procs remaining, duh
+               card.children.center:set_sprite_pos({x = card.ability.loyalty_remaining + 1 or 0, y = 0}) -- set sprite pos acc to loy_remaining
+               card:juice_up(0.2,0.2) -- small jiggle when the frame changes
+            --    play_sound("cardSlide2") -- this sound actually interprets as hole punching
+            end
+         else
+            card.children.center:set_sprite_pos({x = 0, y = 0}) -- Just In Case
+         end
+   end
+    },
+    true -- suppress the mod badge
+)
 
 --There's a bug with this function in 0.9.8 that screws up the joker pool
 --So we just override it to fix our problems
