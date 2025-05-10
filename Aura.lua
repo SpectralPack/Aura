@@ -105,15 +105,15 @@ AnimatedJokers = {
     j_flash = { frames_per_row = 13, frames = 26, individual = true, immediate = true },
     j_popcorn = {}, -- todo: change sprite as it is used
     j_trousers = { frames = 48 },
-    j_ancient = {},
-    j_ramen = {},
+    j_ancient = {}, -- todo: change sprite to indicate suit
+    j_ramen = {}, -- todo: change sprite as it is used
     j_walkie_talkie = {},
     j_selzer = { frames = 5, individual = true },
     j_castle = { frames_per_row = 9, frames = 69, start_frame = 0, extra = { frames_per_row = 5, frames = 5, fps = 5, start_frame = 0 } },
     j_smiley = { frames_per_row = 13, frames = 150 },
     j_campfire = {},
     j_ticket = {},
-    j_mr_bones = {},
+    j_mr_bones = {}, -- todo: destroy animation?
     j_acrobat = {},
     j_sock_and_buskin = {},
     j_swashbuckler = {},
@@ -150,7 +150,7 @@ AnimatedJokers = {
     j_drivers_license = { frames = 2, individual = true },
     j_cartomancer = {},
     j_astronomer = {frames = 29 },
-    j_burnt = {},
+    j_burnt = {}, -- todo: animate when primed?
     j_bootstraps = {frames_per_row = 19, frames = 38 },
     j_caino = {}, -- todo: add animations
     j_triboulet = {}, -- todo: add animations
@@ -664,8 +664,8 @@ function Card:calculate_joker(context)
     end
 
     local ss = Card.set_seal
-    function Card:set_seal(seal)
-        ss(self,seal)
+    function Card:set_seal(seal, silent, immediate)
+        ss(self,seal,silent,immediate)
         if seal then
             Aura.current_seal = seal
         end
@@ -674,36 +674,60 @@ function Card:calculate_joker(context)
         if context.first_hand_drawn then
             ss(self)
             if Aura.current_seal == 'Gold' then
-                AnimatedJokers.j_certificate.individual = false
-                AnimatedJokers.j_certificate.extra.fps = 1
-                G.P_CENTERS["j_certificate"].pos.extra.x = 1
-                AnimatedJokers.j_certificate.extra.fps = 0
+                G.E_MANAGER:add_event(Event({ delay = 10*G.SETTINGS.GAMESPEED,
+                    func = (function()
+                        Aura.add_individual(self)
+                        self.animation = { target = 27 }
+                        AnimatedJokers.j_certificate.extra.fps = 1
+                        G.P_CENTERS["j_certificate"].pos.extra.x = 1
+                        AnimatedJokers.j_certificate.extra.fps = 0
+                        return true
+                    end)
+                }))
             end
             if Aura.current_seal == 'Purple' then
-                AnimatedJokers.j_certificate.individual = false
-                AnimatedJokers.j_certificate.extra.fps = 1
-                G.P_CENTERS["j_certificate"].pos.extra.x = 2
-                AnimatedJokers.j_certificate.extra.fps = 0
+                G.E_MANAGER:add_event(Event({ delay = 10*G.SETTINGS.GAMESPEED,
+                    func = (function()
+                        Aura.add_individual(self)
+                        self.animation = { target = 27 }
+                        AnimatedJokers.j_certificate.extra.fps = 1
+                        G.P_CENTERS["j_certificate"].pos.extra.x = 2
+                        AnimatedJokers.j_certificate.extra.fps = 0
+                        return true
+                    end)
+                }))
             end
             if Aura.current_seal == 'Red' then
-                AnimatedJokers.j_certificate.individual = false
-                AnimatedJokers.j_certificate.extra.fps = 1
-                G.P_CENTERS["j_certificate"].pos.extra.x = 3
-                AnimatedJokers.j_certificate.extra.fps = 0
+                G.E_MANAGER:add_event(Event({ delay = 10*G.SETTINGS.GAMESPEED,
+                    func = (function()
+                        Aura.add_individual(self)
+                        self.animation = { target = 27 }
+                        AnimatedJokers.j_certificate.extra.fps = 1
+                        G.P_CENTERS["j_certificate"].pos.extra.x = 3
+                        AnimatedJokers.j_certificate.extra.fps = 0
+                        return true
+                    end)
+                }))
             end
             if Aura.current_seal == 'Blue' then
-                AnimatedJokers.j_certificate.individual = false
-                AnimatedJokers.j_certificate.extra.fps = 1
-                G.P_CENTERS["j_certificate"].pos.extra.x = 4
-                AnimatedJokers.j_certificate.extra.fps = 0
+                G.E_MANAGER:add_event(Event({ delay = 10*G.SETTINGS.GAMESPEED,
+                    func = (function()
+                        Aura.add_individual(self)
+                        self.animation = { target = 27 }
+                        AnimatedJokers.j_certificate.extra.fps = 1
+                        G.P_CENTERS["j_certificate"].pos.extra.x = 4
+                        AnimatedJokers.j_certificate.extra.fps = 0
+                        return true
+                    end)
+                }))
             end
         end
-        if context.end_of_round then
-            AnimatedJokers.j_certificate.individual = true
+        if context.game_over or (context.setting_blind and G.GAME.round_resets.ante == 1 and G.GAME.round == 1) then
             Aura.add_individual(self)
             self.animation = { target = 0 }
             G.P_CENTERS["j_certificate"].pos.x = 0
             G.P_CENTERS["j_certificate"].pos.y = 0
+            AnimatedJokers.j_certificate.extra.fps = 1
             G.P_CENTERS["j_certificate"].pos.extra.x = 0
             AnimatedJokers.j_certificate.extra.fps = 0
         end
