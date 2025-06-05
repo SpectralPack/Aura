@@ -8,64 +8,64 @@
 
 AnimatedJokers = {
     j_joker = { frames_per_row = 11, frames = 22 },
-    j_greedy_joker = { frames = 12 },
-    j_lusty_joker = { frames_per_row = 5, frames = 20 },
-    j_wrathful_joker = { frames_per_row = 1, frames = 18 },
-    j_gluttenous_joker = { frames = 12 },
-    j_jolly = {},
-    j_zany = {},
-    j_mad = {},
-    j_crazy = {},
-    j_droll = {},
-    j_sly = {},
-    j_wily = {},
-    j_clever = {},
-    j_devious = {},
-    j_crafty = {},
-    j_half = {},
-    j_stencil = {},
+    j_greedy_joker = { frames = 12, extra = { frames_per_row = 11, frames = 22 } },
+    j_lusty_joker = { frames_per_row = 5, frames = 20, extra = { frames_per_row = 11, frames = 22 } },
+    j_wrathful_joker = { frames_per_row = 5, frames = 18, extra = { frames_per_row = 11, frames = 22 } },
+    j_gluttenous_joker = { frames = 12, extra = { frames_per_row = 11, frames = 22 } },
+    j_jolly = { frames_per_row = 11, frames = 22 },
+    j_zany = { frames_per_row = 11, frames = 22 },
+    j_mad = { frames_per_row = 11, frames = 22 },
+    j_crazy = { frames_per_row = 11, frames = 22 },
+    j_droll = { frames_per_row = 11, frames = 22 },
+    j_sly = { frames_per_row = 11, frames = 22 },
+    j_wily = { frames_per_row = 11, frames = 22 },
+    j_clever = { frames_per_row = 11, frames = 22 },
+    j_devious = { frames_per_row = 11, frames = 22 },
+    j_crafty = { frames_per_row = 11, frames = 22 },
+    j_half = { frames_per_row = 11, frames = 22 },
+    j_stencil = { frames_per_row = 11, frames = 22 },
     j_four_fingers = {},
     j_mime = {},
     j_credit_card = {},
     j_ceremonial = {},
     j_banner = {},
     j_mystic_summit = {},
-    j_marble = {},
+    j_marble = { frames_per_row = 11, frames = 22 },
     j_loyalty_card = { frames = 7 },
     j_8_ball = {}, -- todo: animate when triggered
     j_misprint = { frames_per_row = 13, frames = 65 },
     j_dusk = { frames_per_row = 13, frames = 78, fps = 5 },
     j_raised_fist = { frames_per_row = 4, frames = 14 },
-    j_chaos = {},
+    j_chaos = { frames_per_row = 11, frames = 22 },
     j_fibonacci = {},
-    j_steel_joker = {},
+    j_steel_joker = { frames_per_row = 11, frames = 22 },
     j_scary_face = {},
     j_abstract = {},
     j_delayed_grat = {}, -- todo: animate when primed
     j_hack = { frames_per_row = 8, frames = 64 },
     j_pareidolia = { frames_per_row = 5, frames = 20 },
     j_gros_michel = {},
-    j_even_steven = {},
-    j_odd_todd = {},
+    j_even_steven = { frames_per_row = 11, frames = 22 },
+    j_odd_todd = { frames_per_row = 11, frames = 22 },
     j_scholar = { frames_per_row = 9, frames = 45 },
     j_business = { frames_per_row = 13, frames = 120 },
     j_supernova = {},
     j_ride_the_bus = { frames_per_row = 9, frames = 36 },
-    j_space = { frames = 96 },
+    j_space = { frames = 96, extra = { frames_per_row = 11, frames = 22 } },
     j_egg = { frames_per_row = 4, frames = 8, individual = true },
     j_burglar = { frames_per_row = 19, frames = 76, individual = true },
-    j_blackboard = { frames_per_row = 9, frames = 59, individual = true },
-    j_runner = {},
+    j_blackboard = { frames_per_row = 11, frames = 22, extra = { frames_per_row = 9, frames = 59, individual = true } }, -- ANIMATION LOGIC NEEDS FIXING, transfer all logic from main layer to extra layer + there is a weird black outline around the mask
+    j_runner = {frames_per_row = 10, frames = 110},
     j_ice_cream = {}, -- todo: change sprite as it is used
     j_dna = { frames = 11 },
     j_splash = {},
-    j_blue_joker = {},
-    j_sixth_sense = { frames = 13, extra = { frames = 20 } }, --todo: card destroy animation
-    j_constellation = { frames_per_row = 6, frames = 60 },
-    j_hiker = {},
+    j_blue_joker = { frames_per_row = 11, frames = 22 },
+    j_sixth_sense = { frames = 13, extra = { frames_per_row = 11, frames = 22 } }, --todo: card destroy animation
+    j_constellation = { frames_per_row = 6, frames = 66 },
+    j_hiker = { frames_per_row = 11, frames = 22 },
     j_faceless = { frames_per_row = 4, frames = 24 },
-    j_green_joker = {},
-    j_superposition = {}, -- todo: animate when triggered
+    j_green_joker = { frames_per_row = 11, frames = 22 },
+    j_superposition = { frames_per_row = 5, frames = 10, extra = { frames = 6, fps = 8 } }, --NEEDS LOGIC WHEN TRIGGERED: if on row 0 set target to 5, else set target to 0
     j_todo_list = { frames_per_row = 12, frames = 96 }, -- todo: show hand that needs to be played/animate on trigger
     j_cavendish = {},
     j_card_sharp = {},
@@ -74,16 +74,16 @@ AnimatedJokers = {
     j_square = { frames_per_row = 11, frames = 22 },
     j_seance = {}, -- todo: animate when triggered
     j_riff_raff = { frames_per_row = 14, frames = 490 },
-    j_vampire = { frames_per_row = 6, frames = 30 },
+    j_vampire = { frames_per_row = 11, frames = 22, extra = { frames_per_row = 6, frames = 30 } },
     j_shortcut = {},
     j_hologram = {},
     j_vagabond = { frames = 30, fps = 5 },
-    j_baron = {},
+    j_baron = { frames_per_row = 11, frames = 22 },
     j_cloud_9 = {},
     j_rocket = {},
     j_obelisk = {}, -- todo: animate when promoted
     j_midas_mask = {},
-    j_luchador = {},
+    j_luchador = { frames_per_row = 11, frames = 22 },
     j_photograph = { frames = 48 },
     j_gift = {},
     j_turtle_bean = {}, -- todo: change sprite as it is used
@@ -92,11 +92,11 @@ AnimatedJokers = {
     j_mail = {}, -- todo: show rank
     j_to_the_moon = { frames_per_row = 10, frames = 50 },
     j_hallucination = {},
-    j_fortune_teller = {},
+    j_fortune_teller = { frames_per_row = 11, frames = 22 },
     j_juggler = {},
     j_drunkard = {},
-    j_stone = {},
-    j_golden = {},
+    j_stone = { frames_per_row = 11, frames = 22 },
+    j_golden = { frames_per_row = 11, frames = 22 },
     j_lucky_cat = {}, -- todo: animate when promoted
     j_baseball = {},
     j_bull = {},
@@ -113,43 +113,43 @@ AnimatedJokers = {
     j_smiley = { frames_per_row = 13, frames = 150 },
     j_campfire = {},
     j_ticket = {},
-    j_mr_bones = {}, -- todo: destroy animation?
+    j_mr_bones = { frames_per_row = 11, frames = 22 }, -- todo: destroy animation? on extra layer with first frame fully transparent?
     j_acrobat = {},
-    j_sock_and_buskin = {},
-    j_swashbuckler = {},
+    j_sock_and_buskin = { frames_per_row = 5, frames = 30 },
+    j_swashbuckler = { frames_per_row = 11, frames = 22 },
     j_troubadour = {},
     j_certificate = { frames_per_row = 7, frames = 28, individual = true },
     j_smeared = { frames = 10 },
-    j_throwback = {}, -- todo: animate when promoted
-    j_hanging_chad = {},
+    j_throwback = { frames = 1, extra = { frames_per_row = 11, frames = 22 } }, -- todo: animate background and/or animate when promoted
+    j_hanging_chad = {}
     j_rough_gem = {},
     j_bloodstone = {},
     j_arrowhead = {},
     j_onyx_agate = {},
-    j_glass = {},
-    j_ring_master = {},
+    j_glass = { frames_per_row = 11, frames = 22 },
+    j_ring_master = { frames_per_row = 11, frames = 22 },
     j_flower_pot = { frames = 24 },
     j_blueprint = { frames_per_row = 8, frames = 44, individual = true },
     j_wee = { frames_per_row = 11, frames = 22 },
     j_merry_andy = {},
-    j_oops = {},
+    j_oops = {frames = 10, extra = {frames = 1}}, -- todo: add 3/5 frame animation of dice rolling on trigger
     j_idol = {}, -- todo: open mouth to show suit and rank
     j_seeing_double = {frames_per_row = 13, frames = 150, extra = { frames_per_row = 5, frames = 20, start_frame = 0 } },
-    j_matador = {},
+    j_matador = { frames_per_row = 11, frames = 22 },
     j_hit_the_road = {}, -- todo: animate when promoted
     j_duo = {},
     j_trio = {},
     j_family = {},
     j_order = {},
     j_tribe = {},
-    j_stuntman = {},
+    j_stuntman = { frames_per_row = 11, frames = 22 },
     j_invisible = {frames = 11, individual = true},
     j_brainstorm = { frames_per_row = 8, frames = 39, individual = true },
     j_satellite = {},
     j_shoot_the_moon = {},
     j_drivers_license = { frames = 2, individual = true },
-    j_cartomancer = {},
-    j_astronomer = {frames = 29 },
+    j_cartomancer = { frames_per_row = 11, frames = 22 },
+    j_astronomer = { frames = 29, extra = { frames_per_row = 30, frames = 330 } },
     j_burnt = {}, -- todo: animate when primed?
     j_bootstraps = {frames_per_row = 19, frames = 38 },
     j_caino = {}, -- todo: add animations
@@ -237,7 +237,7 @@ AnimatedVouchers = {
     v_money_tree = {},
     v_blank = { frames = 23 },
     v_antimatter = {},
-    v_magic_trick = {},
+    v_magic_trick = { frames = 9 },
     v_illusion = {},
     v_hieroglyph = {},
     v_petroglyph = {},
@@ -562,7 +562,7 @@ function Card:calculate_joker(context)
 
     local ret1, ret2 = cj(self, context)
 
-    --Blackboard
+    --Blackboard -- NEEDS FIXING: transfer all logic to extra layer
     if self.ability.name == "Blackboard" and context.cardarea == G.jokers and context.joker_main then
         local black_suits, all_cards = 0, 0
         for k, v in ipairs(G.hand.cards) do
@@ -583,6 +583,13 @@ function Card:calculate_joker(context)
             }))
         end
     end
+    --Superposition--NEEDS LOGIC WITH FOLLOWING SCHEME
+    --when TRIGGERED
+        --if obj.pos.y == 0
+            --target = 5
+        --else
+            --target = 0
+    
     --Flash Card
     if self.ability.name == "Flash Card" and context.reroll_shop and not context.blueprint then
         G.E_MANAGER:add_event(Event({
