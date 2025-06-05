@@ -43,7 +43,7 @@ AnimatedJokers = {
     j_abstract = {},
     j_delayed_grat = {}, -- todo: animate when primed
     j_hack = { frames_per_row = 8, frames = 64 },
-    j_pareidolia = { frames_per_row = 5, frames = 20 },
+    j_pareidolia = { frames_per_row = 5, fraHmes = 20 },
     j_gros_michel = {},
     j_even_steven = { frames_per_row = 11, frames = 22 },
     j_odd_todd = { frames_per_row = 11, frames = 22 },
@@ -76,7 +76,7 @@ AnimatedJokers = {
     j_riff_raff = { frames_per_row = 14, frames = 490 },
     j_vampire = { frames_per_row = 11, frames = 22, extra = { frames_per_row = 6, frames = 30 } },
     j_shortcut = {},
-    j_hologram = {},
+    j_hologram = {}, -- IMPLEMENT ALREDY MADE ANIMATION
     j_vagabond = { frames = 30, fps = 5 },
     j_baron = { frames_per_row = 11, frames = 22 },
     j_cloud_9 = {},
