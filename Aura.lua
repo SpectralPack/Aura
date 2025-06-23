@@ -8,64 +8,64 @@
 
 AnimatedJokers = {
     j_joker = { frames_per_row = 11, frames = 22 },
-    j_greedy_joker = { frames = 12 },
-    j_lusty_joker = { frames_per_row = 5, frames = 20 },
-    j_wrathful_joker = { frames_per_row = 1, frames = 18 },
-    j_gluttenous_joker = { frames = 12 },
-    j_jolly = {},
-    j_zany = {},
-    j_mad = {},
-    j_crazy = {},
-    j_droll = {},
-    j_sly = {},
-    j_wily = {},
-    j_clever = {},
-    j_devious = {},
-    j_crafty = {},
-    j_half = {},
-    j_stencil = {},
+    j_greedy_joker = { frames = 12, extra = { frames_per_row = 11, frames = 22 } },
+    j_lusty_joker = { frames_per_row = 5, frames = 20, extra = { frames_per_row = 11, frames = 22 } },
+    j_wrathful_joker = { frames_per_row = 5, frames = 18, extra = { frames_per_row = 11, frames = 22 } },
+    j_gluttenous_joker = { frames = 12, extra = { frames_per_row = 11, frames = 22 } },
+    j_jolly = { frames_per_row = 11, frames = 22 },
+    j_zany = { frames_per_row = 11, frames = 22 },
+    j_mad = { frames_per_row = 11, frames = 22 },
+    j_crazy = { frames_per_row = 11, frames = 22 },
+    j_droll = { frames_per_row = 11, frames = 22 },
+    j_sly = { frames_per_row = 11, frames = 22 },
+    j_wily = { frames_per_row = 11, frames = 22 },
+    j_clever = { frames_per_row = 11, frames = 22 },
+    j_devious = { frames_per_row = 11, frames = 22 },
+    j_crafty = { frames_per_row = 11, frames = 22 },
+    j_half = { frames_per_row = 11, frames = 22 },
+    j_stencil = { frames_per_row = 11, frames = 22 },
     j_four_fingers = {},
     j_mime = {},
     j_credit_card = {},
     j_ceremonial = {},
     j_banner = {},
     j_mystic_summit = {},
-    j_marble = {},
+    j_marble = { frames_per_row = 11, frames = 22 },
     j_loyalty_card = { frames = 7 },
     j_8_ball = {}, -- todo: animate when triggered
-    j_misprint = { frames_per_row = 13, frames = 65 },
+    j_misprint = { frames_per_row = 11, frames = 66 },
     j_dusk = { frames_per_row = 13, frames = 78, fps = 5 },
     j_raised_fist = { frames_per_row = 4, frames = 14 },
-    j_chaos = {},
+    j_chaos = { frames_per_row = 11, frames = 22 },
     j_fibonacci = {},
-    j_steel_joker = {},
+    j_steel_joker = { frames_per_row = 11, frames = 22 },
     j_scary_face = {},
     j_abstract = {},
     j_delayed_grat = {}, -- todo: animate when primed
     j_hack = { frames_per_row = 8, frames = 64 },
     j_pareidolia = { frames_per_row = 5, frames = 20 },
     j_gros_michel = {},
-    j_even_steven = {},
-    j_odd_todd = {},
-    j_scholar = { frames_per_row = 9, frames = 45 },
+    j_even_steven = { frames_per_row = 11, frames = 22 },
+    j_odd_todd = { frames_per_row = 11, frames = 22 },
+    j_scholar = { frames_per_row = 11, frames = 22, extra = { frames_per_row = 9, frames = 45 }},
     j_business = { frames_per_row = 13, frames = 120 },
     j_supernova = {},
     j_ride_the_bus = { frames_per_row = 9, frames = 36 },
-    j_space = { frames = 96 },
+    j_space = { frames = 96, extra = { frames_per_row = 11, frames = 22 } },
     j_egg = { frames_per_row = 4, frames = 8, individual = true },
-    j_burglar = { frames_per_row = 19, frames = 76, individual = true },
-    j_blackboard = { frames_per_row = 9, frames = 59, individual = true },
-    j_runner = {},
+    j_burglar = { frames = 76, individual = true, verticframes = 22 },
+    j_blackboard = { frames = 59, individual = true, verticframes = 22 },
+    j_runner = {frames_per_row = 10, frames = 110},
     j_ice_cream = {}, -- todo: change sprite as it is used
     j_dna = { frames = 11 },
     j_splash = {},
-    j_blue_joker = {},
-    j_sixth_sense = { frames = 13, extra = { frames = 20 } }, --todo: card destroy animation
-    j_constellation = { frames_per_row = 6, frames = 60 },
-    j_hiker = {},
+    j_blue_joker = { frames_per_row = 11, frames = 22 },
+    j_sixth_sense = { frames = 13, extra = { frames_per_row = 11, frames = 22 } }, --todo: card destroy animation --extra = { frames = 20 }
+    j_constellation = { frames_per_row = 6, frames = 66 },
+    j_hiker = { frames_per_row = 11, frames = 22 },
     j_faceless = { frames_per_row = 4, frames = 24 },
-    j_green_joker = {},
-    j_superposition = {}, -- todo: animate when triggered
+    j_green_joker = { frames_per_row = 11, frames = 22 },
+    j_superposition = { frames = 20, verticframes = 6, verticfps = 8, individual = true },
     j_todo_list = { frames_per_row = 12, frames = 96 }, -- todo: show hand that needs to be played/animate on trigger
     j_cavendish = {},
     j_card_sharp = {},
@@ -74,16 +74,16 @@ AnimatedJokers = {
     j_square = { frames_per_row = 11, frames = 22 },
     j_seance = {}, -- todo: animate when triggered
     j_riff_raff = { frames_per_row = 14, frames = 490 },
-    j_vampire = { frames_per_row = 6, frames = 30 },
+    j_vampire = { frames_per_row = 11, frames = 22, extra = { frames_per_row = 6, frames = 30 } },
     j_shortcut = {},
-    j_hologram = {},
+    j_hologram = { frames_per_row = 22, frames = 220, start_frame=198, extra = { frames = 1 }},--{frames = 1, extra = { frames_per_row = 22, frames = 220, start_frame=198}},-- frames = 1, extra = { frames_per_row = 11, frames = 22 } 
     j_vagabond = { frames = 30, fps = 5 },
-    j_baron = {},
+    j_baron = { frames_per_row = 11, frames = 22 },
     j_cloud_9 = {},
     j_rocket = {},
     j_obelisk = {}, -- todo: animate when promoted
     j_midas_mask = {},
-    j_luchador = {},
+    j_luchador = { frames_per_row = 11, frames = 22 },
     j_photograph = { frames = 48 },
     j_gift = {},
     j_turtle_bean = {}, -- todo: change sprite as it is used
@@ -92,11 +92,11 @@ AnimatedJokers = {
     j_mail = {}, -- todo: show rank
     j_to_the_moon = { frames_per_row = 10, frames = 50 },
     j_hallucination = {},
-    j_fortune_teller = {},
+    j_fortune_teller = { frames_per_row = 11, frames = 22 },
     j_juggler = {},
     j_drunkard = {},
-    j_stone = {},
-    j_golden = {},
+    j_stone = { frames_per_row = 11, frames = 22 },
+    j_golden = { frames_per_row = 11, frames = 22 },
     j_lucky_cat = {}, -- todo: animate when promoted
     j_baseball = {},
     j_bull = {},
@@ -113,26 +113,26 @@ AnimatedJokers = {
     j_smiley = { frames_per_row = 13, frames = 150 },
     j_campfire = {},
     j_ticket = {},
-    j_mr_bones = {}, -- todo: destroy animation?
+    j_mr_bones = { frames_per_row = 11, frames = 22 }, -- todo: destroy animation?
     j_acrobat = {},
-    j_sock_and_buskin = {},
-    j_swashbuckler = {},
+    j_sock_and_buskin = { frames_per_row = 5, frames = 30 },
+    j_swashbuckler = { frames_per_row = 11, frames = 22 },
     j_troubadour = {},
     j_certificate = { frames_per_row = 7, frames = 28, individual = true },
     j_smeared = { frames = 10 },
-    j_throwback = {}, -- todo: animate when promoted
+    j_throwback = { frames = 1, extra = { frames_per_row = 11, frames = 22 } }, -- todo: animate when promoted -- todo:animate background
     j_hanging_chad = {},
     j_rough_gem = {},
     j_bloodstone = {},
     j_arrowhead = {},
     j_onyx_agate = {},
-    j_glass = {},
-    j_ring_master = {},
+    j_glass = { frames_per_row = 11, frames = 22 },
+    j_ring_master = { frames_per_row = 11, frames = 22 },
     j_flower_pot = { frames = 24 },
-    j_blueprint = { frames_per_row = 8, frames = 44, individual = true },
+    j_blueprint = { frames = 36, individual = true, verticframes = 22 },
     j_wee = { frames_per_row = 11, frames = 22 },
     j_merry_andy = {},
-    j_oops = {},
+    j_oops = {frames = 10, extra = {frames = 1}},
     j_idol = {}, -- todo: open mouth to show suit and rank
     j_seeing_double = {frames_per_row = 13, frames = 150, extra = { frames_per_row = 5, frames = 20, start_frame = 0 } },
     j_matador = {},
@@ -269,6 +269,23 @@ if SMODS.Atlas then
     for i = 1, 150 do
         local k = G.P_CENTER_POOLS.Joker[i].key
         local v = AnimatedJokers[k]
+        local posx, posy, posex, posey
+        if v.start_frame then
+            local posx= v.start_frame%(v.frames_per_row or v.frames)
+            if v.verticframes and v.start_verticframe then
+                posy = start_verticframe
+            else
+                posy = math.floor(v.start_frame/(v.frames_per_row or v.frames))
+            end
+        end
+        if v.extra and v.extra.start_frame then
+            posex = v.extra.start_frame%(v.extra.frames_per_row or v.extra.frames)
+            if v.extra.verticframes and v.extra.start_verticframe then
+                posey = v.extra.start_verticframe
+            else
+                posey = math.floor(v.extra.start_frame/(v.extra.frames_per_row or v.extra.frames))
+            end
+        end
         if v and v.frames then
             --sprite
             SMODS.Atlas {
@@ -288,7 +305,7 @@ if SMODS.Atlas then
             --joker override
             SMODS[v.set or "Joker"]:take_ownership(k, {
                 atlas = k,
-                pos = { x = 0, y = 0, extra = v.extra and {x = 0, y = 0, atlas = "aura_"..k.."_extra"} },
+                pos = { x = posx or 0, y = posy or 0, extra = v.extra and {x = posex or 0, y = posey or 0, atlas = "aura_"..k.."_extra"} },
             })
         else
             SMODS[v and v.set or "Joker"]:take_ownership(k, {}, true)
@@ -315,7 +332,7 @@ if SMODS.Atlas then
             --planet override
             SMODS[v.set or "Consumable"]:take_ownership(k, {
                 atlas = k,
-                pos = { x = 0, y = 0, extra = v.extra and {x = 0, y = 0, atlas = "aura_"..k.."_extra"} },
+                pos = { x = posx or 0, y = posy or 0, extra = v.extra and {x = posex or 0, y = posey or 0, atlas = "aura_"..k.."_extra"} },
             })
         else
             SMODS[v and v.set or "Consumable"]:take_ownership(k, {}, true)
@@ -342,7 +359,7 @@ if SMODS.Atlas then
             --voucher override
             SMODS[v.set or "Voucher"]:take_ownership(k, {
                 atlas = k,
-                pos = { x = 0, y = 0, extra = v.extra and {x = 0, y = 0, atlas = "aura_"..k.."_extra"} },
+                pos = { x = posx or 0, y = posy or 0, extra = v.extra and {x = posex or 0, y = posey or 0, atlas = "aura_"..k.."_extra"} },
             })
         else
             SMODS[v and v.set or "Voucher"]:take_ownership(k, {}, true)
@@ -358,6 +375,8 @@ function Aura.update_frame(dt, k, obj, jkr)
     if anim and obj and (anim.frames or anim.individual) then
         local next_frame = false
         local next_frame_extra = false
+        local next_verticframe = false
+        local next_verticframe_extra = false
         if anim.individual then
             if jkr then
                 if not jkr.animation then jkr.animation = {} end
@@ -373,6 +392,23 @@ function Aura.update_frame(dt, k, obj, jkr)
                     if jkr.animation.extra.t > 1/(jkr.animation.extra.fps or 10) then
                         jkr.animation.extra.t = jkr.animation.extra.t - 1/(jkr.animation.extra.fps or 10)
                         next_frame_extra = true
+                    end
+                end
+            else
+                if anim.verticframes then
+                    if not anim.verticframest then anim.verticframest = 0 end
+                    anim.verticframest = anim.verticframest + dt
+                    if anim.verticframest > 1/(anim.verticfps or 10) then
+                        anim.verticframest = anim.verticframest - 1/(anim.verticfps or 10)
+                        next_verticframe = true
+                    end
+                end
+                if anim.extra and anim.extra.verticframes then
+                    if not anim.extra.verticframest then anim.extra.verticframest = 0 end
+                    anim.extra.verticframest = anim.extra.verticframest + dt
+                    if anim.extra.verticframest > 1/(anim.extra.verticfps or 10) then
+                        anim.extra.verticframest = anim.extra.verticframest - 1/(anim.extra.verticfps or 10)
+                        next_verticframe_extra = true
                     end
                 end
             end
@@ -391,9 +427,30 @@ function Aura.update_frame(dt, k, obj, jkr)
                     next_frame_extra = true
                 end
             end
+            if anim.verticframes then
+                if not anim.verticframest then anim.verticframest = 0 end
+                anim.verticframest = anim.verticframest + dt
+                if anim.verticframest > 1/(anim.verticfps or 10) then
+                    anim.verticframest = anim.verticframest - 1/(anim.verticfps or 10)
+                    next_verticframe = true
+                end
+            end
+            if anim.extra and anim.extra.verticframes then
+                if not anim.extra.verticframest then anim.extra.verticframest = 0 end
+                anim.extra.verticframest = anim.extra.verticframest + dt
+                if anim.extra.verticframest > 1/(anim.extra.verticfps or 10) then
+                    anim.extra.verticframest = anim.extra.verticframest - 1/(anim.extra.verticfps or 10)
+                    next_verticframe_extra = true
+                end
+            end
         end
         if next_frame then
-            local loc = obj.pos.y*(anim.frames_per_row or anim.frames)+obj.pos.x
+            local loc = 0
+            if anim.verticframes then
+                loc = obj.pos.x
+            else
+                loc = obj.pos.y*(anim.frames_per_row or anim.frames)+obj.pos.x
+            end
             if (not anim.individual) or (jkr and jkr.animation.target and loc ~= jkr.animation.target) then
                 loc = loc + 1
                 if anim.immediate and jkr and jkr.animation.target then
@@ -402,10 +459,17 @@ function Aura.update_frame(dt, k, obj, jkr)
             end
             if loc >= anim.frames then loc = anim.start_frame or 0 end
             obj.pos.x = loc%(anim.frames_per_row or anim.frames)
+            if not anim.verticframes then
             obj.pos.y = math.floor(loc/(anim.frames_per_row or anim.frames))
+            end
         end
         if next_frame_extra then
-            local loc = obj.pos.extra.y*(anim.extra.frames_per_row or anim.extra.frames)+obj.pos.extra.x
+            local loc = 0
+            if not anim.extra.verticframes then
+                loc = obj.pos.extra.y*(anim.extra.frames_per_row or anim.extra.frames)+obj.pos.extra.x
+            else
+                loc = obj.pos.extra.x
+            end
             if (not anim.individual) or (jkr and jkr.animation.extra and jkr.animation.extra.target and loc ~= jkr.animation.extra.target) then
                 loc = loc + 1
                 if anim.extra.immediate and jkr and jkr.animation.extra and jkr.animation.extra.target then
@@ -414,7 +478,25 @@ function Aura.update_frame(dt, k, obj, jkr)
             end
             if loc >= anim.extra.frames then loc = anim.extra.start_frame or 0 end
             obj.pos.extra.x = loc%(anim.extra.frames_per_row or anim.extra.frames)
+            if not anim.extra.verticframes then
             obj.pos.extra.y = math.floor(loc/(anim.extra.frames_per_row or anim.extra.frames))
+            end
+        end
+        if next_verticframe then
+            if not anim.verticloc then anim.verticloc = 0 end
+            anim.verticloc = anim.verticloc + 1
+            if anim.verticloc >= anim.verticframes then anim.verticloc = anim.start_verticframe or 0 end
+        end
+        if next_verticframe_extra then
+            if not anim.extra.verticloc then anim.extra.verticloc = 0 end
+            anim.extra.verticloc = anim.extra.verticloc + 1
+            if anim.extra.verticloc >= anim.extra.verticframes then anim.extra.verticloc = anim.extra.start_verticframe or 0 end
+        end
+        if anim.verticframes then
+            obj.pos.y = anim.verticloc
+        end
+        if anim.extra and anim.extra.verticframes then
+            obj.pos.extra.y = anim.extra.verticloc
         end
     end
 end
@@ -487,7 +569,7 @@ end
 local css = Card.set_sprites
 function Card:set_sprites(c, f)
     css(self, c,f)
-    if self.config.center and self.config.center.pos and self.config.center.pos.extra and self.config.center.pos.extra.atlas then
+    if self.config.center and self.config.center.pos and self.config.center.pos.extra and self.config.center.pos.extra.atlas and (self.config.center.discovered or self.bypass_discovery_center) then
         if not self.children.front then
             self.children.front = Sprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ASSET_ATLAS[self.config.center.pos.extra.atlas], self.config.center.pos)
             self.children.front.states.hover = self.states.hover
@@ -504,6 +586,13 @@ local cd = Card.draw
 function Card:draw(layer)
     if self.config and self.config.center and self.config.center.pos and self.config.center.pos.extra and self.config.center.pos.extra.atlas then self:set_sprites() end
     cd(self,layer)
+    if self.ability and self.ability.name == 'Hologram' and self.children.center then
+        self.hover_tilt = self.hover_tilt * 1.5
+        local scale_mod = 0.07 + 0.02*math.sin(1.8*G.TIMERS.REAL) + 0.00*math.sin((G.TIMERS.REAL - math.floor(G.TIMERS.REAL))*math.pi*14)*(1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL)))^3
+        local rotate_mod = 0.05*math.sin(1.219*G.TIMERS.REAL) + 0.00*math.sin((G.TIMERS.REAL)*math.pi*5)*(1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL)))^2
+        self.children.center:draw_shader('hologram', nil, self.ARGS and self.ARGS.send_to_shader, nil, self.children.center, 2 * scale_mod, 2 * rotate_mod )
+        self.hover_tilt = self.hover_tilt / 1.5
+    end
 end
 
 --Castle
@@ -583,6 +672,33 @@ function Card:calculate_joker(context)
             }))
         end
     end
+
+    --Superposition--1YFC3DZX (first bufoon pack+ next roud two ace straights)
+    if self.ability.name == "Superposition" and context.cardarea == G.jokers and context.joker_main then
+        local aces = 0
+        for i = 1, #context.scoring_hand do
+            if context.scoring_hand[i]:get_id() == 14 then aces = aces + 1 end
+        end
+        if aces >= 1 and next(context.poker_hands["Straight"]) then
+            Aura.add_individual(self)
+            if self.config.center.pos.x < 10 then
+                G.E_MANAGER:add_event(Event({
+                func = (function()
+                    self.animation = {target = 10}
+                    return true
+                end)
+                }))
+            else
+                G.E_MANAGER:add_event(Event({
+                func = (function()
+                    self.animation = {target = 0}
+                    return true
+                end)
+                }))
+            end
+        end
+    end
+
     --Flash Card
     if self.ability.name == "Flash Card" and context.reroll_shop and not context.blueprint then
         G.E_MANAGER:add_event(Event({
@@ -687,6 +803,18 @@ function Card:calculate_joker(context)
     end
 
     return ret1, ret2
+end
+
+--On consume effects
+
+local cuc = Card.use_consumeable
+function Card:use_consumeable(context)
+    if self.ability.name == "The Wheel of Fortune" then
+        Aura.add_individual(self)
+        self.animation = { target = 12 }
+    end
+    local ret = cuc(self, context)
+    return ret
 end
 
 Aura.ss = Card.set_seal
@@ -795,11 +923,10 @@ SMODS.Joker:take_ownership('loyalty_card',
 SMODS.Joker:take_ownership('burglar',
     {
         update = function(self, card, dt)
-            if card.config.center.pos.x == 18 and card.config.center.pos.y == 3 then
+            if card.config.center.pos.x == 75 then
                 Aura.add_individual(card)
                 card.animation = { target = 0 }
                 card.config.center.pos.x = 0
-                card.config.center.pos.y = 0
             end
         end
     }
@@ -826,4 +953,3 @@ SMODS.Joker:take_ownership('egg',
         end
     }
 )
-
