@@ -140,7 +140,7 @@ AnimatedJokers = {
     j_flash = { frames_per_row = 13, frames = 26, individual = true, immediate = true },
     j_popcorn = { frames = 5, individual = true },
     j_trousers = { frames_per_row = 4, frames = 12, extra = { frames_per_row = 4, frames = 16, fps = 8 } },
-    j_ancient = {}, -- todo: change sprite to indicate suit. flip the head to reveal the suit, when changing, it passes through the face.
+    j_ancient = { start_frame = 18, frames = 6, target = 3 },
     j_ramen = { frames = 21, individual = true, programart = true }, --todo: create true animation
     j_walkie_talkie = {},
     j_selzer = { verticframes = 15, start_frame = 3, frames = 51, individual = true },
@@ -543,7 +543,10 @@ function Aura.update_frame(dt, k, obj, jkr)
                 elseif not anim.individual then
                     loc = loc + frames_passed
                 end
-                if loc >= anim.frames then loc = loc % anim.frames end
+                if loc >= anim.frames then 
+                    loc = loc % anim.frames
+                    if k == "j_ancient" then Aura.update_ancient() end
+                end
                 loc = loc + (anim.start_frame or 0)
                 obj.pos.x = loc%(anim.frames_per_row or anim.frames)
                 if not anim.verticframes then
@@ -838,6 +841,7 @@ function Game:start_run(args)
         end
     end
     Aura.update_idol()
+    Aura.update_ancient()
     Aura.update_castle()
     Aura.update_mail()
     Aura.update_drivers_license(true)
@@ -891,6 +895,9 @@ function Card:init(x,y,w,h,card,center,params)
     if self.config.center_key == "j_idol" then
         Aura.update_idol()
     end
+    if self.config.center_key == "j_ancient" then
+        Aura.update_ancient()
+    end
     if self.config.center_key == "j_castle" then
         Aura.update_castle()
     end
@@ -902,7 +909,7 @@ function Card:init(x,y,w,h,card,center,params)
     end
 end
 
---Castle, Mail & Idol
+--Castle, Mail, Ancient & Idol
 function Aura.suit_sprite_order(suit)
     if suit == "Hearts" then return 0
     elseif suit == "Clubs" then return 1
@@ -1076,6 +1083,18 @@ function Aura.update_drivers_license(silent)
     end
 end
 
+function Aura.update_ancient()
+    local suit = Aura.suit_sprite_order(G.GAME.current_round.ancient_card.suit or nil) * 6
+    AnimatedJokers.j_ancient.start_frame = suit
+    G.P_CENTERS["j_ancient"].pos.y = suit
+end
+
+local rac = reset_ancient_card
+function reset_ancient_card()
+    rac()
+    AnimatedJokers.j_ancient.escape_target = true
+end
+
 function Aura.update_idol()-- Triggered if the mouth is closed
     local suit = G.GAME.current_round.idol_card.suit or nil
     local rank = G.GAME.current_round.idol_card.rank or nil
@@ -1150,14 +1169,23 @@ local arer = add_round_eval_row
 function add_round_eval_row(config)
     local ret = arer(config)
     if config.name == "interest" then
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            blocking = false,
-            func = (function()
-                AnimatedJokers.j_to_the_moon.escape_target = true
-                return true
-            end)
-        }))
+        local has_ttm = false
+        for _, jkr in ipairs(G.jokers.cards) do
+            if jkr.ability.name == "To the Moon" then
+                has_ttm = true
+                break
+            end
+        end
+        if has_ttm then
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                blocking = false,
+                func = (function()
+                    AnimatedJokers.j_to_the_moon.escape_target = true
+                    return true
+                end)
+            }))
+        end
     end
     return ret
 end
