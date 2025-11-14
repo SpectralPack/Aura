@@ -8,9 +8,7 @@ Aura is a mod that seeks to add animations to every Joker in Balatro.
 **0/18** Spectral completed
 
 Known Bugs:
-- Pixel Smoothing causes the border in Castle and clubs in Seeing Double to look wonky
-- Rerolling while having a duplicated Flash Card (via Invisible Joker/Ankh) will crash the game
-- Some animated jokers will have frames flash when they spawn (Flash Card, will find more maybe later)
+- Under unkown circustances Idol, Mail or Castle may display a diferent suit/rank that it should. It is rare, cannot replicate.
 - Crashes when opening [Malverk](https://github.com/Eremel/Malverk) settings
   - May animate cards improperly/which shouldn't animate with Malverk
 
