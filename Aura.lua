@@ -31,6 +31,12 @@ SMODS.Mods.Aura.config_tab = function() -- Add a config tab to the mod for toggl
 				ref_table = SMODS.Mods["Aura"].config,
 				ref_value = "Programmer_art",
 			}),
+            create_toggle({
+                id = "Silent_ownership",
+                label = "Disable Aura Mod tag in animated objects (requires restart to take effect)",
+                ref_table = SMODS.Mods["Aura"].config,
+                ref_value = "Silent_ownership",
+            }),
             --[[create_toggle({
 				id = "Experimental_Idol",
 				label = "Experimental Idol, but with missalign texture",
@@ -95,7 +101,7 @@ AnimatedJokers = {
     j_dna = { frames = 11 }, --frames = 9
     j_splash = {},
     j_blue_joker = { frames_per_row = 11, frames = 22 },
-    j_sixth_sense = { extra = { frames_per_row = 11, frames = 22 } }, --todo: card destroy animation on base layer
+    j_sixth_sense = { verticframes = 22, frames = 39, individual = true },
     j_constellation = { frames_per_row = 6, frames = 66 },--
     j_hiker = { frames_per_row = 11, frames = 22 },
     j_faceless = { frames_per_row = 4, frames = 24 },
@@ -370,7 +376,7 @@ if SMODS.Atlas then
                 atlas = k,
                 pos = { x = posx or 0, y = posy or 0, extra = v.extra and {x = posex or 0, y = posey or 0, atlas = "aura_"..k.."_extra"} },
                 extrasoul = v.extra and v.extra.extrasoul,
-            })
+            },SMODS.Mods["Aura"].config.Silent_ownership)
         else
             SMODS[v and v.set or "Joker"]:take_ownership(k, {}, true)
         end
@@ -398,7 +404,7 @@ if SMODS.Atlas then
                 atlas = k,
                 pos = { x = posx or 0, y = posy or 0, extra = v.extra and {x = posex or 0, y = posey or 0, atlas = "aura_"..k.."_extra"} },
                 extrasoul = v.extra and v.extra.extrasoul,
-            })
+            },SMODS.Mods["Aura"].config.Silent_ownership)
         else
             SMODS[v and v.set or "Consumable"]:take_ownership(k, {}, true)
         end
@@ -426,7 +432,7 @@ if SMODS.Atlas then
                 atlas = k,
                 pos = { x = posx or 0, y = posy or 0, extra = v.extra and {x = posex or 0, y = posey or 0, atlas = "aura_"..k.."_extra"} },
                 extrasoul = v.extra and v.extra.extrasoul,
-            })
+            },SMODS.Mods["Aura"].config.Silent_ownership)
         else
             SMODS[v and v.set or "Voucher"]:take_ownership(k, {}, true)
         end
@@ -444,20 +450,23 @@ function Aura.update_frame(dt, k, obj, jkr)
             local frames_passed = 0
             if jkr then
                 if anim.individual then
-                    if anim.immediate and jkr.target and (obj.pos.x + (not anim.verticframes and (obj.pos.y*(anim.frames_per_row or anim.frames)) or 0)) ~= jkr.target then
+                    if anim.immediate then
+                        if jkr.target and (obj.pos.x + (not anim.verticframes and (obj.pos.y*(anim.frames_per_row or anim.frames)) or 0)) ~= jkr.target then
                         next_frame = true
                     end
+                    else
                     jkr.t = jkr.t or (anim.t and (anim.t - dt)) or 0
                     jkr.t = jkr.t + dt
                     frames_passed = math.floor(jkr.t / (1/(jkr.fps or anim.fps or 10)))
                     if frames_passed > 0 then
                         jkr.t = jkr.t - frames_passed/(jkr.fps or anim.fps or 10)
                         next_frame = true
+                        end
                     end
                 end
             else
                 if anim.immediate and anim.target then
-                    if obj.pos.x ~= anim.target and not anim.individual then
+                    if (obj.pos.x + (not anim.verticframes and (obj.pos.y*(anim.frames_per_row or anim.frames)) or 0)) ~= anim.target and not anim.individual then
                         next_frame = true
                     end
                 else
@@ -592,9 +601,11 @@ function Aura.update_frame(dt, k, obj, jkr)
                         end
                     end
                 else
-                    if anim.extra.immediate and obj.pos.extra and obj.pos.extra.x ~= anim.extra.target and not anim.extra.individual then
+                    if anim.extra.immediate then
+                        if obj.pos.extra and obj.pos.extra.x ~= anim.extra.target and not anim.extra.individual then
                         next_frame_extra = true
                     end
+                    else
                     anim.extra.t = anim.extra.t or (anim.t and (anim.t - dt)) or 0
                     anim.extra.t = anim.extra.t + dt
                     frames_passed = math.floor(anim.extra.t / (1/(anim.extra.fps or 10)))
@@ -602,6 +613,7 @@ function Aura.update_frame(dt, k, obj, jkr)
                         anim.extra.t = anim.extra.t - frames_passed/(anim.extra.fps or 10)
                         if not anim.extra.individual then
                             next_frame_extra = true
+                            end
                         end
                     end
                 end
@@ -1212,6 +1224,35 @@ function Card:calculate_joker(context)
     if self.ability.name == "Certificate" and not context.blueprint and context.first_hand_drawn then
         Aura.add_individual(self)
         self.animation.certificate_ran = false -- reset for next round
+    end
+
+    --Sixth Sense
+    if self.ability.name == "Sixth Sense" and
+      context.destroying_card and not context.blueprint and not self.debuff and
+      #context.full_hand == 1 and context.full_hand[1]:get_id() == 6 and G.GAME.current_round.hands_played == 0 and
+      #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+
+        local delay = 1.6*G.SETTINGS.GAMESPEED --16 frames at 10 fps * compensation for game speed
+
+        --Compensation to properly sync
+        if G.SETTINGS.GAMESPEED == 1 or G.SETTINGS.GAMESPEED == 0.5 then-------Values reached through experimentation:  when x4-> 2, when x1-> 0, when x0.5-> 0, when x2-> 0.5
+            --delay = delay + (G.GAME.consumeable_buffer * 0)
+        elseif G.SETTINGS.GAMESPEED == 2 then
+            delay = delay + (G.GAME.consumeable_buffer * 0.5)
+        elseif G.SETTINGS.GAMESPEED == 4 then
+            delay = delay + (G.GAME.consumeable_buffer * 2)
+        else --If modded game speed
+            delay = 0
+        end
+
+        G.E_MANAGER:add_event(Event({ delay = delay,
+        trigger = 'before',
+        func = (function()
+            Aura.add_individual(self)
+            self.animation = { target = 0, escape_target = true }
+            return true
+        end)}))
+
     end
 
     local ret = cj(self, context)
