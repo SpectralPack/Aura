@@ -319,7 +319,7 @@ function Aura.add_individual(card)
             center_copy.pos = card.config.center.pos
         end
         if card.config.center.pos.extra then
-            if anim.extra.individual then
+            if anim and anim.extra and anim.extra.individual then
                 center_copy.pos.extra = {x = card.config.center.pos.extra.x, y = card.config.center.pos.extra.y, atlas = card.config.center.pos.extra.atlas} 
             else
                 center_copy.pos.extra = card.config.center.pos.extra
@@ -820,9 +820,10 @@ end
 local cc = copy_card
 function copy_card(other, new_card, card_scale, playing_card, strip_edition)
     local ret_card = cc(other, new_card, card_scale, playing_card, strip_edition)
-    local key = ret_card.config.center_key
+    local key = ret_card.config.center.key
     local anim = AnimatedJokers[key] or AnimatedPlanets[key] or AnimatedVouchers[key]
-    if anim and (anim.individual or (anim.extra and anim.extra.individual)) and ret_card.animation then
+    if anim and (anim.individual or (anim.extra and anim.extra.individual)) and other.animation then
+        ret_card.config.center_key = key
         Aura.add_individual(ret_card)
     end
     return ret_card
@@ -1628,40 +1629,3 @@ function Card:set_cost()
     end
     csc(self)
 end
-
---[[SMODS.Joker:take_ownership('loyalty_card',
-    { -- the table of properties you want to change
-   update = function(self, card, dt) -- change only update() to not mess with calculate()
-        if card.ability then
-            if (5 - card.ability.loyalty_remaining) ~= card.animation.target then -- loyalty_remaining is the. loyalty card procs remaining, duh
-                --card.children.center:set_sprite_pos({x = 5 - (card.ability.loyalty_remaining or 0), y = 0}) -- set sprite pos acc to loy_remaining
-                Aura.add_individual(card)
-                card.animation = { target = 5 - (card.ability.loyalty_remaining or 0) }
-                card:juice_up(0.2,0.2) -- small jiggle when the frame changes
-                play_sound("goldseal") -- this sound actually interprets as hole punching
-            end
-        else
-            card.children.center:set_sprite_pos({x = 0, y = 0}) -- Just In Case
-        end
-   end
-    }
-)]]
-
-
---[[
-SMODS.Joker:take_ownership('egg',
-    {
-        update = function(self, card, dt)
-            if card.ability then
-                if not card.old_value then
-                    card.old_value = card.ability.extra_value
-                end
-                if card.ability.extra_value > card.old_value then
-                    Aura.add_individual(card)
-                    card.old_value = card.ability.extra_value
-                    card.animation = { target = 0, escape_target = true }
-                end
-            end
-        end
-    }
-)]]
