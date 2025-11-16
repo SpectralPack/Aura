@@ -150,7 +150,7 @@ AnimatedJokers = {
     j_ramen = { frames = 21, individual = true, programart = true }, --todo: create true animation
     j_walkie_talkie = {},
     j_selzer = { verticframes = 15, start_frame = 3, frames = 51, individual = true },
-    j_castle = { frames_per_row = 9, frames = 69, start_frame = 0, extra = { frames = 7, target = 3, immediate = true, verticframes = 5, verticfps = 5 } },
+    j_castle = { frames_per_row = 9, frames = 69, start_frame = 0, extra = { frames = 9, target = 3, immediate = true, verticframes = 5, verticfps = 5 } },
     j_smiley = { frames_per_row = 13, frames = 150 },
     j_campfire = {}, -- todo: animate fire, which gets bigger the more you burn, returning to normal when resetting
     j_ticket = {},
@@ -174,7 +174,7 @@ AnimatedJokers = {
     j_wee = { frames_per_row = 11, frames = 22 },
     j_merry_andy = { frames_per_row = 11, frames = 22 },
     j_oops = { frames_per_row = 5, frames = 10, extra = { frames = 5, fps = 15, target = 0, programart = true } }, -- todo: create stilized smear frames
-    j_idol = { frames_per_row = 14, frames = 112, immediate = true, target = 51, extra = { frames_per_row = 6, frames = 6, fps = 3, target = 3 } }, -- todo: fix broken code for custom suit icons
+    j_idol = { frames_per_row = 14, frames = 140, immediate = true, target = 51, extra = { frames_per_row = 6, frames = 6, fps = 3, target = 3 } }, -- todo: fix broken code for custom suit icons
     j_seeing_double = { frames_per_row = 13, frames = 150, extra = { frames_per_row = 5, frames = 20 } },
     j_matador = { frames_per_row = 11, frames = 22 },
     j_hit_the_road = { frames = 10, individual = true }, -- todo: create a true animation with pespective and not just the 2d car
@@ -930,7 +930,9 @@ function Aura.suit_sprite_order(suit)
     elseif suit == "Spades" then return 3
     elseif suit == "six_Moons" then return 4
     elseif suit == "six_Stars" then return 5
-    else return 6 end
+    elseif suit == "paperback_Crowns" then return 6
+    elseif suit == "paperback_Stars" then return 7
+    else return 8 end
 end
 
 function Aura.rank_sprite_order(rank)
@@ -1115,7 +1117,7 @@ function Aura.update_idol()-- Triggered if the mouth is closed
     --sendDebugMessage("Experimental Idol: " .. tostring(SMODS.Mods["Aura"].config.Experimental_Idol))
     --if SMODS.Mods["Aura"].config.Experimental_Idol then 
         --sendDebugMessage("Experimental Idol enabled")
-        --AnimatedJokers.j_idol.target = 98 + Aura.rank_sprite_order(rank)
+        --AnimatedJokers.j_idol.target = 126 + Aura.rank_sprite_order(rank)
     --else 
         AnimatedJokers.j_idol.target = (Aura.suit_sprite_order(suit) * 14) + Aura.rank_sprite_order(rank)
     --end
