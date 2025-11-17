@@ -11,5 +11,5 @@ Known Bugs:
 - Crashes when opening [Malverk](https://github.com/Eremel/Malverk) settings
   - May animate cards improperly/which shouldn't animate with Malverk
 
-Artists and progress for each Joker are detailed [here](https://docs.google.com/spreadsheets/d/174gWOyMyTUSuESsiqWSt5OYEr8mcDdAM2Ig9oDxMTlQ/edit?gid=0#gid=0) (that is main brach, I cannot add my additions to the doc).
+Artists and progress for each Joker are detailed [here](https://docs.google.com/spreadsheets/d/174gWOyMyTUSuESsiqWSt5OYEr8mcDdAM2Ig9oDxMTlQ/edit?gid=0#gid=0).
 22
