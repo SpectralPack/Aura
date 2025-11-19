@@ -31,6 +31,12 @@ SMODS.Mods.Aura.config_tab = function() -- Add a config tab to the mod for toggl
 				ref_table = SMODS.Mods["Aura"].config,
 				ref_value = "Programmer_art",
 			}),
+            create_toggle({
+                id = "Silent_ownership",
+                label = "Disable Aura Mod tag in animated objects (requires restart to take effect)",
+                ref_table = SMODS.Mods["Aura"].config,
+                ref_value = "Silent_ownership",
+            }),
             --[[create_toggle({
 				id = "Experimental_Idol",
 				label = "Experimental Idol, but with missalign texture",
@@ -95,7 +101,7 @@ AnimatedJokers = {
     j_dna = { frames = 11 }, --frames = 9
     j_splash = {},
     j_blue_joker = { frames_per_row = 11, frames = 22 },
-    j_sixth_sense = { extra = { frames_per_row = 11, frames = 22 } }, --todo: card destroy animation on base layer
+    j_sixth_sense = { verticframes = 22, frames = 39, individual = true },
     j_constellation = { frames_per_row = 6, frames = 66 },--
     j_hiker = { frames_per_row = 11, frames = 22 },
     j_faceless = { frames_per_row = 4, frames = 24 },
@@ -140,11 +146,11 @@ AnimatedJokers = {
     j_flash = { frames_per_row = 13, frames = 26, individual = true, immediate = true },
     j_popcorn = { frames = 5, individual = true },
     j_trousers = { frames_per_row = 4, frames = 12, extra = { frames_per_row = 4, frames = 16, fps = 8 } },
-    j_ancient = {}, -- todo: change sprite to indicate suit. flip the head to reveal the suit, when changing, it passes through the face.
+    j_ancient = { start_frame = 18, frames = 6, target = 3 },
     j_ramen = { frames = 21, individual = true, programart = true }, --todo: create true animation
     j_walkie_talkie = {},
     j_selzer = { verticframes = 15, start_frame = 3, frames = 51, individual = true },
-    j_castle = { frames_per_row = 9, frames = 69, start_frame = 0, extra = { frames = 7, target = 3, immediate = true, verticframes = 5, verticfps = 5 } },
+    j_castle = { frames_per_row = 9, frames = 69, start_frame = 0, extra = { frames = 9, target = 3, immediate = true, verticframes = 5, verticfps = 5 } },
     j_smiley = { frames_per_row = 13, frames = 150 },
     j_campfire = {}, -- todo: animate fire, which gets bigger the more you burn, returning to normal when resetting
     j_ticket = {},
@@ -168,7 +174,7 @@ AnimatedJokers = {
     j_wee = { frames_per_row = 11, frames = 22 },
     j_merry_andy = { frames_per_row = 11, frames = 22 },
     j_oops = { frames_per_row = 5, frames = 10, extra = { frames = 5, fps = 15, target = 0, programart = true } }, -- todo: create stilized smear frames
-    j_idol = { frames_per_row = 14, frames = 112, immediate = true, target = 51, extra = { frames_per_row = 6, frames = 6, fps = 3, target = 3 } }, -- todo: fix broken code for custom suit icons
+    j_idol = { frames_per_row = 14, frames = 140, immediate = true, target = 51, extra = { frames_per_row = 6, frames = 6, fps = 3, target = 3 } }, -- todo: fix broken code for custom suit icons
     j_seeing_double = { frames_per_row = 13, frames = 150, extra = { frames_per_row = 5, frames = 20 } },
     j_matador = { frames_per_row = 11, frames = 22 },
     j_hit_the_road = { frames = 10, individual = true }, -- todo: create a true animation with pespective and not just the 2d car
@@ -313,7 +319,7 @@ function Aura.add_individual(card)
             center_copy.pos = card.config.center.pos
         end
         if card.config.center.pos.extra then
-            if anim.extra.individual then
+            if anim and anim.extra and anim.extra.individual then
                 center_copy.pos.extra = {x = card.config.center.pos.extra.x, y = card.config.center.pos.extra.y, atlas = card.config.center.pos.extra.atlas} 
             else
                 center_copy.pos.extra = card.config.center.pos.extra
@@ -370,7 +376,7 @@ if SMODS.Atlas then
                 atlas = k,
                 pos = { x = posx or 0, y = posy or 0, extra = v.extra and {x = posex or 0, y = posey or 0, atlas = "aura_"..k.."_extra"} },
                 extrasoul = v.extra and v.extra.extrasoul,
-            })
+            },SMODS.Mods["Aura"].config.Silent_ownership)
         else
             SMODS[v and v.set or "Joker"]:take_ownership(k, {}, true)
         end
@@ -398,7 +404,7 @@ if SMODS.Atlas then
                 atlas = k,
                 pos = { x = posx or 0, y = posy or 0, extra = v.extra and {x = posex or 0, y = posey or 0, atlas = "aura_"..k.."_extra"} },
                 extrasoul = v.extra and v.extra.extrasoul,
-            })
+            },SMODS.Mods["Aura"].config.Silent_ownership)
         else
             SMODS[v and v.set or "Consumable"]:take_ownership(k, {}, true)
         end
@@ -426,7 +432,7 @@ if SMODS.Atlas then
                 atlas = k,
                 pos = { x = posx or 0, y = posy or 0, extra = v.extra and {x = posex or 0, y = posey or 0, atlas = "aura_"..k.."_extra"} },
                 extrasoul = v.extra and v.extra.extrasoul,
-            })
+            },SMODS.Mods["Aura"].config.Silent_ownership)
         else
             SMODS[v and v.set or "Voucher"]:take_ownership(k, {}, true)
         end
@@ -444,20 +450,23 @@ function Aura.update_frame(dt, k, obj, jkr)
             local frames_passed = 0
             if jkr then
                 if anim.individual then
-                    if anim.immediate and jkr.target and (obj.pos.x + (not anim.verticframes and (obj.pos.y*(anim.frames_per_row or anim.frames)) or 0)) ~= jkr.target then
+                    if anim.immediate then
+                        if jkr.target and (obj.pos.x + (not anim.verticframes and (obj.pos.y*(anim.frames_per_row or anim.frames)) or 0)) ~= jkr.target then
                         next_frame = true
                     end
+                    else
                     jkr.t = jkr.t or (anim.t and (anim.t - dt)) or 0
                     jkr.t = jkr.t + dt
                     frames_passed = math.floor(jkr.t / (1/(jkr.fps or anim.fps or 10)))
                     if frames_passed > 0 then
                         jkr.t = jkr.t - frames_passed/(jkr.fps or anim.fps or 10)
                         next_frame = true
+                        end
                     end
                 end
             else
                 if anim.immediate and anim.target then
-                    if obj.pos.x ~= anim.target and not anim.individual then
+                    if (obj.pos.x + (not anim.verticframes and (obj.pos.y*(anim.frames_per_row or anim.frames)) or 0)) ~= anim.target and not anim.individual then
                         next_frame = true
                     end
                 else
@@ -543,7 +552,10 @@ function Aura.update_frame(dt, k, obj, jkr)
                 elseif not anim.individual then
                     loc = loc + frames_passed
                 end
-                if loc >= anim.frames then loc = loc % anim.frames end
+                if loc >= anim.frames then 
+                    loc = loc % anim.frames
+                    if k == "j_ancient" then Aura.update_ancient() end
+                end
                 loc = loc + (anim.start_frame or 0)
                 obj.pos.x = loc%(anim.frames_per_row or anim.frames)
                 if not anim.verticframes then
@@ -589,9 +601,11 @@ function Aura.update_frame(dt, k, obj, jkr)
                         end
                     end
                 else
-                    if anim.extra.immediate and obj.pos.extra and obj.pos.extra.x ~= anim.extra.target and not anim.extra.individual then
+                    if anim.extra.immediate then
+                        if obj.pos.extra and obj.pos.extra.x ~= anim.extra.target and not anim.extra.individual then
                         next_frame_extra = true
                     end
+                    else
                     anim.extra.t = anim.extra.t or (anim.t and (anim.t - dt)) or 0
                     anim.extra.t = anim.extra.t + dt
                     frames_passed = math.floor(anim.extra.t / (1/(anim.extra.fps or 10)))
@@ -599,6 +613,7 @@ function Aura.update_frame(dt, k, obj, jkr)
                         anim.extra.t = anim.extra.t - frames_passed/(anim.extra.fps or 10)
                         if not anim.extra.individual then
                             next_frame_extra = true
+                            end
                         end
                     end
                 end
@@ -805,9 +820,10 @@ end
 local cc = copy_card
 function copy_card(other, new_card, card_scale, playing_card, strip_edition)
     local ret_card = cc(other, new_card, card_scale, playing_card, strip_edition)
-    local key = ret_card.config.center_key
+    local key = ret_card.config.center.key
     local anim = AnimatedJokers[key] or AnimatedPlanets[key] or AnimatedVouchers[key]
-    if anim and (anim.individual or (anim.extra and anim.extra.individual)) and ret_card.animation then
+    if anim and (anim.individual or (anim.extra and anim.extra.individual)) and other.animation then
+        ret_card.config.center_key = key
         Aura.add_individual(ret_card)
     end
     return ret_card
@@ -838,6 +854,7 @@ function Game:start_run(args)
         end
     end
     Aura.update_idol()
+    Aura.update_ancient()
     Aura.update_castle()
     Aura.update_mail()
     Aura.update_drivers_license(true)
@@ -891,6 +908,9 @@ function Card:init(x,y,w,h,card,center,params)
     if self.config.center_key == "j_idol" then
         Aura.update_idol()
     end
+    if self.config.center_key == "j_ancient" then
+        Aura.update_ancient()
+    end
     if self.config.center_key == "j_castle" then
         Aura.update_castle()
     end
@@ -902,7 +922,7 @@ function Card:init(x,y,w,h,card,center,params)
     end
 end
 
---Castle, Mail & Idol
+--Castle, Mail, Ancient & Idol
 function Aura.suit_sprite_order(suit)
     if suit == "Hearts" then return 0
     elseif suit == "Clubs" then return 1
@@ -910,7 +930,9 @@ function Aura.suit_sprite_order(suit)
     elseif suit == "Spades" then return 3
     elseif suit == "six_Moons" then return 4
     elseif suit == "six_Stars" then return 5
-    else return 6 end
+    elseif suit == "paperback_Crowns" then return 6
+    elseif suit == "paperback_Stars" then return 7
+    else return 8 end
 end
 
 function Aura.rank_sprite_order(rank)
@@ -1076,6 +1098,18 @@ function Aura.update_drivers_license(silent)
     end
 end
 
+function Aura.update_ancient()
+    local suit = Aura.suit_sprite_order(G.GAME.current_round.ancient_card.suit or nil) * 6
+    AnimatedJokers.j_ancient.start_frame = suit
+    G.P_CENTERS["j_ancient"].pos.y = suit
+end
+
+local rac = reset_ancient_card
+function reset_ancient_card()
+    rac()
+    AnimatedJokers.j_ancient.escape_target = true
+end
+
 function Aura.update_idol()-- Triggered if the mouth is closed
     local suit = G.GAME.current_round.idol_card.suit or nil
     local rank = G.GAME.current_round.idol_card.rank or nil
@@ -1083,7 +1117,7 @@ function Aura.update_idol()-- Triggered if the mouth is closed
     --sendDebugMessage("Experimental Idol: " .. tostring(SMODS.Mods["Aura"].config.Experimental_Idol))
     --if SMODS.Mods["Aura"].config.Experimental_Idol then 
         --sendDebugMessage("Experimental Idol enabled")
-        --AnimatedJokers.j_idol.target = 98 + Aura.rank_sprite_order(rank)
+        --AnimatedJokers.j_idol.target = 126 + Aura.rank_sprite_order(rank)
     --else 
         AnimatedJokers.j_idol.target = (Aura.suit_sprite_order(suit) * 14) + Aura.rank_sprite_order(rank)
     --end
@@ -1150,14 +1184,23 @@ local arer = add_round_eval_row
 function add_round_eval_row(config)
     local ret = arer(config)
     if config.name == "interest" then
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            blocking = false,
-            func = (function()
-                AnimatedJokers.j_to_the_moon.escape_target = true
-                return true
-            end)
-        }))
+        local has_ttm = false
+        for _, jkr in ipairs(G.jokers.cards) do
+            if jkr.ability.name == "To the Moon" then
+                has_ttm = true
+                break
+            end
+        end
+        if has_ttm then
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                blocking = false,
+                func = (function()
+                    AnimatedJokers.j_to_the_moon.escape_target = true
+                    return true
+                end)
+            }))
+        end
     end
     return ret
 end
@@ -1184,6 +1227,35 @@ function Card:calculate_joker(context)
     if self.ability.name == "Certificate" and not context.blueprint and context.first_hand_drawn then
         Aura.add_individual(self)
         self.animation.certificate_ran = false -- reset for next round
+    end
+
+    --Sixth Sense
+    if self.ability.name == "Sixth Sense" and
+      context.destroying_card and not context.blueprint and not self.debuff and
+      #context.full_hand == 1 and context.full_hand[1]:get_id() == 6 and G.GAME.current_round.hands_played == 0 and
+      #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+
+        local delay = 1.6*G.SETTINGS.GAMESPEED --16 frames at 10 fps * compensation for game speed
+
+        --Compensation to properly sync
+        if G.SETTINGS.GAMESPEED == 1 or G.SETTINGS.GAMESPEED == 0.5 then-------Values reached through experimentation:  when x4-> 2, when x1-> 0, when x0.5-> 0, when x2-> 0.5
+            --delay = delay + (G.GAME.consumeable_buffer * 0)
+        elseif G.SETTINGS.GAMESPEED == 2 then
+            delay = delay + (G.GAME.consumeable_buffer * 0.5)
+        elseif G.SETTINGS.GAMESPEED == 4 then
+            delay = delay + (G.GAME.consumeable_buffer * 2)
+        else --If modded game speed
+            delay = 0
+        end
+
+        G.E_MANAGER:add_event(Event({ delay = delay,
+        trigger = 'before',
+        func = (function()
+            Aura.add_individual(self)
+            self.animation = { target = 0, escape_target = true }
+            return true
+        end)}))
+
     end
 
     local ret = cj(self, context)
@@ -1559,40 +1631,3 @@ function Card:set_cost()
     end
     csc(self)
 end
-
---[[SMODS.Joker:take_ownership('loyalty_card',
-    { -- the table of properties you want to change
-   update = function(self, card, dt) -- change only update() to not mess with calculate()
-        if card.ability then
-            if (5 - card.ability.loyalty_remaining) ~= card.animation.target then -- loyalty_remaining is the. loyalty card procs remaining, duh
-                --card.children.center:set_sprite_pos({x = 5 - (card.ability.loyalty_remaining or 0), y = 0}) -- set sprite pos acc to loy_remaining
-                Aura.add_individual(card)
-                card.animation = { target = 5 - (card.ability.loyalty_remaining or 0) }
-                card:juice_up(0.2,0.2) -- small jiggle when the frame changes
-                play_sound("goldseal") -- this sound actually interprets as hole punching
-            end
-        else
-            card.children.center:set_sprite_pos({x = 0, y = 0}) -- Just In Case
-        end
-   end
-    }
-)]]
-
-
---[[
-SMODS.Joker:take_ownership('egg',
-    {
-        update = function(self, card, dt)
-            if card.ability then
-                if not card.old_value then
-                    card.old_value = card.ability.extra_value
-                end
-                if card.ability.extra_value > card.old_value then
-                    Aura.add_individual(card)
-                    card.old_value = card.ability.extra_value
-                    card.animation = { target = 0, escape_target = true }
-                end
-            end
-        end
-    }
-)]]
