@@ -439,6 +439,42 @@ if SMODS.Atlas then
     end
 end
 
+if SMODS.DrawStep then
+	-- drawsteps are "only" supported since 0423a
+	SMODS.DrawStep:take_ownership("front",
+		-- delay drawing of front to be after `edition` drawstep for center
+		{
+			order = 22,
+		}
+	)
+
+	SMODS.DrawStep {
+		-- now we need to create a new drawing step to apply the edition shader to the front
+		key = "front_edition",
+		order = 24,
+		func = function(self, layer)
+			if self.children.front and not self:should_hide_front() then
+				local edition = self.delay_edition or self.edition
+				if edition then
+					for k, v in pairs(G.P_CENTER_POOLS.Edition) do
+						if edition[v.key:sub(3)] and v.shader then
+							if type(v.draw) == 'function' then
+								v:draw(self, layer)
+							else
+								self.children.front:draw_shader(v.shader, nil, self.ARGS.send_to_shader)
+							end
+						end
+					end
+				end
+				if (edition and edition.negative) or (self.ability.name == 'Antimatter' and (self.config.center.discovered or self.bypass_discovery_center)) then
+					self.children.front:draw_shader('negative_shine', nil, self.ARGS.send_to_shader)
+				end
+			end
+		end,
+		conditions = { vortex = false, facing = 'front', front_hidden = false },
+	}
+end
+
 --Update animated sprites
 local upd = Game.update
 
