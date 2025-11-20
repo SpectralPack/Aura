@@ -175,7 +175,7 @@ AnimatedJokers = {
     j_merry_andy = { frames_per_row = 11, frames = 22 },
     j_oops = { frames_per_row = 5, frames = 10, extra = { frames = 5, fps = 15, target = 0, programart = true } }, -- todo: create stilized smear frames
     j_idol = { frames_per_row = 14, frames = 140, immediate = true, target = 51, extra = { frames_per_row = 6, frames = 6, fps = 3, target = 3 } }, -- todo: fix broken code for custom suit icons
-    j_seeing_double = { frames_per_row = 13, frames = 150, extra = { frames_per_row = 5, frames = 20 } },
+    j_seeing_double = { frames_per_row = 13, frames = 150, extra = { frames_per_row = 4, frames = 8, individual = true } },
     j_matador = { frames_per_row = 11, frames = 22 },
     j_hit_the_road = { frames = 10, individual = true }, -- todo: create a true animation with pespective and not just the 2d car
     j_duo = {},
@@ -437,6 +437,26 @@ if SMODS.Atlas then
             SMODS[v and v.set or "Voucher"]:take_ownership(k, {}, true)
         end
     end
+end
+
+--fix negative shine shader letting see though extra layers
+if SMODS.DrawStep then
+	-- drawsteps are "only" supported since 0423a  
+
+	SMODS.DrawStep {
+		key = "negative_front",
+		order = 24,
+		func = function(self, layer)
+			if self.children.front and not self:should_hide_front() then
+				local edition = self.delay_edition or self.edition
+				if (edition and edition.negative) or (self.ability.name == 'Antimatter' and (self.config.center.discovered or self.bypass_discovery_center)) then
+					self.children.front:draw_shader('negative', nil, self.ARGS.send_to_shader)-- This covers the negative_shine of center
+                    self.children.front:draw_shader('negative_shine', nil, self.ARGS.send_to_shader)
+				end
+			end
+		end,
+		conditions = { vortex = false, facing = 'front', front_hidden = false },
+	}
 end
 
 --Update animated sprites
@@ -1280,50 +1300,45 @@ function Card:calculate_joker(context)
     end
 
     --Blackboard
-    if self.ability.name == "Blackboard" and context.cardarea == G.jokers and context.joker_main and not context.blueprint then
-        local black_suits, all_cards = 0, 0
-        for k, v in ipairs(G.hand.cards) do
-            all_cards = all_cards + 1
-            if v:is_suit('Clubs', nil, true) or v:is_suit('Spades', nil, true) then
-                black_suits = black_suits + 1
+    if self.ability.name == "Blackboard" and ret and not context.blueprint then
+        G.E_MANAGER:add_event(Event({
+            func = (function()
+                Aura.add_individual(self)
+                self.animation = { target = 0, escape_target = true }
+                return true
+            end)
+        }))
+    end
+
+    --Seeing Double
+    if self.ability.name == "Seeing Double" and ret and not context.blueprint then
+        G.E_MANAGER:add_event(Event({
+        func = (function()
+            Aura.add_individual(self)
+            if self.config.center.pos.extra.y == 0 then
+                self.animation = { extra = { target = 4 } }
+            else
+                self.animation = { extra = { target = 0 } }
             end
-        end
-        if black_suits == all_cards then
-            --triggered
-            G.E_MANAGER:add_event(Event({
-                func = (function()
-                    Aura.add_individual(self)
-                    self.animation = { target = 0, escape_target = true }
-                    return true
-                end)
-            }))
-        end
+                return true
+            end)
+        }))
     end
 
     --Superposition
-    if self.ability.name == "Superposition" and context.cardarea == G.jokers and context.joker_main and next(context.poker_hands["Straight"]) then
-        local aces = 0
-        for i = 1, #context.scoring_hand do
-            if context.scoring_hand[i]:get_id() == 14 then aces = aces + 1 end
-        end
-        if aces >= 1 then
+    if self.ability.name == "Superposition" and ret and not context.blueprint then
+        G.E_MANAGER:add_event(Event({
+        func = (function()
             Aura.add_individual(self)
             if self.config.center.pos.x < 10 then
-                G.E_MANAGER:add_event(Event({
-                func = (function()
-                    self.animation = {target = 10}
-                    return true
-                end)
-                }))
+                self.animation = {target = 10}
             else
-                G.E_MANAGER:add_event(Event({
-                func = (function()
-                    self.animation = {target = 0}
-                    return true
-                end)
-                }))
+                self.animation = {target = 0}
             end
-        end
+                return true
+            end)
+        }))
+            
     end
 
     --Driver's License
@@ -1416,21 +1431,6 @@ function Card:calculate_joker(context)
         self.animation = { target = 0, remaining_triggers = (self.animation and self.animation.remaining_triggers or 0) + 1 }
     end
 
-    --Space Joker (with Oops trigger)
-    if self.ability.name == "Space Joker" and context.cardarea == G.jokers and context.before and not self.debuff then
-        AnimatedJokers.j_oops.extra.fps = 10*G.SETTINGS.GAMESPEED
-        AnimatedJokers.j_oops.extra.remaining_triggers = (AnimatedJokers.j_oops.extra.remaining_triggers or 0) + 1
-        if not context.blueprint and ret and ret.level_up then -- only on successful trigger 
-            G.E_MANAGER:add_event(Event({
-                func = (function()
-                    Aura.add_individual(self)
-                    self.animation = { target = 0, escape_target = true }
-                    return true
-                end)
-            }))
-        end
-    end
-
     --Loyalty Card
     if self.config.center_key == "j_loyalty_card" then
         if self.animation then
@@ -1444,6 +1444,27 @@ function Card:calculate_joker(context)
         else
             Aura.add_individual(self)
             self.animation = { target = 5 - (self.ability.loyalty_remaining or 0) }
+        end
+    end
+
+    --Space Joker (with Oops trigger)
+    if self.ability.name == "Space Joker" and context.cardarea == G.jokers and context.before and not self.debuff then
+        G.E_MANAGER:add_event(Event({
+            trigger = 'before',
+            func = (function()
+                AnimatedJokers.j_oops.extra.fps = 10*G.SETTINGS.GAMESPEED
+                AnimatedJokers.j_oops.extra.remaining_triggers = (AnimatedJokers.j_oops.extra.remaining_triggers or 0) + 1
+                return true
+            end)
+        }))
+        if not context.blueprint and ret and ret.level_up then -- only on successful trigger 
+            G.E_MANAGER:add_event(Event({
+                func = (function()
+                    Aura.add_individual(self)
+                    self.animation = { target = 0, escape_target = true }
+                    return true
+                end)
+            }))
         end
     end
 
