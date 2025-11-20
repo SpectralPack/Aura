@@ -439,25 +439,7 @@ if SMODS.Atlas then
     end
 end
 
---fix negative shine shader letting see though extra layers
-if SMODS.DrawStep then
-	-- drawsteps are "only" supported since 0423a  
-
-	SMODS.DrawStep {
-		key = "negative_front",
-		order = 24,
-		func = function(self, layer)
-			if self.children.front and not self:should_hide_front() then
-				local edition = self.delay_edition or self.edition
-				if (edition and edition.negative) or (self.ability.name == 'Antimatter' and (self.config.center.discovered or self.bypass_discovery_center)) then
-					self.children.front:draw_shader('negative', nil, self.ARGS.send_to_shader)-- This covers the negative_shine of center
-                    self.children.front:draw_shader('negative_shine', nil, self.ARGS.send_to_shader)
-				end
-			end
-		end,
-		conditions = { vortex = false, facing = 'front', front_hidden = false },
-	}
-end
+--Here goes Larswijn's shader fix
 
 --Update animated sprites
 local upd = Game.update
