@@ -37,12 +37,6 @@ SMODS.Mods.Aura.config_tab = function() -- Add a config tab to the mod for toggl
                 ref_table = SMODS.Mods["Aura"].config,
                 ref_value = "Silent_ownership",
             }),
-            --[[create_toggle({
-				id = "Experimental_Idol",
-				label = "Experimental Idol, but with missalign texture",
-				ref_table = SMODS.Mods["Aura"].config,
-				ref_value = "Experimental_Idol",
-			}),]]
 		}
 	}
 end
@@ -175,7 +169,7 @@ AnimatedJokers = {
     j_merry_andy = { frames_per_row = 11, frames = 22 },
     j_oops = { frames_per_row = 5, frames = 10, extra = { frames = 5, fps = 15, target = 0, programart = true } }, -- todo: create stilized smear frames
     j_idol = { frames_per_row = 14, frames = 140, immediate = true, target = 51, extra = { frames_per_row = 6, frames = 6, fps = 3, target = 3 } }, -- todo: fix broken code for custom suit icons
-    j_seeing_double = { frames_per_row = 13, frames = 150, extra = { frames_per_row = 5, frames = 20 } },
+    j_seeing_double = { frames_per_row = 13, frames = 150, extra = { frames_per_row = 4, frames = 8, individual = true } },
     j_matador = { frames_per_row = 11, frames = 22 },
     j_hit_the_road = { frames = 10, individual = true }, -- todo: create a true animation with pespective and not just the 2d car
     j_duo = {},
@@ -190,7 +184,7 @@ AnimatedJokers = {
     j_shoot_the_moon = { frames_per_row = 11, frames = 22 },
     j_drivers_license = { frames = 2, target = 0, immediate = true },
     j_cartomancer = { frames_per_row = 11, frames = 22 },
-    j_astronomer = { frames = 29, extra = { frames = 6, fps = 2, verticframes = 22 } },--
+    j_astronomer = { frames = 29, extra = { frames = 6, fps = 2, verticframes = 22 } },
     j_burnt = {}, -- todo: animate when primed?
     j_bootstraps = { frames_per_row = 19, frames = 38 },
     j_caino = {}, -- todo: add animations
@@ -251,7 +245,7 @@ AnimatedPlanets = {
     c_medium = {},
     c_cryptid = {},
     c_soul = {},
-    c_black_hole = {},
+    c_black_hole = { frames_per_row = 24, frames = 144 },
 }
 AnimatedVouchers = {
     v_overstock_norm = { frames = 5 },
@@ -439,6 +433,44 @@ if SMODS.Atlas then
     end
 end
 
+--fix edition shaders ignoring front layer. FIX MADE BY LARSWIJN
+--In theory, this fix will be added natively to Steamodded, but until then, it will be here.
+if SMODS.DrawStep then
+	-- drawsteps are "only" supported since 0423a
+	SMODS.DrawStep:take_ownership("front",
+		-- delay drawing of front to be after `edition` drawstep for center
+		{
+			order = 22,
+		}
+	)
+
+	SMODS.DrawStep {
+		-- now we need to create a new drawing step to apply the edition shader to the front
+		key = "front_edition",
+		order = 24,
+		func = function(self, layer)
+			if self.children.front and not self:should_hide_front() then
+				local edition = self.delay_edition or self.edition
+				if edition then
+					for k, v in pairs(G.P_CENTER_POOLS.Edition) do
+						if edition[v.key:sub(3)] and v.shader then
+							if type(v.draw) == 'function' then
+								v:draw(self, layer)
+							else
+								self.children.front:draw_shader(v.shader, nil, self.ARGS.send_to_shader)
+							end
+						end
+					end
+				end
+				if (edition and edition.negative) or (self.ability.name == 'Antimatter' and (self.config.center.discovered or self.bypass_discovery_center)) then
+					self.children.front:draw_shader('negative_shine', nil, self.ARGS.send_to_shader)
+				end
+			end
+		end,
+		conditions = { vortex = false, facing = 'front', front_hidden = false },
+	}
+end
+
 --Update animated sprites
 local upd = Game.update
 
@@ -446,13 +478,12 @@ function Aura.update_frame(dt, k, obj, jkr)
     local anim = AnimatedJokers[k] or AnimatedPlanets[k] or AnimatedVouchers[k]
     if anim and obj then
         if anim.frames then
-            local next_frame = false
             local frames_passed = 0
             if jkr then
                 if anim.individual then
                     if anim.immediate then
                         if jkr.target and (obj.pos.x + (not anim.verticframes and (obj.pos.y*(anim.frames_per_row or anim.frames)) or 0)) ~= jkr.target then
-                        next_frame = true
+                            frames_passed = 1
                     end
                     else
                     jkr.t = jkr.t or (anim.t and (anim.t - dt)) or 0
@@ -460,7 +491,6 @@ function Aura.update_frame(dt, k, obj, jkr)
                     frames_passed = math.floor(jkr.t / (1/(jkr.fps or anim.fps or 10)))
                     if frames_passed > 0 then
                         jkr.t = jkr.t - frames_passed/(jkr.fps or anim.fps or 10)
-                        next_frame = true
                         end
                     end
                 end
@@ -475,41 +505,41 @@ function Aura.update_frame(dt, k, obj, jkr)
                     frames_passed = math.floor(anim.t / (1/(anim.fps or 10)))
                     if frames_passed > 0 then
                         anim.t = anim.t - frames_passed/(anim.fps or 10)
-                        if not anim.individual then
-                            next_frame = true
+                        if anim.individual then
+                            frames_passed = 0
                         end
                     end
                 end
             end
-            if next_frame and ( SMODS.Mods["Aura"].config.Programmer_art or not anim.programart ) then
+            if frames_passed > 0 and ( SMODS.Mods["Aura"].config.Programmer_art or not anim.programart ) then
                 local loc = obj.pos.x
                 if not anim.verticframes then
                     loc = loc + obj.pos.y*(anim.frames_per_row or anim.frames)
                 end
-                loc = loc - (anim.start_frame or 0)
-                if jkr and (jkr.target or jkr.fps) and anim.individual then
+                loc = loc - ((jkr and jkr.start_frame) or anim.start_frame or 0)
+                if jkr and (jkr.target or jkr.fps or jkr.frames) and anim.individual then
                     if jkr.target then
                         if anim.immediate then
                             loc = jkr.target
                         else
                             local til_target = jkr.target - loc
                             if til_target < 0 then
-                                til_target = til_target + anim.frames
+                                til_target = til_target + (jkr.frames or anim.frames)
                             end
                             if til_target >= frames_passed then
                                 loc = loc + frames_passed
                             else
                                 if jkr.remaining_triggers then
-                                    local targets_passed = math.floor((frames_passed - til_target) / anim.frames) + 1
+                                    local targets_passed = math.floor((frames_passed - til_target) / (jkr.frames or anim.frames)) + 1
                                     if targets_passed > jkr.remaining_triggers then
                                         loc = jkr.target
                                         jkr.remaining_triggers = nil
                                     else
-                                        loc = loc + (frames_passed % anim.frames)
+                                        loc = loc + (frames_passed % (jkr.frames or anim.frames))
                                         jkr.remaining_triggers = jkr.remaining_triggers - targets_passed
                                     end
                                 elseif jkr.escape_target and til_target == 0 then
-                                    loc = loc + math.min(frames_passed, anim.frames)
+                                    loc = loc + math.min(frames_passed, jkr.frames or anim.frames)
                                 else
                                     loc = jkr.target
                                 end
@@ -552,11 +582,11 @@ function Aura.update_frame(dt, k, obj, jkr)
                 elseif not anim.individual then
                     loc = loc + frames_passed
                 end
-                if loc >= anim.frames then 
-                    loc = loc % anim.frames
+                if loc >= ((jkr and jkr.frames) or anim.frames) then 
+                    loc = loc % ((jkr and jkr.frames) or anim.frames)
                     if k == "j_ancient" then Aura.update_ancient() end
                 end
-                loc = loc + (anim.start_frame or 0)
+                loc = loc + ((jkr and jkr.start_frame) or anim.start_frame or 0)
                 obj.pos.x = loc%(anim.frames_per_row or anim.frames)
                 if not anim.verticframes then
                     obj.pos.y = math.floor(loc / (anim.frames_per_row or anim.frames))
@@ -579,14 +609,13 @@ function Aura.update_frame(dt, k, obj, jkr)
         end
         if anim.extra then
             if anim.extra.frames then
-                local next_frame_extra = false
                 local frames_passed = 0
                 if jkr then
                     if anim.extra.individual then
                         jkr.extra = jkr.extra or {}
                         if anim.extra.immediate then
                             if jkr.extra.target and (obj.pos.extra.x + (not anim.extra.verticframes and obj.pos.extra.y*(anim.extra.frames_per_row or anim.extra.frames) or 0)) ~= jkr.extra.target then
-                                next_frame_extra = true
+                                frames_passed = 1
                             end
                         else
                             if jkr.extra then
@@ -595,7 +624,6 @@ function Aura.update_frame(dt, k, obj, jkr)
                                 frames_passed = math.floor(jkr.extra.t / (1/(jkr.extra.fps or anim.extra.fps or 10)))
                                 if frames_passed > 0 then
                                     jkr.extra.t = jkr.extra.t - frames_passed/(jkr.extra.fps or anim.extra.fps or 10)
-                                    next_frame_extra = true
                                 end
                             end
                         end
@@ -603,7 +631,7 @@ function Aura.update_frame(dt, k, obj, jkr)
                 else
                     if anim.extra.immediate then
                         if obj.pos.extra and obj.pos.extra.x ~= anim.extra.target and not anim.extra.individual then
-                        next_frame_extra = true
+                            frames_passed = 1
                     end
                     else
                     anim.extra.t = anim.extra.t or (anim.t and (anim.t - dt)) or 0
@@ -611,13 +639,13 @@ function Aura.update_frame(dt, k, obj, jkr)
                     frames_passed = math.floor(anim.extra.t / (1/(anim.extra.fps or 10)))
                     if frames_passed > 0 then
                         anim.extra.t = anim.extra.t - frames_passed/(anim.extra.fps or 10)
-                        if not anim.extra.individual then
-                            next_frame_extra = true
+                            if anim.extra.individual then
+                                frames_passed = 0
                             end
                         end
                     end
                 end
-                if next_frame_extra and ( SMODS.Mods["Aura"].config.Programmer_art or not anim.extra.programart ) then
+                if frames_passed > 0 and ( SMODS.Mods["Aura"].config.Programmer_art or not anim.extra.programart ) then 
                     if not obj.pos.extra then--Custom fix to prevent crash in Balatro Multiplayer in a sandbox play- idk why oops_all_6s didnt have obj.pos.extra, but if I give it to it it works
                         obj.pos.extra = {x = 0, y = 0, atlas = "aura_"..k.."_extra"}
                     end
@@ -625,7 +653,7 @@ function Aura.update_frame(dt, k, obj, jkr)
                     if not anim.extra.verticframes then
                         loc = loc + obj.pos.extra.y*(anim.extra.frames_per_row or anim.extra.frames)
                     end
-                    loc = loc - (anim.extra.start_frame or 0)
+                    loc = loc - ((jkr and jkr.extra.start_frame) or anim.extra.start_frame or 0)
                     if jkr and jkr.extra and (jkr.extra.target or jkr.extra.fps) and anim.extra.individual then
                         if jkr.extra.target then
                             if anim.extra.immediate then
@@ -633,22 +661,22 @@ function Aura.update_frame(dt, k, obj, jkr)
                                 else
                                 local til_target = jkr.extra.target - loc
                                 if til_target < 0 then
-                                    til_target = til_target + anim.extra.frames
+                                    til_target = til_target + (jkr.extra.frames or anim.extra.frames)
                                 end
                                 if til_target >= frames_passed then
                                     loc = loc + frames_passed
                                 else
                                     if jkr.extra.remaining_triggers then
-                                        local targets_passed = math.floor((frames_passed - til_target) / anim.extra.frames) + 1
+                                        local targets_passed = math.floor((frames_passed - til_target) / (jkr.extra.frames or anim.extra.frames)) + 1
                                         if targets_passed > jkr.extra.remaining_triggers then
                                             loc = jkr.extra.target
                                             jkr.extra.remaining_triggers = nil
                                         else
-                                            loc = loc + (frames_passed % anim.extra.frames)
+                                            loc = loc + (frames_passed % (jkr.extra.frames or anim.extra.frames))
                                             jkr.extra.remaining_triggers = jkr.extra.remaining_triggers - targets_passed
                                         end
                                     elseif jkr.extra.escape_target and til_target == 0 then
-                                        loc = loc + math.min(frames_passed, anim.extra.frames)
+                                        loc = loc + math.min(frames_passed, jkr.extra.frames or anim.extra.frames)
                                     else
                                         loc = jkr.extra.target
                                     end
@@ -691,11 +719,11 @@ function Aura.update_frame(dt, k, obj, jkr)
                     elseif not anim.extra.individual then
                         loc = loc + frames_passed
                     end
-                    if loc >= anim.extra.frames then
-                        loc = loc % anim.extra.frames
+                    if loc >= (jkr and jkr.extra and jkr.extra.frames or anim.extra.frames) then
+                        loc = loc % (jkr and jkr.extra and jkr.extra.frames or anim.extra.frames)
                         if k == "j_idol" then Aura.update_idol() end
                     end
-                    loc = loc + (anim.extra.start_frame or 0)
+                    loc = loc + ((jkr and jkr.extra.start_frame) or anim.extra.start_frame or 0)
                     obj.pos.extra.x = loc%(anim.extra.frames_per_row or anim.extra.frames)
                     if not anim.extra.verticframes then
                         obj.pos.extra.y = math.floor(loc / (anim.extra.frames_per_row or anim.extra.frames))
@@ -1078,7 +1106,7 @@ function Aura.update_drivers_license(silent)
         target_frame = 0
     end
     if target_frame then
-        if silent then -- or (G.GAME.blind.name == "Amber Acorn" and G.GAME.facing_blind)
+        if silent then
             AnimatedJokers.j_drivers_license.target = target_frame
         else
             G.E_MANAGER:add_event(Event({
@@ -1113,71 +1141,14 @@ end
 function Aura.update_idol()-- Triggered if the mouth is closed
     local suit = G.GAME.current_round.idol_card.suit or nil
     local rank = G.GAME.current_round.idol_card.rank or nil
-
-    --sendDebugMessage("Experimental Idol: " .. tostring(SMODS.Mods["Aura"].config.Experimental_Idol))
-    --if SMODS.Mods["Aura"].config.Experimental_Idol then 
-        --sendDebugMessage("Experimental Idol enabled")
-        --AnimatedJokers.j_idol.target = 126 + Aura.rank_sprite_order(rank)
-    --else 
-        AnimatedJokers.j_idol.target = (Aura.suit_sprite_order(suit) * 14) + Aura.rank_sprite_order(rank)
-    --end
+    AnimatedJokers.j_idol.target = (Aura.suit_sprite_order(suit) * 14) + Aura.rank_sprite_order(rank)
 end
 
 local ric = reset_idol_card
 function reset_idol_card()
     ric()
-    --if SMODS.Mods["Aura"].config.Experimental_Idol then set_experimental_idol() end
     AnimatedJokers.j_idol.extra.escape_target = true
 end
---[[ --Experimental Idol (disabled for now, looks very bad)
-function get_suit_ui_sprite(suit, offset_x, offset_y)
-    -- Default offsets to 0 if not provided
-    offset_x = offset_x or 0
-    offset_y = offset_y or 0
-    
-    local deckskin = SMODS.DeckSkins[ G.SETTINGS.CUSTOM_DECK.Collabs[suit] ]
-    local palette = deckskin and (deckskin.palette_map and deckskin.palette_map[G.SETTINGS.colour_palettes[suit] or ''] or (deckskin.palettes or {})[1])
-    local exportexture
-    
-    if palette and palette.suit_icon and palette.suit_icon.atlas then
-        -- Custom deck skin with suit icon
-        local _x = (suit == 'Spades' and 3) or (suit == 'Hearts' and 0) or (suit == 'Clubs' and 2) or (suit == 'Diamonds' and 1)
-        local pos_x = SMODS.Mods["Aura"].config.Experimental_Idol and _x or -1
-        local pos_y = SMODS.Mods["Aura"].config.Experimental_Idol and ((type(palette.suit_icon.pos) == "number" and palette.suit_icon.pos) or 
-                                                  (palette.suit_icon.pos and palette.suit_icon.pos.y) or 0) or -1
-
-        exportexture = Sprite(offset_x, offset_y, 0.3, 0.3, 
-            G.ASSET_ATLAS[palette.suit_icon.atlas or 'ui_1'], 
-            {x = pos_x, y = pos_y})
-    elseif G.SETTINGS.colour_palettes[suit] == 'lc' or G.SETTINGS.colour_palettes[suit] == 'hc' then
-        -- High contrast or low contrast palette
-        local pos = SMODS.Mods["Aura"].config.Experimental_Idol and SMODS.Suits[suit].ui_pos or {x = -1, y = -1}
-        exportexture = Sprite(offset_x, offset_y, 0.3, 0.3,
-            G.ASSET_ATLAS[ SMODS.Suits[suit][G.SETTINGS.colour_palettes[suit] == 'hc' and "hc_ui_atlas" or G.SETTINGS.colour_palettes[suit] == 'lc' and "lc_ui_atlas"] ] or
-            G.ASSET_ATLAS[("ui_" .. (G.SETTINGS.colourblind_option and "2" or "1"))], 
-            pos)
-    else
-        -- Default atlas
-        local atlas = G.SETTINGS.colour_palettes[suit] == "hc" and SMODS.Suits[suit].hc_ui_atlas or SMODS.Suits[suit].lc_ui_atlas
-        local pos = SMODS.Mods["Aura"].config.Experimental_Idol and SMODS.Suits[suit].ui_pos or {x = -1, y = -1}
-        exportexture = Sprite(offset_x, offset_y, 0.3, 0.3, 
-            G.ASSET_ATLAS[atlas and atlas or ("ui_" .. (G.SETTINGS.colourblind_option and "2" or "1"))], 
-            pos)
-    end
-    
-    return exportexture
-end
-function set_experimental_idol()
-    self.children.front = get_suit_ui_sprite(G.GAME.current_round.idol_card.suit)
-    self.children.front:set_role({
-        major = self, 
-        role_type = 'Minor', 
-        draw_major = self,
-        --xy_bond = 'Strong',  -- Use Strong bond for precise tracking
-        wh_bond = 'Weak',   -- Use Weak bond to prevent size-based centering adjustments
-        offset = {x = 1.05, y = 1.55}  -- This is the offset for positioning
-    })
-end]]
 
 --To The Moon
 local arer = add_round_eval_row
@@ -1280,50 +1251,45 @@ function Card:calculate_joker(context)
     end
 
     --Blackboard
-    if self.ability.name == "Blackboard" and context.cardarea == G.jokers and context.joker_main and not context.blueprint then
-        local black_suits, all_cards = 0, 0
-        for k, v in ipairs(G.hand.cards) do
-            all_cards = all_cards + 1
-            if v:is_suit('Clubs', nil, true) or v:is_suit('Spades', nil, true) then
-                black_suits = black_suits + 1
+    if self.ability.name == "Blackboard" and ret and not context.blueprint then
+        G.E_MANAGER:add_event(Event({
+            func = (function()
+                Aura.add_individual(self)
+                self.animation = { target = 0, escape_target = true }
+                return true
+            end)
+        }))
+    end
+
+    --Seeing Double
+    if self.ability.name == "Seeing Double" and ret and not context.blueprint then
+        G.E_MANAGER:add_event(Event({
+        func = (function()
+            Aura.add_individual(self)
+            if self.config.center.pos.extra.y == 0 then
+                self.animation = { extra = { target = 4 } }
+            else
+                self.animation = { extra = { target = 0 } }
             end
-        end
-        if black_suits == all_cards then
-            --triggered
-            G.E_MANAGER:add_event(Event({
-                func = (function()
-                    Aura.add_individual(self)
-                    self.animation = { target = 0, escape_target = true }
-                    return true
-                end)
-            }))
-        end
+                return true
+            end)
+        }))
     end
 
     --Superposition
-    if self.ability.name == "Superposition" and context.cardarea == G.jokers and context.joker_main and next(context.poker_hands["Straight"]) then
-        local aces = 0
-        for i = 1, #context.scoring_hand do
-            if context.scoring_hand[i]:get_id() == 14 then aces = aces + 1 end
-        end
-        if aces >= 1 then
+    if self.ability.name == "Superposition" and ret and not context.blueprint then
+        G.E_MANAGER:add_event(Event({
+        func = (function()
             Aura.add_individual(self)
             if self.config.center.pos.x < 10 then
-                G.E_MANAGER:add_event(Event({
-                func = (function()
-                    self.animation = {target = 10}
-                    return true
-                end)
-                }))
+                self.animation = {target = 10}
             else
-                G.E_MANAGER:add_event(Event({
-                func = (function()
-                    self.animation = {target = 0}
-                    return true
-                end)
-                }))
+                self.animation = {target = 0}
             end
-        end
+                return true
+            end)
+        }))
+            
     end
 
     --Driver's License
@@ -1416,21 +1382,6 @@ function Card:calculate_joker(context)
         self.animation = { target = 0, remaining_triggers = (self.animation and self.animation.remaining_triggers or 0) + 1 }
     end
 
-    --Space Joker (with Oops trigger)
-    if self.ability.name == "Space Joker" and context.cardarea == G.jokers and context.before and not self.debuff then
-        AnimatedJokers.j_oops.extra.fps = 10*G.SETTINGS.GAMESPEED
-        AnimatedJokers.j_oops.extra.remaining_triggers = (AnimatedJokers.j_oops.extra.remaining_triggers or 0) + 1
-        if not context.blueprint and ret and ret.level_up then -- only on successful trigger 
-            G.E_MANAGER:add_event(Event({
-                func = (function()
-                    Aura.add_individual(self)
-                    self.animation = { target = 0, escape_target = true }
-                    return true
-                end)
-            }))
-        end
-    end
-
     --Loyalty Card
     if self.config.center_key == "j_loyalty_card" then
         if self.animation then
@@ -1444,6 +1395,27 @@ function Card:calculate_joker(context)
         else
             Aura.add_individual(self)
             self.animation = { target = 5 - (self.ability.loyalty_remaining or 0) }
+        end
+    end
+
+    --Space Joker (with Oops trigger)
+    if self.ability.name == "Space Joker" and context.cardarea == G.jokers and context.before and not self.debuff then
+        G.E_MANAGER:add_event(Event({
+            trigger = 'before',
+            func = (function()
+                AnimatedJokers.j_oops.extra.fps = 10*G.SETTINGS.GAMESPEED
+                AnimatedJokers.j_oops.extra.remaining_triggers = (AnimatedJokers.j_oops.extra.remaining_triggers or 0) + 1
+                return true
+            end)
+        }))
+        if not context.blueprint and ret and ret.level_up then -- only on successful trigger 
+            G.E_MANAGER:add_event(Event({
+                func = (function()
+                    Aura.add_individual(self)
+                    self.animation = { target = 0, escape_target = true }
+                    return true
+                end)
+            }))
         end
     end
 
