@@ -5,7 +5,7 @@ Aura is a mod that seeks to add animations to every Joker in Balatro.
 **13/32** Vouchers completed
 **4/22** Tarot completed
 **12/12** Planet completed
-**0/18** Spectral completed
+**1/18** Spectral completed
 
 Known Bugs:
 - Crashes when opening [Malverk](https://github.com/Eremel/Malverk) settings
