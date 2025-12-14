@@ -497,7 +497,7 @@ function Aura.update_frame(dt, k, obj, jkr)
             else
                 if anim.immediate and anim.target then
                     if (obj.pos.x + (not anim.verticframes and (obj.pos.y*(anim.frames_per_row or anim.frames)) or 0)) ~= anim.target and not anim.individual then
-                        next_frame = true
+                        frames_passed = 1
                     end
                 else
                     anim.t = anim.t or 0
