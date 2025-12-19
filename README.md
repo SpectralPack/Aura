@@ -12,4 +12,3 @@ Known Bugs:
   - May animate cards improperly/which shouldn't animate with Malverk
 
 Artists and progress for each Joker are detailed [here](https://docs.google.com/spreadsheets/d/174gWOyMyTUSuESsiqWSt5OYEr8mcDdAM2Ig9oDxMTlQ/edit?gid=0#gid=0).
-22
