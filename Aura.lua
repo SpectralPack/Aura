@@ -79,7 +79,7 @@ AnimatedJokers = {
     j_delayed_grat = {}, -- todo: animate when primed. constant backround animation. flip clock when triggered, but empty when failed
     j_hack = { frames_per_row = 8, frames = 64 },
     j_pareidolia = { frames_per_row = 5, frames = 20 },
-    j_gros_michel = {},
+    j_gros_michel = {frames = 13, extra = { frames = 18, fps = 15, individual = true } },
     j_even_steven = { frames_per_row = 11, frames = 22 },
     j_odd_todd = { frames_per_row = 11, frames = 22 },
     j_scholar = { frames_per_row = 11, frames = 22, extra = { frames_per_row = 9, frames = 45 }},
@@ -91,7 +91,7 @@ AnimatedJokers = {
     j_burglar = { frames = 76, individual = true, verticframes = 22 },
     j_blackboard = { frames = 49, individual = true, verticframes = 22 },
     j_runner = { frames_per_row = 10, frames = 110 },
-    j_ice_cream = { frames = 21, individual = true, programart = true }, --todo: create true animation
+    j_ice_cream = { frames = 6, individual = true, verticframes = 13 }, --todo: add extra frames in between
     j_dna = { frames = 11 }, --frames = 9
     j_splash = {},
     j_blue_joker = { frames_per_row = 11, frames = 22 },
@@ -132,7 +132,7 @@ AnimatedJokers = {
     j_drunkard = { frames = 22, verticframes = 14, verticfps = 13 },
     j_stone = { frames_per_row = 11, frames = 22 },
     j_golden = { frames_per_row = 11, frames = 22 },
-    j_lucky_cat = {}, -- todo: animate when promoted
+    j_lucky_cat = { frames = 9, individual = true, verticframes = 29 }, -- todo: animate when promoted
     j_baseball = {},
     j_bull = {},
     j_diet_cola = { frames = 20 },
@@ -281,6 +281,32 @@ AnimatedVouchers = {
     v_paint_brush = {},
     v_palette = {}
 }
+AnimatedTags = {
+    tag_uncommon = { frames_per_row = 11, frames = 22 },
+    tag_rare = { frames_per_row = 11, frames = 22 },
+    tag_negative = {},
+    tag_foil = {},
+    tag_holo = {},
+    tag_polychrome = {},
+    tag_investment = { frames = 20 },
+    tag_voucher = {},
+    tag_boss = {},
+    tag_standard = {},
+    tag_charm = { frames = 13 },
+    tag_meteor = {},
+    tag_buffoon = {},
+    tag_handy = {},
+    tag_garbage = {},
+    tag_ethereal = {},
+    tag_coupon = { frames = 18 },
+    tag_double = { frames_per_row = 7, frames = 21 },
+    tag_juggle = { frames = 11 },
+    tag_d_six = { frames_per_row = 4, frames = 24 },
+    tag_top_up = {},
+    tag_skip = {},
+    tag_orbital = { frames = 12 },
+    tag_economy = { frames = 10, fps = 10 }
+}
 
 AnimatedIndividuals = {}
 
@@ -297,11 +323,15 @@ function Aura.add_individual(card)
     if not is_in_individual then
         AnimatedIndividuals[#AnimatedIndividuals+1] = card
         local name = card.config.center_key
-        local anim = AnimatedJokers[name] or AnimatedPlanets[name] or AnimatedVouchers[name]
+        local anim = AnimatedJokers[name] or AnimatedPlanets[name] or AnimatedVouchers[name] or AnimatedTags[name]
 
         card.animation = card.animation or {}
-        if card.config.key == "j_flash" and card.animation.flash_order then
-            Aura.update_flash(card, card.animation.flash_order[card.animation.flash_index])
+        if card.config.center.key == "j_flash" then
+            if card.animation.flash_order then
+                Aura.update_flash(card, card.animation.flash_order[card.animation.flash_index])
+            else
+                Aura.update_flash(card, (card.config.center.pos.x + (13*card.config.center.pos.y)))
+            end
         end
         local center_copy = {}
         for k, v in pairs(card.config.center) do
@@ -329,9 +359,7 @@ end
 
 if SMODS.Atlas then
     --Register all Jokers/Sprites
-    for i = 1, 150 do
-        local k = G.P_CENTER_POOLS.Joker[i].key
-        local v = AnimatedJokers[k]
+    for k, v in pairs(AnimatedJokers) do
         local posx, posy, posex, posey
         if v.start_frame then
             posx = v.start_frame%(v.frames_per_row or v.frames)
@@ -377,6 +405,23 @@ if SMODS.Atlas then
     end
     --Register all Planets/Sprites
     for k, v in pairs(AnimatedPlanets) do
+        local posx, posy, posex, posey
+        if v.start_frame then
+            posx = v.start_frame%(v.frames_per_row or v.frames)
+            if v.verticframes and v.start_verticframe then
+                posy = v.start_verticframe
+            else
+                posy = math.floor(v.start_frame / (v.frames_per_row or v.frames))
+            end
+        end
+        if v.extra and v.extra.start_frame then
+            posex = v.extra.start_frame%(v.extra.frames_per_row or v.extra.frames)
+            if v.extra.verticframes and v.extra.start_verticframe then
+                posey = v.extra.start_verticframe
+            else
+                posey = math.floor(v.extra.start_frame / (v.extra.frames_per_row or v.extra.frames))
+            end
+        end
         if v.frames then
             --sprite
             SMODS.Atlas {
@@ -405,6 +450,23 @@ if SMODS.Atlas then
     end
     --Register all Vouchers/Sprites
     for k, v in pairs(AnimatedVouchers) do
+        local posx, posy, posex, posey
+        if v.start_frame then
+            posx = v.start_frame%(v.frames_per_row or v.frames)
+            if v.verticframes and v.start_verticframe then
+                posy = v.start_verticframe
+            else
+                posy = math.floor(v.start_frame / (v.frames_per_row or v.frames))
+            end
+        end
+        if v.extra and v.extra.start_frame then
+            posex = v.extra.start_frame%(v.extra.frames_per_row or v.extra.frames)
+            if v.extra.verticframes and v.extra.start_verticframe then
+                posey = v.extra.start_verticframe
+            else
+                posey = math.floor(v.extra.start_frame / (v.extra.frames_per_row or v.extra.frames))
+            end
+        end
         if v.frames then
             --sprite
             SMODS.Atlas {
@@ -431,7 +493,43 @@ if SMODS.Atlas then
             SMODS[v and v.set or "Voucher"]:take_ownership(k, {}, true)
         end
     end
+    --Register all Tags/Sprites
+    for k, v in pairs(AnimatedTags) do
+        if v.frames then
+            --sprite
+            SMODS.Atlas {
+                key = k,
+                path = k .. ".png",
+                px = v.px or 34,
+                py = v.py or 34
+            }
+            --tag override
+            SMODS.Tag:take_ownership(k, {
+                atlas = k,
+                pos = { x = 0, y = 0 },
+            },SMODS.Mods["Aura"].config.Silent_ownership)
+        else
+            SMODS.Tag:take_ownership(k, {}, true)
+        end
+    end
 end
+
+--This function lets you know the pseudorandom value for a given seed without modifying future random calls
+function peek_pseudorandom(seed, min, max)
+    if type(seed) == 'string' then
+        local base
+        if G.GAME.pseudorandom[seed] then
+            base = G.GAME.pseudorandom[seed]
+        else
+            base = pseudohash(seed..(G.GAME.pseudorandom.seed or ''))
+        end
+        seed = (math.abs(tonumber(string.format("%.13f", (2.134453429141 + base * 1.72431234) % 1))) + (G.GAME.pseudorandom.hashed_seed or 0)) / 2
+    end
+    math.randomseed(seed)
+    if min and max then return math.random(min, max)
+    else return math.random() end
+end
+
 
 --fix edition shaders ignoring front layer. FIX MADE BY LARSWIJN
 --In theory, this fix will be added natively to Steamodded, but until then, it will be here.
@@ -475,7 +573,7 @@ end
 local upd = Game.update
 
 function Aura.update_frame(dt, k, obj, jkr)
-    local anim = AnimatedJokers[k] or AnimatedPlanets[k] or AnimatedVouchers[k]
+    local anim = AnimatedJokers[k] or AnimatedPlanets[k] or AnimatedVouchers[k] or AnimatedTags[k]
     if anim and obj then
         if anim.frames then
             local frames_passed = 0
@@ -484,7 +582,7 @@ function Aura.update_frame(dt, k, obj, jkr)
                     if anim.immediate then
                         if jkr.target and (obj.pos.x + (not anim.verticframes and (obj.pos.y*(anim.frames_per_row or anim.frames)) or 0)) ~= jkr.target then
                             frames_passed = 1
-                    end
+                        end    
                     else
                     jkr.t = jkr.t or (anim.t and (anim.t - dt)) or 0
                     jkr.t = jkr.t + dt
@@ -759,6 +857,9 @@ function Game:update(dt)
     for k, v in pairs(AnimatedVouchers) do
         Aura.update_frame(dt, k, G.P_CENTERS[k])
     end
+    for k, v in pairs(AnimatedTags) do
+        Aura.update_frame(dt, k, G.P_TAGS[k])
+    end
     for _, v in pairs(AnimatedIndividuals) do
         Aura.update_frame(dt, v.config.center_key, v.config.center, v.animation)
     end
@@ -849,7 +950,8 @@ local cc = copy_card
 function copy_card(other, new_card, card_scale, playing_card, strip_edition)
     local ret_card = cc(other, new_card, card_scale, playing_card, strip_edition)
     local key = ret_card.config.center.key
-    local anim = AnimatedJokers[key] or AnimatedPlanets[key] or AnimatedVouchers[key]
+    local anim = AnimatedJokers[key] or AnimatedPlanets[key] or AnimatedVouchers[key] or AnimatedTags[key]
+
     if anim and (anim.individual or (anim.extra and anim.extra.individual)) and other.animation then
         ret_card.config.center_key = key
         Aura.add_individual(ret_card)
@@ -865,7 +967,7 @@ function Game:start_run(args)
     gsr(self,args)
     for i = 1, #AnimatedIndividuals do
         local card = AnimatedIndividuals[i]
-        local anim = AnimatedJokers[card.config.center_key] or AnimatedPlanets[card.config.center_key] or AnimatedVouchers[card.config.center_key]
+        local anim = AnimatedJokers[card.config.center_key] or AnimatedPlanets[card.config.center_key] or AnimatedVouchers[card.config.center_key] or AnimatedTags[card.config.center_key]
         if card.animation and card.animation.target and anim.individual then
             card.config.center.pos.x = card.animation.target%(anim.frames_per_row or anim.frames)
             if not anim.verticframes then
@@ -1229,6 +1331,28 @@ function Card:calculate_joker(context)
 
     end
 
+    --Gros Michel
+    if self.ability.name == "Gros Michel"  and context.end_of_round and context.main_eval and not context.blueprint then
+        G.E_MANAGER:add_event(Event({
+            func = (function()
+                AnimatedJokers.j_oops.extra.fps = 10*G.SETTINGS.GAMESPEED
+                AnimatedJokers.j_oops.extra.remaining_triggers = (AnimatedJokers.j_oops.extra.remaining_triggers or 0) + 1
+                return true
+            end)
+        }))
+        if peek_pseudorandom('gros_michel') < G.GAME.probabilities.normal/self.ability.extra.odds then
+            G.E_MANAGER:add_event(Event({
+                delay = 1*G.SETTINGS.GAMESPEED,
+                trigger = 'before',
+                func = (function()
+                    Aura.add_individual(self)
+                    self.animation = { extra = { target = 17 } }
+                    return true
+                end)
+            }))
+        end
+    end
+
     local ret = cj(self, context)
 
     --Flash Card
@@ -1320,7 +1444,7 @@ function Card:calculate_joker(context)
         G.E_MANAGER:add_event(Event({
             func = (function()
                 Aura.add_individual(self)
-                self.animation = { target = 20 - math.floor((self.ability.extra.chips / 5) + 0.5) }
+                self.animation = { target = math.floor((100 - self.ability.extra.chips) / 20) }
                 return true
             end)
         }))
@@ -1419,20 +1543,21 @@ function Card:calculate_joker(context)
         end
     end
 
-    --Various Oops triggers
-    if self.ability.name == "Hallucination" and context.open_booster then
+    --Lucky Cat
+    if self.ability.name == "Lucky Cat" and ret and ret.extra and not context.blueprint then
         G.E_MANAGER:add_event(Event({
-            trigger = 'before',
             func = (function()
-                AnimatedJokers.j_oops.extra.fps = 10*G.SETTINGS.GAMESPEED
-                AnimatedJokers.j_oops.extra.remaining_triggers = (AnimatedJokers.j_oops.extra.remaining_triggers or 0) + 1
+                Aura.add_individual(self)
+                self.animation = { target = 0, remaining_triggers = (self.animation and self.animation.remaining_triggers or 0) + 1 }
                 return true
             end)
         }))
     end
 
-    if self.ability.name == "Gros Michel"  and context.end_of_round and context.main_eval and not context.blueprint then
+    --Various Oops triggers
+    if self.ability.name == "Hallucination" and context.open_booster then
         G.E_MANAGER:add_event(Event({
+            trigger = 'before',
             func = (function()
                 AnimatedJokers.j_oops.extra.fps = 10*G.SETTINGS.GAMESPEED
                 AnimatedJokers.j_oops.extra.remaining_triggers = (AnimatedJokers.j_oops.extra.remaining_triggers or 0) + 1
