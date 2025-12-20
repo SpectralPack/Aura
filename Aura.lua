@@ -299,7 +299,7 @@ AnimatedTags = {
     tag_garbage = {},
     tag_ethereal = {},
     tag_coupon = { frames = 18 },
-    tag_double = { frames_per_row = 7, frames = 21 },
+    tag_double = { frames = 26 },
     tag_juggle = { frames = 11 },
     tag_d_six = { frames_per_row = 4, frames = 24 },
     tag_top_up = {},
@@ -969,16 +969,16 @@ function Game:start_run(args)
         local card = AnimatedIndividuals[i]
         local anim = AnimatedJokers[card.config.center_key] or AnimatedPlanets[card.config.center_key] or AnimatedVouchers[card.config.center_key] or AnimatedTags[card.config.center_key]
         if card.animation and card.animation.target and anim.individual then
-            card.config.center.pos.x = card.animation.target%(anim.frames_per_row or anim.frames)
+            card.config.center.pos.x = ((anim.start_frame or 0) + card.animation.target)%(anim.frames_per_row or anim.frames)
             if not anim.verticframes then
-                card.config.center.pos.y = math.floor(card.animation.target / (anim.frames_per_row or anim.frames))
+                card.config.center.pos.y = math.floor( ((anim.start_frame or 0) + card.animation.target) / (anim.frames_per_row or anim.frames) )
             end
             card.animation.t = nil
         end
         if card.animation and card.animation.extra and card.animation.extra.target and anim.extra.individual then
-            card.config.center.pos.extra.x = card.animation.extra.target%(anim.extra.frames_per_row or anim.extra.frames)
+            card.config.center.pos.extra.x = ((anim.extra.start_frame or 0) + card.animation.extra.target)%(anim.extra.frames_per_row or anim.extra.frames)
             if not anim.extra.verticframes then
-                card.config.center.pos.extra.y = math.floor(card.animation.extra.target / (anim.extra.frames_per_row or anim.extra.frames))
+                card.config.center.pos.extra.y = math.floor( ((anim.extra.start_frame or 0) + card.animation.extra.target) / (anim.extra.frames_per_row or anim.extra.frames) )
             end
             card.animation.extra.t = nil
         end
@@ -1115,10 +1115,10 @@ function Aura.update_castle()
     local new_suit = G.GAME.current_round.castle_card.suit or 'Spades'
     local anim_offset = Aura.suit_sprite_order(new_suit)
     AnimatedJokers.j_castle.extra.target = anim_offset
-    if (new_suit == "six_Moons" or new_suit == "six_Stars") then
+    if (new_suit == "six_Moons" or new_suit == "six_Stars" or new_suit == "paperback_Stars") then
         if AnimatedJokers.j_castle.start_frame == 0 then
             AnimatedJokers.j_castle.start_frame = 72
-            AnimatedJokers.j_castle.frames = 94
+            AnimatedJokers.j_castle.frames = 22
             G.P_CENTERS["j_castle"].pos.y = 8
         end
     else
