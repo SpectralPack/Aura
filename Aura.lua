@@ -123,8 +123,8 @@ AnimatedJokers = {
     j_gift = {},
     j_turtle_bean = { frames_per_row = 7, frames = 14, extra = { frames = 6, individual = true, programart = true, verticframes = 14, verticfps = 8 } }, -- todo: add the diferent stages of eaten/roten
     j_erosion = {},
-    j_reserved_parking = {},
-    j_mail = { frames_per_row = 7, frames = 14, target = 13, immediate = true },
+    j_reserved_parking = { frames_per_row = 6, frames = 36 },
+    j_mail = { frames_per_row = 5, frames = 15, target = 14, immediate = true },
     j_to_the_moon = { frames = 40, fps = 8, target = 0, verticframes = 40, verticfps = 8 },
     j_hallucination = {},
     j_fortune_teller = { frames_per_row = 11, frames = 22 },
@@ -168,7 +168,7 @@ AnimatedJokers = {
     j_wee = { frames_per_row = 11, frames = 22 },
     j_merry_andy = { frames_per_row = 11, frames = 22 },
     j_oops = { frames_per_row = 5, frames = 10, extra = { frames = 5, fps = 15, target = 0, programart = true } }, -- todo: create stilized smear frames
-    j_idol = { frames_per_row = 14, frames = 140, immediate = true, target = 51, extra = { frames_per_row = 6, frames = 6, fps = 3, target = 3 } }, -- todo: fix broken code for custom suit icons
+    j_idol = { frames_per_row = 15, frames = 150, immediate = true, target = 51, extra = { frames_per_row = 6, frames = 6, fps = 3, target = 3 } }, -- todo: fix broken code for custom suit icons
     j_seeing_double = { frames_per_row = 13, frames = 150, extra = { frames_per_row = 4, frames = 8, individual = true } },
     j_matador = { frames_per_row = 11, frames = 22 },
     j_hit_the_road = { frames = 10, individual = true }, -- todo: create a true animation with pespective and not just the 2d car
@@ -1079,7 +1079,8 @@ function Aura.rank_sprite_order(rank)
     elseif rank == "Queen" then return 10
     elseif rank == "King" then return 11
     elseif rank == "Ace" then return 12
-    else return 13 end
+    elseif rank == "paperback_Apostle" then return 13
+    else return 14 end
 end
 
 function Aura.seal_sprite_order(seal)
@@ -1116,13 +1117,13 @@ function Aura.update_castle()
     local anim_offset = Aura.suit_sprite_order(new_suit)
     AnimatedJokers.j_castle.extra.target = anim_offset
     if (new_suit == "six_Moons" or new_suit == "six_Stars" or new_suit == "paperback_Stars") then
-        if AnimatedJokers.j_castle.start_frame == 0 then
+        if AnimatedJokers.j_castle.start_frame ~= 72 then
             AnimatedJokers.j_castle.start_frame = 72
             AnimatedJokers.j_castle.frames = 22
             G.P_CENTERS["j_castle"].pos.y = 8
         end
     else
-        if AnimatedJokers.j_castle.start_frame == 72 then
+        if AnimatedJokers.j_castle.start_frame ~= 0 then
             AnimatedJokers.j_castle.start_frame = 0
             AnimatedJokers.j_castle.frames = 69
             G.P_CENTERS["j_castle"].pos.y = 0
@@ -1146,7 +1147,7 @@ function reset_castle_card()
                 jkr:flip()
             end
             Aura.update_castle()
-            delay(0.075*G.SETTINGS.GAMESPEED)
+            delay(0.075*G.SPEEDFACTOR)
             for _, jkr in pairs(castlelist) do
                 jkr:flip()
             end
@@ -1176,7 +1177,7 @@ function reset_mail_rank()
                 jkr:flip()
             end
             Aura.update_mail()
-            delay(0.075*G.SETTINGS.GAMESPEED)
+            delay(0.075*G.SPEEDFACTOR)
             for _, jkr in pairs(maillist) do
                 jkr:flip()
             end
@@ -1217,7 +1218,7 @@ function Aura.update_drivers_license(silent)
                         jkr:flip()
                     end
                     AnimatedJokers.j_drivers_license.target = target_frame
-                    delay(0.075*G.SETTINGS.GAMESPEED)
+                    delay(0.075*G.SPEEDFACTOR)
                     for _, jkr in pairs(licenselist) do
                         jkr:flip()
                     end
@@ -1243,13 +1244,24 @@ end
 function Aura.update_idol()-- Triggered if the mouth is closed
     local suit = G.GAME.current_round.idol_card.suit or nil
     local rank = G.GAME.current_round.idol_card.rank or nil
-    AnimatedJokers.j_idol.target = (Aura.suit_sprite_order(suit) * 14) + Aura.rank_sprite_order(rank)
+    AnimatedJokers.j_idol.target = (Aura.suit_sprite_order(suit) * AnimatedJokers.j_idol.frames_per_row) + Aura.rank_sprite_order(rank)
 end
 
 local ric = reset_idol_card
 function reset_idol_card()
     ric()
     AnimatedJokers.j_idol.extra.escape_target = true
+end
+
+--Oops All 6s
+function Aura.Trigger_oops_all_6s()
+    G.E_MANAGER:add_event(Event({
+        func = (function()
+            AnimatedJokers.j_oops.extra.fps = 10*(G.SPEEDFACTOR/G.SETTINGS.GAMESPEED)
+            AnimatedJokers.j_oops.extra.remaining_triggers = (AnimatedJokers.j_oops.extra.remaining_triggers or 0) + 1
+            return true
+        end)
+    }))
 end
 
 --To The Moon
@@ -1308,24 +1320,11 @@ function Card:calculate_joker(context)
       #context.full_hand == 1 and context.full_hand[1]:get_id() == 6 and G.GAME.current_round.hands_played == 0 and
       #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
 
-        local delay = 1.6*G.SETTINGS.GAMESPEED --16 frames at 10 fps * compensation for game speed
-
-        --Compensation to properly sync
-        if G.SETTINGS.GAMESPEED == 1 or G.SETTINGS.GAMESPEED == 0.5 then-------Values reached through experimentation:  when x4-> 2, when x1-> 0, when x0.5-> 0, when x2-> 0.5
-            --delay = delay + (G.GAME.consumeable_buffer * 0)
-        elseif G.SETTINGS.GAMESPEED == 2 then
-            delay = delay + (G.GAME.consumeable_buffer * 0.5)
-        elseif G.SETTINGS.GAMESPEED == 4 then
-            delay = delay + (G.GAME.consumeable_buffer * 2)
-        else --If modded game speed
-            delay = 0
-        end
-
-        G.E_MANAGER:add_event(Event({ delay = delay,
+        G.E_MANAGER:add_event(Event({ delay = 1.6*G.SETTINGS.GAMESPEED,
         trigger = 'before',
         func = (function()
             Aura.add_individual(self)
-            self.animation = { target = 0, escape_target = true }
+            self.animation = { target = 0, escape_target = true, fps = 10*(G.SPEEDFACTOR/G.SETTINGS.GAMESPEED) }
             return true
         end)}))
 
@@ -1333,16 +1332,10 @@ function Card:calculate_joker(context)
 
     --Gros Michel
     if self.ability.name == "Gros Michel"  and context.end_of_round and context.main_eval and not context.blueprint then
-        G.E_MANAGER:add_event(Event({
-            func = (function()
-                AnimatedJokers.j_oops.extra.fps = 10*G.SETTINGS.GAMESPEED
-                AnimatedJokers.j_oops.extra.remaining_triggers = (AnimatedJokers.j_oops.extra.remaining_triggers or 0) + 1
-                return true
-            end)
-        }))
+        Aura.Trigger_oops_all_6s()
         if peek_pseudorandom('gros_michel') < G.GAME.probabilities.normal/self.ability.extra.odds then
             G.E_MANAGER:add_event(Event({
-                delay = 1*G.SETTINGS.GAMESPEED,
+                delay = 1*G.SPEEDFACTOR,
                 trigger = 'before',
                 func = (function()
                     Aura.add_individual(self)
@@ -1366,7 +1359,7 @@ function Card:calculate_joker(context)
                 if self.animation.flash_index > 25 then self.animation.flash_index = 0 end
                 self.animation.target = self.animation.flash_order[self.animation.flash_index]
                 self:juice_up(0.3, 0.3)
-                delay(0.075*G.SETTINGS.GAMESPEED)
+                delay(0.075*G.SPEEDFACTOR)
                 self:flip()
                 play_sound('tarot2', 1, 0.6)
                 return true
@@ -1524,14 +1517,7 @@ function Card:calculate_joker(context)
 
     --Space Joker (with Oops trigger)
     if self.ability.name == "Space Joker" and context.cardarea == G.jokers and context.before and not self.debuff then
-        G.E_MANAGER:add_event(Event({
-            trigger = 'before',
-            func = (function()
-                AnimatedJokers.j_oops.extra.fps = 10*G.SETTINGS.GAMESPEED
-                AnimatedJokers.j_oops.extra.remaining_triggers = (AnimatedJokers.j_oops.extra.remaining_triggers or 0) + 1
-                return true
-            end)
-        }))
+        Aura.Trigger_oops_all_6s()
         if not context.blueprint and ret and ret.level_up then -- only on successful trigger 
             G.E_MANAGER:add_event(Event({
                 func = (function()
@@ -1548,7 +1534,7 @@ function Card:calculate_joker(context)
         G.E_MANAGER:add_event(Event({
             func = (function()
                 Aura.add_individual(self)
-                self.animation = { target = 0, remaining_triggers = (self.animation and self.animation.remaining_triggers or 0) + 1 }
+                self.animation = { target = 0, escape_target = true, fps = 8*(G.SPEEDFACTOR/G.SETTINGS.GAMESPEED) } --remaining_triggers = (self.animation and self.animation.remaining_triggers or 0) + 1
                 return true
             end)
         }))
@@ -1556,67 +1542,26 @@ function Card:calculate_joker(context)
 
     --Various Oops triggers
     if self.ability.name == "Hallucination" and context.open_booster then
-        G.E_MANAGER:add_event(Event({
-            trigger = 'before',
-            func = (function()
-                AnimatedJokers.j_oops.extra.fps = 10*G.SETTINGS.GAMESPEED
-                AnimatedJokers.j_oops.extra.remaining_triggers = (AnimatedJokers.j_oops.extra.remaining_triggers or 0) + 1
-                return true
-            end)
-        }))
+        Aura.Trigger_oops_all_6s()
     end
 
     if self.ability.name == "Cavendish" and context.end_of_round and context.main_eval and not context.blueprint then
-        G.E_MANAGER:add_event(Event({
-            func = (function()
-                AnimatedJokers.j_oops.extra.fps = 10*G.SETTINGS.GAMESPEED
-                AnimatedJokers.j_oops.extra.remaining_triggers = (AnimatedJokers.j_oops.extra.remaining_triggers or 0) + 1
-                return true
-            end)
-        }))
+        Aura.Trigger_oops_all_6s()
     end
     if self.ability.name == "8 Ball" and context.individual and context.cardarea == G.play and context.other_card and context.other_card:get_id() == 8 then
-        G.E_MANAGER:add_event(Event({
-            trigger = 'before',
-            func = (function()
-                AnimatedJokers.j_oops.extra.fps = 10*G.SETTINGS.GAMESPEED
-                AnimatedJokers.j_oops.extra.remaining_triggers = (AnimatedJokers.j_oops.extra.remaining_triggers or 0) + 1
-                return true
-            end)
-        }))
+        Aura.Trigger_oops_all_6s()
     end
 
     if self.ability.name == "Business Card" and context.individual and context.cardarea == G.play and context.other_card and context.other_card:is_face() then
-        G.E_MANAGER:add_event(Event({
-            trigger = 'before',
-            func = (function()
-                AnimatedJokers.j_oops.extra.fps = 10*G.SETTINGS.GAMESPEED
-                AnimatedJokers.j_oops.extra.remaining_triggers = (AnimatedJokers.j_oops.extra.remaining_triggers or 0) + 1
-                return true
-            end)
-        }))
+        Aura.Trigger_oops_all_6s()
     end
 
     if self.ability.name == "Bloodstone" and context.individual and context.cardarea == G.play and context.other_card and context.other_card:is_suit("Hearts") then
-        G.E_MANAGER:add_event(Event({
-            trigger = 'before',
-            func = (function()
-                AnimatedJokers.j_oops.extra.fps = 10*G.SETTINGS.GAMESPEED
-                AnimatedJokers.j_oops.extra.remaining_triggers = (AnimatedJokers.j_oops.extra.remaining_triggers or 0) + 1
-                return true
-            end)
-        }))
+        Aura.Trigger_oops_all_6s()
     end
 
     if self.ability.name == "Reserved Parking" and context.individual and context.cardarea == G.hand and context.other_card and context.other_card:is_face() then
-        G.E_MANAGER:add_event(Event({
-            trigger = 'before',
-            func = (function()
-                AnimatedJokers.j_oops.extra.fps = 10*G.SETTINGS.GAMESPEED
-                AnimatedJokers.j_oops.extra.remaining_triggers = (AnimatedJokers.j_oops.extra.remaining_triggers or 0) + 1
-                return true
-            end)
-        }))
+        Aura.Trigger_oops_all_6s()
     end
 
     return ret
@@ -1627,17 +1572,9 @@ end
 local cuc = Card.use_consumeable
 function Card:use_consumeable(context)
     if self.ability.name == "The Wheel of Fortune" then
-        G.E_MANAGER:add_event(Event({
-            trigger = 'before',
-            delay = 0.35,
-            func = (function()
-                AnimatedJokers.j_oops.extra.fps = 10*G.SETTINGS.GAMESPEED
-                AnimatedJokers.j_oops.extra.remaining_triggers = (AnimatedJokers.j_oops.extra.remaining_triggers or 0) + 1
-                return true
-            end)
-        }))
+        Aura.Trigger_oops_all_6s()
         Aura.add_individual(self)
-        AnimatedPlanets.c_wheel_of_fortune.fps = 10*G.SETTINGS.GAMESPEED-- so it can be seen on higher gamespeeds
+        AnimatedPlanets.c_wheel_of_fortune.fps = 10*G.SPEEDFACTOR
         self.animation = { target = 12 }
     end
     local ret = cuc(self, context)
@@ -1652,7 +1589,7 @@ function Card:set_seal(seal, silent, immediate)
             if selfjkr.config.center_key == "j_certificate" and not selfjkr.debuff and ( not selfjkr.animation or not selfjkr.animation.certificate_ran ) then
                 Aura.add_individual(selfjkr)
                 selfjkr.animation.certificate_ran = true
-                G.E_MANAGER:add_event(Event({ delay = 10*G.SETTINGS.GAMESPEED,
+                G.E_MANAGER:add_event(Event({ delay = 10*G.SPEEDFACTOR,
                     func = (function()
                         selfjkr.animation = { target = 27, escape_target = true, extra = { target = Aura.seal_sprite_order(seal) }, certificate_ran = selfjkr.animation.certificate_ran }
                         --selfjkr:juice_up(0.3, 0.3)
@@ -1672,18 +1609,9 @@ local gcm = Card.get_chip_mult
 
 function Card:get_chip_mult()
     local ret = gcm(self)
-
     if self.ability.effect == "Lucky Card" then
-        G.E_MANAGER:add_event(Event({
-            trigger = 'before',
-            func = (function()
-                AnimatedJokers.j_oops.extra.fps = 10*G.SETTINGS.GAMESPEED
-                AnimatedJokers.j_oops.extra.remaining_triggers = (AnimatedJokers.j_oops.extra.remaining_triggers or 0) + 1
-                return true
-            end)
-        }))
+        Aura.Trigger_oops_all_6s()
     end
-
     return ret
 end
 
@@ -1693,24 +1621,16 @@ local gfep = G.FUNCS.evaluate_play
 
 function G.FUNCS.evaluate_play(e)
     local ret = gfep(e)
-    
     if G.play and G.play.cards then
         local _, _, _, scoring_hand = G.FUNCS.get_poker_hand_info(G.play.cards)
         if scoring_hand then
             for i=1, #scoring_hand do
                 if scoring_hand[i].ability.name == 'Glass Card' and not scoring_hand[i].debuff then
-                    G.E_MANAGER:add_event(Event({
-                        func = (function()
-                            AnimatedJokers.j_oops.extra.fps = 10*G.SETTINGS.GAMESPEED
-                            AnimatedJokers.j_oops.extra.remaining_triggers = (AnimatedJokers.j_oops.extra.remaining_triggers or 0) + 1
-                            return true
-                        end)
-                    }))
+                    Aura.Trigger_oops_all_6s()
                 end
             end
         end
     end
-    
     return ret
 end
 
