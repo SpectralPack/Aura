@@ -5,7 +5,7 @@
 --- MOD_DESCRIPTION: Adds animations to Jokers. Art by: Bard, Grassy311, RattlingSnow353, Solace, RadicaAprils, chloe_cromslor, SadCube, Mincoiin, Flowr and MRTorres
 --- CONFLICTS: [Malverk]
 --- BADGE_COLOUR: 3469ab
---- VERSION: 0.350
+--- VERSION: 0.501
 
 SMODS.Atlas { -- The Icon for the mod
   key = 'modicon',
