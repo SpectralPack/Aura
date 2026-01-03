@@ -285,19 +285,19 @@ AnimatedVouchers = {
 AnimatedTags = {
     tag_uncommon = { frames_per_row = 11, frames = 22, credits = {"MightyKingJoker"} },
     tag_rare = { frames_per_row = 11, frames = 22, credits = {"MightyKingJoker"} },
-    tag_negative = {},
-    tag_foil = {},
-    tag_holo = {},
-    tag_polychrome = {},
+    tag_negative = { frames = 19, credits = {"MightyKingJoker"} },
+    tag_foil = { frames = 19, credits = {"MightyKingJoker"} },
+    tag_holo = { frames = 19, credits = {"MightyKingJoker"} },
+    tag_polychrome = { frames = 19, credits = {"MightyKingJoker"} },
     tag_investment = { frames = 20, credits = {"MightyKingJoker"} },
     tag_voucher = {},
-    tag_boss = {},
+    tag_boss = { frames = 10, credits = {"SadCube"} },
     tag_standard = {},
     tag_charm = { frames = 13, credits = {"Cebee"} },
     tag_meteor = {},
-    tag_buffoon = {},
-    tag_handy = {},
-    tag_garbage = {},
+    tag_buffoon = { frames_per_row = 11, frames = 22, credits = {"Willow"} },
+    tag_handy = { frames = 18, credits = {"Willow"} },
+    tag_garbage = { frames = 19, credits = {"Willow"} },
     tag_ethereal = {},
     tag_coupon = { frames = 18, credits = {"SadCube"} },
     tag_double = { frames = 26, credits = {"SadCube"} },
@@ -310,11 +310,13 @@ AnimatedTags = {
 }
 
 AuraTradingCards = {
-    [11] = {class = "JOKER", name = "The Joker of Poker"},
-    [15] = {class = "JOKER", name = "Applause for Acrobats"},
-    [41] = {class = "JOKER", name = "Riff Raff Rumble"},
-    [66] = {class = "SPELL", name = "Frightful Face of Fear"},
-    [79] = {class = "ITEM",  name = "Generous Gift"}
+    [11] = {class = "JOKER", name = "The Joker of Poker", credits = {"MightyKingJoker"}},
+    [15] = {class = "JOKER", name = "Applause for Acrobats", credits = {"MightyKingJoker"}},
+    [17] = {class = "JOKER", name = "Mind Over Madness", credits = {"Willow"}},
+    [41] = {class = "JOKER", name = "Riff Raff Rumble", credits = {"MightyKingJoker"}},
+    [66] = {class = "SPELL", name = "Frightful Face of Fear", credits = {"MightyKingJoker"}},
+    [79] = {class = "ITEM",  name = "Generous Gift", credits = {"MightyKingJoker"}},
+    [95] = {class = "SPELL", name = "Interplanetary Alignment", credits = {"MightyKingJoker"}}
 }
 
 AnimatedDeckSkins = {
@@ -368,7 +370,7 @@ function Aura.add_individual(card, loaded)
         end
         card.config.center = center_copy
         card:set_sprites(card.config.center)
-        if card.children and card.children.front then
+        if card.children and card.children.front and anim.extra then
             card.children.front.sprite_pos = center_copy.animpos.extra
         end
     end
@@ -651,41 +653,6 @@ end
 
 --fix edition shaders ignoring front layer. FIX MADE BY LARSWIJN
 --In theory, this fix will be added natively to Steamodded, but until then, it will be here.
-if SMODS.DrawStep then
-	-- drawsteps are "only" supported since 0423a
-	SMODS.DrawStep:take_ownership("front",
-		-- delay drawing of front to be after `edition` drawstep for center
-		{
-			order = 22,
-		}
-	)
-
-	SMODS.DrawStep {
-		-- now we need to create a new drawing step to apply the edition shader to the front
-		key = "front_edition",
-		order = 24,
-		func = function(self, layer)
-			if self.children.front and not self:should_hide_front() then
-				local edition = self.delay_edition or self.edition
-				if edition then
-					for k, v in pairs(G.P_CENTER_POOLS.Edition) do
-						if edition[v.key:sub(3)] and v.shader then
-							if type(v.draw) == 'function' then
-								v:draw(self, layer)
-							else
-								self.children.front:draw_shader(v.shader, nil, self.ARGS.send_to_shader)
-							end
-						end
-					end
-				end
-				if (edition and edition.negative) or (self.ability.name == 'Antimatter' and (self.config.center.discovered or self.bypass_discovery_center)) then
-					self.children.front:draw_shader('negative_shine', nil, self.ARGS.send_to_shader)
-				end
-			end
-		end,
-		conditions = { vortex = false, facing = 'front', front_hidden = false },
-	}
-end
 
 if SMODS.DrawStep then
 	-- drawsteps are "only" supported since 0423a
@@ -1582,7 +1549,7 @@ function Card:calculate_joker(context)
     local ret = cj(self, context)
 
     --Flash Card
-    if self.ability.name == "Flash Card" and context.reroll_shop and not context.blueprint and not AnimatedJokers.j_flash_card.IncorrectAtlas then
+    if self.ability.name == "Flash Card" and context.reroll_shop and not context.blueprint and not AnimatedJokers.j_flash.IncorrectAtlas then
         G.E_MANAGER:add_event(Event({
             func = (function()
                 self:flip()
@@ -1602,7 +1569,7 @@ function Card:calculate_joker(context)
 
 
     --Trading Card
-    if self.ability.name == "Trading Card" and ret and ret.message and not context.blueprint and not AnimatedJokers.j_trading_card.IncorrectAtlas then
+    if self.ability.name == "Trading Card" and ret and ret.message and not context.blueprint and not AnimatedJokers.j_trading.IncorrectAtlas then
         G.E_MANAGER:add_event(Event({
             func = (function()
                 self:flip()
