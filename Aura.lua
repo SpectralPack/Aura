@@ -285,19 +285,19 @@ AnimatedVouchers = {
 AnimatedTags = {
     tag_uncommon = { frames_per_row = 11, frames = 22, credits = {"MightyKingJoker"} },
     tag_rare = { frames_per_row = 11, frames = 22, credits = {"MightyKingJoker"} },
-    tag_negative = {},
-    tag_foil = {},
-    tag_holo = {},
-    tag_polychrome = {},
+    tag_negative = { frames = 19, credits = {"MightyKingJoker"} },
+    tag_foil = { frames = 19, credits = {"MightyKingJoker"} },
+    tag_holo = { frames = 19, credits = {"MightyKingJoker"} },
+    tag_polychrome = { frames = 19, credits = {"MightyKingJoker"} },
     tag_investment = { frames = 20, credits = {"MightyKingJoker"} },
     tag_voucher = {},
-    tag_boss = {},
+    tag_boss = { frames = 10, credits = {"SadCube"} },
     tag_standard = {},
     tag_charm = { frames = 13, credits = {"Cebee"} },
     tag_meteor = {},
-    tag_buffoon = {},
-    tag_handy = {},
-    tag_garbage = {},
+    tag_buffoon = { frames_per_row = 11, frames = 22, credits = {"Willow"} },
+    tag_handy = { frames = 18, credits = {"Willow"} },
+    tag_garbage = { frames = 19, credits = {"Willow"} },
     tag_ethereal = {},
     tag_coupon = { frames = 18, credits = {"SadCube"} },
     tag_double = { frames = 26, credits = {"SadCube"} },
@@ -310,11 +310,13 @@ AnimatedTags = {
 }
 
 AuraTradingCards = {
-    [11] = {class = "JOKER", name = "The Joker of Poker"},
-    [15] = {class = "JOKER", name = "Applause for Acrobats"},
-    [41] = {class = "JOKER", name = "Riff Raff Rumble"},
-    [66] = {class = "SPELL", name = "Frightful Face of Fear"},
-    [79] = {class = "ITEM",  name = "Generous Gift"}
+    [11] = {class = "JOKER", name = "The Joker of Poker", credits = {"MightyKingJoker"}},
+    [15] = {class = "JOKER", name = "Applause for Acrobats", credits = {"MightyKingJoker"}},
+    [17] = {class = "JOKER", name = "Mind Over Madness", credits = {"Willow"}},
+    [41] = {class = "JOKER", name = "Riff Raff Rumble", credits = {"MightyKingJoker"}},
+    [66] = {class = "SPELL", name = "Frightful Face of Fear", credits = {"MightyKingJoker"}},
+    [79] = {class = "ITEM",  name = "Generous Gift", credits = {"MightyKingJoker"}},
+    [95] = {class = "SPELL", name = "Interplanetary Alignment", credits = {"MightyKingJoker"}}
 }
 
 AnimatedDeckSkins = {
@@ -368,7 +370,7 @@ function Aura.add_individual(card, loaded)
         end
         card.config.center = center_copy
         card:set_sprites(card.config.center)
-        if card.children and card.children.front then
+        if card.children and card.children.front and anim.extra then
             card.children.front.sprite_pos = center_copy.animpos.extra
         end
     end
@@ -1546,7 +1548,7 @@ function Card:calculate_joker(context)
     local ret = cj(self, context)
 
     --Flash Card
-    if self.ability.name == "Flash Card" and context.reroll_shop and not context.blueprint and not AnimatedJokers.j_flash_card.IncorrectAtlas then
+    if self.ability.name == "Flash Card" and context.reroll_shop and not context.blueprint and not AnimatedJokers.j_flash.IncorrectAtlas then
         G.E_MANAGER:add_event(Event({
             func = (function()
                 self:flip()
@@ -1566,7 +1568,7 @@ function Card:calculate_joker(context)
 
 
     --Trading Card
-    if self.ability.name == "Trading Card" and ret and ret.message and not context.blueprint and not AnimatedJokers.j_trading_card.IncorrectAtlas then
+    if self.ability.name == "Trading Card" and ret and ret.message and not context.blueprint and not AnimatedJokers.j_trading.IncorrectAtlas then
         G.E_MANAGER:add_event(Event({
             func = (function()
                 self:flip()
