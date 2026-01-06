@@ -653,6 +653,7 @@ end
 
 --fix edition shaders ignoring front layer. FIX MADE BY LARSWIJN
 --In theory, this fix will be added natively to Steamodded, but until then, it will be here.
+
 if SMODS.DrawStep then
 	-- drawsteps are "only" supported since 0423a
 	SMODS.DrawStep:take_ownership("front",
