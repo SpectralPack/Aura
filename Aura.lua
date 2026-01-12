@@ -48,18 +48,18 @@ AnimatedJokers = {
     j_lusty_joker = { frames_per_row = 5, frames = 20, extra = { frames_per_row = 11, frames = 22 }, credits = {"Bard", "Chloe"} },
     j_wrathful_joker = { frames_per_row = 5, frames = 18, extra = { frames_per_row = 11, frames = 22 }, credits = {"Bard", "Chloe"} },
     j_gluttenous_joker = { frames_per_row = 6, frames = 12, extra = { frames_per_row = 11, frames = 22 }, credits = {"Bard", "Chloe"} },
-    j_jolly = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_zany = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_mad = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_crazy = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_droll = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_sly = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_wily = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_clever = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_devious = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_crafty = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_half = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_stencil = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
+    j_jolly = { frames_per_row = 11, frames = 22, credits = {"Chloe", "SadCube"} },
+    j_zany = { frames_per_row = 11, frames = 22, credits = {"Chloe", "SadCube"} },
+    j_mad = { frames_per_row = 11, frames = 22, credits = {"Chloe", "SadCube"} },
+    j_crazy = { frames_per_row = 11, frames = 22, credits = {"Chloe", "SadCube"} },
+    j_droll = { frames_per_row = 11, frames = 22, credits = {"Chloe", "SadCube"} },
+    j_sly = { frames_per_row = 11, frames = 22, credits = {"Chloe", "SadCube"} },
+    j_wily = { frames_per_row = 11, frames = 22, credits = {"Chloe", "SadCube"} },
+    j_clever = { frames_per_row = 11, frames = 22, credits = {"Chloe", "SadCube"} },
+    j_devious = { frames_per_row = 11, frames = 22, credits = {"Chloe", "SadCube"} },
+    j_crafty = { frames_per_row = 11, frames = 22, credits = {"Chloe", "SadCube"} },
+    j_half = { frames_per_row = 11, frames = 22, credits = {"Chloe", "SadCube"} },
+    j_stencil = { frames_per_row = 11, frames = 22, credits = {"Chloe", "SadCube"} },
     j_four_fingers = {},
     j_mime = {},
     j_credit_card = {},
@@ -80,7 +80,7 @@ AnimatedJokers = {
     j_delayed_grat = {}, -- todo: animate when primed. constant backround animation. flip clock when triggered, but empty when failed
     j_hack = { frames_per_row = 8, frames = 64, credits = {"rattlingssnow353"} },
     j_pareidolia = { frames_per_row = 5, frames = 20, credits = {"SadCube"} },
-    j_gros_michel = {frames = 13, extra = { frames = 18, fps = 15, individual = true }, credits = {"MightyKingJoker"} },
+    j_gros_michel = {frames = 13, extra = { frames = 18, fps = 15, individual = true }, credits = {"MightyKingVideo"} },
     j_even_steven = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
     j_odd_todd = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
     j_scholar = { frames_per_row = 11, frames = 22, extra = { frames_per_row = 9, frames = 45 } , credits = {"Chloe", "MRTorres"} },
@@ -92,7 +92,7 @@ AnimatedJokers = {
     j_burglar = { frames = 76, individual = true, verticframes = 22, credits = {"Chloe"} },
     j_blackboard = { frames = 49, individual = true, verticframes = 22, credits = {"Comet_System", "Grassy311", "Chloe"} },
     j_runner = { frames_per_row = 10, frames = 110, credits = {"Chloe", "MRTorres"} },
-    j_ice_cream = { frames = 6, individual = true, verticframes = 13, credits = {"MightyKingJoker"} }, --todo: add extra frames in between
+    j_ice_cream = { frames = 6, individual = true, verticframes = 13, credits = {"MightyKingVideo"} }, --todo: add extra frames in between
     j_dna = { frames = 11, credits = {"SadCube"} },
     j_splash = {},
     j_blue_joker = { frames_per_row = 11, frames = 22 },
@@ -124,7 +124,7 @@ AnimatedJokers = {
     j_gift = {},
     j_turtle_bean = { frames_per_row = 7, frames = 14, extra = { verticframes = 14, verticfps = 8 }, credits = {"MRTorres"} },--extra = frames = 6, individual = true -- todo: add the diferent stages of eaten/roten
     j_erosion = {},
-    j_reserved_parking = { frames_per_row = 6, frames = 36, credits = {"MightyKingJoker"} },
+    j_reserved_parking = { frames_per_row = 6, frames = 36, credits = {"MightyKingVideo"} },
     j_mail = { frames_per_row = 5, frames = 15, target = 14, immediate = true, credits = {"MRTorres"} },
     j_to_the_moon = { frames = 40, fps = 8, target = 0, verticframes = 40, verticfps = 8, credits = {"MRTorres"} },
     j_hallucination = {},
@@ -133,11 +133,11 @@ AnimatedJokers = {
     j_drunkard = { frames = 22, verticframes = 14, verticfps = 13, credits = {"MRTorres"} },
     j_stone = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
     j_golden = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_lucky_cat = { frames = 8, individual = true, verticframes = 29, credits = {"MightyKingJoker"} },
+    j_lucky_cat = { frames = 8, individual = true, verticframes = 29, credits = {"MightyKingVideo"} },
     j_baseball = {},
     j_bull = {},
     j_diet_cola = { frames = 20, credits = {"SadCube", "Chloe"} },
-    j_trading = { frames = 96, frames_per_row = 12, individual = true, immediate = true, pos_x = 10, credits = {"MightyKingJoker", "Willow"} }, -- todo: needs more frames
+    j_trading = { frames = 96, frames_per_row = 12, individual = true, immediate = true, pos_x = 10, credits = {"MightyKingVideo", "Willow"} }, -- todo: needs more frames
     j_flash = { frames_per_row = 13, frames = 26, individual = true, immediate = true, pos_x = 9, credits = {"Grassy331"} },
     j_popcorn = { frames = 5, individual = true, credits = {"MRTorres"} },
     j_trousers = { frames_per_row = 4, frames = 12, extra = { frames_per_row = 4, frames = 16, fps = 8 }, credits = {"Solace"} },
@@ -154,7 +154,7 @@ AnimatedJokers = {
     j_sock_and_buskin = { frames_per_row = 5, frames = 30, credits = {"MRTorres"} },
     j_swashbuckler = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
     j_troubadour = {},
-    j_certificate = { frames_per_row = 7, frames = 28, individual = true, extra = { frames_per_row = 6, frames = 13, individual = true, immediate = true }, credits = {"Chloe", "MightyKingJoker"} },
+    j_certificate = { frames_per_row = 7, frames = 28, individual = true, extra = { frames_per_row = 6, frames = 13, individual = true, immediate = true }, credits = {"Chloe", "MightyKingVideo"} },
     j_smeared = { frames_per_row = 11, frames = 22, extra = { frames = 10 }, credits = {"SadCube", "Chloe"} },
     j_throwback = { verticframes = 18, frames = 100, extra = { frames_per_row = 11, frames = 22 }, credits = {"Chloe", "MRTorres"} }, -- todo: animate when promoted (if done, on extra layer, with the laugh as verticframes)
     j_hanging_chad = {},
@@ -173,11 +173,11 @@ AnimatedJokers = {
     j_seeing_double = { frames_per_row = 13, frames = 150, extra = { frames_per_row = 4, frames = 8, individual = true }, credits = {"SadCube"} },
     j_matador = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
     j_hit_the_road = { frames = 10, individual = true, credits = {"MRTorres"} }, -- todo: create a true animation with pespective and not just the 2d car
-    j_duo = {},
-    j_trio = {},
-    j_family = {},
-    j_order = {},
-    j_tribe = {},
+    j_duo = { extra = { frames_per_row = 11, frames = 22 }, credits = {"SadCube"} },
+    j_trio = { extra = { frames_per_row = 11, frames = 22 }, credits = {"SadCube"} },
+    j_family = { extra = { frames_per_row = 11, frames = 22 }, credits = {"SadCube"} },
+    j_order = { extra = { frames_per_row = 11, frames = 22 }, credits = {"SadCube"} },
+    j_tribe = { extra = { frames_per_row = 11, frames = 22 }, credits = {"SadCube"} },
     j_stuntman = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
     j_invisible = { frames = 11, fps = 5, individual = true, verticframes = 22, credits = {"Chloe"} },
     j_brainstorm = { frames = 39, individual = true, verticframes = 22, credits = {"Grassy331", "Chloe"} },
@@ -246,7 +246,7 @@ AnimatedConsumeables = {
     c_medium = {},
     c_cryptid = {},
     c_soul = {},
-    c_black_hole = { frames_per_row = 24, frames = 144, credits = {"SadCube", "MRTorres"} },
+    c_black_hole = { frames_per_row = 24, frames = 144, credits = {"SadCube", "MRTorres"} }
 }
 AnimatedVouchers = {
     v_overstock_norm = { frames = 5, credits = {"MRTorres"} },
@@ -261,7 +261,7 @@ AnimatedVouchers = {
     v_omen_globe = { frames = 150, frames_per_row = 13, credits = {"SadCube"} },
     v_telescope = {},
     v_observatory = {},
-    v_grabber = {},
+    v_grabber = { frames_per_row = 12, frames = 48, credits = {"GhostSalt"} },
     v_nacho_tong = {},
     v_wasteful = { frames = 9, credits = {"Chloe"} },
     v_recyclomancy = { frames = 9, credits = {"MRTorres"} },
@@ -283,14 +283,14 @@ AnimatedVouchers = {
     v_palette = {}
 }
 AnimatedTags = {
-    tag_uncommon = { frames_per_row = 11, frames = 22, credits = {"MightyKingJoker"} },
-    tag_rare = { frames_per_row = 11, frames = 22, credits = {"MightyKingJoker"} },
-    tag_negative = { frames = 19, credits = {"MightyKingJoker"} },
-    tag_foil = { frames = 19, credits = {"MightyKingJoker"} },
-    tag_holo = { frames = 19, credits = {"MightyKingJoker"} },
-    tag_polychrome = { frames = 19, credits = {"MightyKingJoker"} },
-    tag_investment = { frames = 20, credits = {"MightyKingJoker"} },
-    tag_voucher = { frames_per_row = 19, frames  = 57, credits = {"MightyKingJoker"} },
+    tag_uncommon = { frames_per_row = 11, frames = 22, credits = {"MightyKingVideo"} },
+    tag_rare = { frames_per_row = 11, frames = 22, credits = {"MightyKingVideo"} },
+    tag_negative = { frames = 19, credits = {"MightyKingVideo"} },
+    tag_foil = { frames = 19, credits = {"MightyKingVideo"} },
+    tag_holo = { frames = 19, credits = {"MightyKingVideo"} },
+    tag_polychrome = { frames = 19, credits = {"MightyKingVideo"} },
+    tag_investment = { frames = 20, credits = {"MightyKingVideo"} },
+    tag_voucher = { frames_per_row = 19, frames  = 57, credits = {"MightyKingVideo"} },
     tag_boss = { frames = 10, credits = {"SadCube"} },
     tag_standard = { frames = 18, credits = {"SadCube"} },
     tag_charm = { frames = 13, credits = {"Cebee"} },
@@ -301,12 +301,12 @@ AnimatedTags = {
     tag_ethereal = {},
     tag_coupon = { frames = 18, credits = {"SadCube"} },
     tag_double = { frames = 26, credits = {"SadCube"} },
-    tag_juggle = { frames = 11, credits = {"MightyKingJoker"} },
-    tag_d_six = { frames_per_row = 4, frames = 24, credits = {"MightyKingJoker"} },
-    tag_top_up = {},
-    tag_skip = {},
-    tag_orbital = { frames = 12, credits = {"MightyKingJoker"} },
-    tag_economy = { frames = 10, fps = 10, credits = {"SadCube"} }
+    tag_juggle = { frames = 11, credits = {"MightyKingVideo"} },
+    tag_d_six = { frames_per_row = 4, frames = 24, credits = {"MightyKingVideo"} },
+    tag_top_up = { frames_per_row = 5, frames = 19, credits = {"MightyKingVideo"} },
+    tag_skip = { frames = 10, credits = {"SadCube"} },
+    tag_orbital = { frames = 12, credits = {"MightyKingVideo"} },
+    tag_economy = { frames = 10, credits = {"SadCube"} }
 }
 
 AnimatedEnchancements = {
@@ -321,19 +321,19 @@ AnimatedEnchancements = {
 }
 
 AuraTradingCards = {
-    [11] = {class = "JOKER", name = "The Joker of Poker", credits = {"LocalThunk"}, EX = {credits = {"MightyKingJoker"}, pos = 12}},
-    [15] = {class = "JOKER", name = "Applause for Acrobats", credits = {"MightyKingJoker"}},
+    [11] = {class = "JOKER", name = "The Joker of Poker", credits = {"LocalThunk"}, EX = {credits = {"MightyKingVideo"}, pos = 12}},
+    [15] = {class = "JOKER", name = "Applause for Acrobats", credits = {"MightyKingVideo"}},
     [17] = {class = "JOKER", name = "Mind Over Madness", credits = {"Willow"}},
     [21] = {class = "JOKER", name = "At Evens & Odds", credits = {"Willow"}},
-    [22] = {class = "JOKER", name = "Despair Trousers", credits = {"MightyKingJoker"}},
-    [41] = {class = "JOKER", name = "Riff Raff Rumble", credits = {"MightyKingJoker"}, EX = {pos = 42}},
+    [22] = {class = "JOKER", name = "Despair Trousers!!", credits = {"MightyKingVideo"}},
+    [41] = {class = "JOKER", name = "Riff Raff Rumble", credits = {"MightyKingVideo"}, EX = {pos = 42}},
     [51] = {class = "SPELL", name = "Dangerous Dunce-like DNA", credits = {"Willow"}},
-    [61] = {class = "SPELL", name = "Paralleling Pyres of Plasma", credits = {"MightyKingJoker"}, EX = {pos = 62}},
-    [66] = {class = "SPELL", name = "Frightful Face of Fear", credits = {"MightyKingJoker"}},
-    [70] = {class = "LAND",  name = "Constellation Station", credits = {"MightyKingJoker"}},
-    [71] = {class = "LAND",  name = "No Jack's Land", credits = {"MightyKingJoker"}},
-    [79] = {class = "ITEM",  name = "Generous Gift", credits = {"MightyKingJoker"}},
-    [95] = {class = "SPELL", name = "Interplanetary Alignment", credits = {"MightyKingJoker"}}
+    [61] = {class = "SPELL", name = "Paralleling Pyres of Plasma", credits = {"MightyKingVideo"}, EX = {pos = 62}},
+    [66] = {class = "SPELL", name = "Frightful Face of Fear", credits = {"MightyKingVideo"}},
+    [70] = {class = "LAND",  name = "Constellation Station", credits = {"MightyKingVideo"}},
+    [71] = {class = "LAND",  name = "No Jack's Land", credits = {"MightyKingVideo"}},
+    [79] = {class = "ITEM",  name = "Generous Gift", credits = {"MightyKingVideo"}},
+    [95] = {class = "SPELL", name = "Interplanetary Alignment", credits = {"MightyKingVideo"}},
 }
 
 AnimatedDeckSkins = {
@@ -428,13 +428,11 @@ if SMODS.Atlas then
                 }
             end
             --joker override
-            SMODS[v.set or "Joker"]:take_ownership(k, {
+            SMODS.Joker:take_ownership(k, {
                 atlas = k,
                 animpos = { x = v.pos_x or posx or 0, y = posy or 0, extra = v.extra and {x = v.extra.pos_x or posex or 0, y = v.extra.pos_y or posey or 0, atlas = "aura_"..k.."_extra"} },
                 anim = v,
             }, not SMODS.Mods["Aura"].config.Animation_Credits)
-        else
-            SMODS[v and v.set or "Joker"]:take_ownership(k, {}, true)
         end
     end
     --Register all Planets/Sprites
@@ -456,7 +454,7 @@ if SMODS.Atlas then
                 posey = math.floor(v.extra.start_frame / (v.extra.frames_per_row or v.extra.frames))
             end
         end
-        if v.frames then
+        if v and next(v) then
             --sprite
             SMODS.Atlas {
                 key = k,
@@ -473,13 +471,11 @@ if SMODS.Atlas then
                 }
             end
             --planet override
-            SMODS[v.set or "Consumable"]:take_ownership(k, {
+            SMODS.Consumable:take_ownership(k, {
                 atlas = k,
                 animpos = { x = v.pos_x or posx or 0, y = v.pos_y or posy or 0, extra = v.extra and {x = v.extra.pos_x or posex or 0, y = v.extra.pos_y or posey or 0, atlas = "aura_"..k.."_extra"} },
                 anim = v,
             },not SMODS.Mods["Aura"].config.Animation_Credits)
-        else
-            SMODS[v and v.set or "Consumable"]:take_ownership(k, {}, true)
         end
     end
     --Register all Vouchers/Sprites
@@ -501,7 +497,7 @@ if SMODS.Atlas then
                 posey = math.floor(v.extra.start_frame / (v.extra.frames_per_row or v.extra.frames))
             end
         end
-        if v.frames then
+        if v and next(v) then
             --sprite
             SMODS.Atlas {
                 key = k,
@@ -518,13 +514,11 @@ if SMODS.Atlas then
                 }
             end
             --voucher override
-            SMODS[v.set or "Voucher"]:take_ownership(k, {
+            SMODS.Voucher:take_ownership(k, {
                 atlas = k,
                 animpos = { x = v.pos_x or posx or 0, y = v.pos_y or posy or 0, extra = v.extra and {x = v.extra.pos_x or posex or 0, y = v.extra.pos_y or posey or 0, atlas = "aura_"..k.."_extra"} },
                 anim = v,
             },not SMODS.Mods["Aura"].config.Animation_Credits)
-        else
-            SMODS[v and v.set or "Voucher"]:take_ownership(k, {}, true)
         end
     end
 
@@ -548,13 +542,11 @@ if SMODS.Atlas then
                 py = v.py or 95
             }
             --enchancement override
-            SMODS[v.set or "Enhancement"]:take_ownership(k, {
+            SMODS.Enhancement:take_ownership(k, {
                 atlas = k,
                 animpos = { x = v.pos_x or posx or 0, y = v.pos_y or posy or 0 },
                 anim = v,
             },not SMODS.Mods["Aura"].config.Animation_Credits)
-        else
-            SMODS[v.set or "Enhancement"]:take_ownership(k, {}, true)
         end
     end
     --Register all Tags/Sprites
@@ -703,6 +695,48 @@ function SMODS.create_mod_badges(obj, badges)
 			end
 		end
 	end
+end
+
+local chpop = G.UIDEF.card_h_popup
+function G.UIDEF.card_h_popup(card)
+    if card.ability_UIBox_table and card.config and card.config.center and card.config.center.key == "j_trading" then
+        local tradingNumber = card.animation and card.animation.trading_order[card.animation.trading_index] or 11
+        local trading_name = AuraTradingCards[tradingNumber].name or "Unknown Trading Card"
+        trading_name = '"'..trading_name..(card.animation and card.animation.EX and ' EX"' or '"')
+        card.ability_UIBox_table.name[2] = {
+            n = G.UIT.R,
+            config = { align = "cm" },
+            nodes = {
+                {
+                    n = G.UIT.R,
+                    config = {
+                        padding = 0.03,
+                        align = "cm",
+                        res = 0.15,
+                        r = 0.05,
+                    },
+                    nodes = {
+                        {
+                            n = G.UIT.O,
+                            config = {
+                                object = DynaText({
+                                    string = trading_name,
+                                    colours = {G.C.WHITE},
+                                    silent = true,
+                                    float = true,
+                                    shadow = true,
+                                    offset_y = -0.03,
+                                    spacing = 1,
+                                    scale = 0.35,
+                                }),
+                            },
+                        },
+                    },
+                },
+            },
+        }
+    end
+    return chpop(card)
 end
 
 --fix edition shaders ignoring front layer. FIX MADE BY LARSWIJN
@@ -1380,9 +1414,14 @@ end
 function Aura.update_trading(self, StartNumber)
     local anim_order = {}
     local count = 0
+    local isEX = false
     for k, v in pairs(AuraTradingCards) do
         anim_order[count] = k
         count = count + 1
+        if v.EX and v.EX.pos and v.EX.pos == StartNumber then
+            StartNumber = k
+            isEX = true
+        end
     end
     pseudoshuffle(anim_order, pseudoseed("aura_trading"))
     --force StartNumber to be first
@@ -1391,7 +1430,8 @@ function Aura.update_trading(self, StartNumber)
             anim_order[0], anim_order[i] = anim_order[i], anim_order[0]
         end
     end
-    self.animation = {target = anim_order[0] and anim_order[0] - 1 or 10, trading_index = 0, trading_order = anim_order}
+    local trading_target = isEX and AuraTradingCards[StartNumber].EX.pos -1 or StartNumber -1
+    self.animation = {target = trading_target, trading_index = 0, trading_order = anim_order, EX = isEX}
 end
 
 function Aura.update_castle()
