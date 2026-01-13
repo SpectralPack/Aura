@@ -1,12 +1,3 @@
---- STEAMODDED HEADER
---- MOD_NAME: Aura
---- MOD_ID: Aura
---- MOD_AUTHOR: [MRTorres, MathIsFun_, ChromaPIE, Bard, TwoBlueDogs]
---- MOD_DESCRIPTION: Adds animations to Jokers. Art by: Bard, Grassy311, RattlingSnow353, Solace, RadicaAprils, chloe_cromslor, SadCube, Mincoiin, Flowr and MRTorres
---- CONFLICTS: [Malverk]
---- BADGE_COLOUR: 3469ab
---- VERSION: 0.501
-
 SMODS.Atlas { -- The Icon for the mod
   key = 'modicon',
   px = 32,
@@ -43,83 +34,83 @@ SMODS.Mods.Aura.config_tab = function() -- Add a config tab to the mod for toggl
 end
 
 AnimatedJokers = {
-    j_joker = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_greedy_joker = { frames_per_row = 6, frames = 12, extra = { frames_per_row = 11, frames = 22 }, credits = {"Bard", "Chloe"} },
-    j_lusty_joker = { frames_per_row = 5, frames = 20, extra = { frames_per_row = 11, frames = 22 }, credits = {"Bard", "Chloe"} },
-    j_wrathful_joker = { frames_per_row = 5, frames = 18, extra = { frames_per_row = 11, frames = 22 }, credits = {"Bard", "Chloe"} },
-    j_gluttenous_joker = { frames_per_row = 6, frames = 12, extra = { frames_per_row = 11, frames = 22 }, credits = {"Bard", "Chloe"} },
-    j_jolly = { frames_per_row = 11, frames = 22, credits = {"Chloe", "SadCube"} },
-    j_zany = { frames_per_row = 11, frames = 22, credits = {"Chloe", "SadCube"} },
-    j_mad = { frames_per_row = 11, frames = 22, credits = {"Chloe", "SadCube"} },
-    j_crazy = { frames_per_row = 11, frames = 22, credits = {"Chloe", "SadCube"} },
-    j_droll = { frames_per_row = 11, frames = 22, credits = {"Chloe", "SadCube"} },
-    j_sly = { frames_per_row = 11, frames = 22, credits = {"Chloe", "SadCube"} },
-    j_wily = { frames_per_row = 11, frames = 22, credits = {"Chloe", "SadCube"} },
-    j_clever = { frames_per_row = 11, frames = 22, credits = {"Chloe", "SadCube"} },
-    j_devious = { frames_per_row = 11, frames = 22, credits = {"Chloe", "SadCube"} },
-    j_crafty = { frames_per_row = 11, frames = 22, credits = {"Chloe", "SadCube"} },
-    j_half = { frames_per_row = 11, frames = 22, credits = {"Chloe", "SadCube"} },
-    j_stencil = { frames_per_row = 11, frames = 22, credits = {"Chloe", "SadCube"} },
+    j_joker = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
+    j_greedy_joker = { frames_per_row = 6, frames = 12, extra = { frames_per_row = 11, frames = 22 }, credits = {"Bard", "chloe_cromslor"} },
+    j_lusty_joker = { frames_per_row = 5, frames = 20, extra = { frames_per_row = 11, frames = 22 }, credits = {"Bard", "chloe_cromslor"} },
+    j_wrathful_joker = { frames_per_row = 5, frames = 18, extra = { frames_per_row = 11, frames = 22 }, credits = {"Bard", "chloe_cromslor"} },
+    j_gluttenous_joker = { frames_per_row = 6, frames = 12, extra = { frames_per_row = 11, frames = 22 }, credits = {"Bard", "chloe_cromslor"} },
+    j_jolly = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
+    j_zany = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
+    j_mad = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
+    j_crazy = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
+    j_droll = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
+    j_sly = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
+    j_wily = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
+    j_clever = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
+    j_devious = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
+    j_crafty = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
+    j_half = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
+    j_stencil = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
     j_four_fingers = {},
     j_mime = {},
     j_credit_card = {},
     j_ceremonial = {},
     j_banner = {},
     j_mystic_summit = {},
-    j_marble = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_loyalty_card = { frames = 7, individual = true, immediate = true, credits = {"Chloe"} },
+    j_marble = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
+    j_loyalty_card = { frames = 7, individual = true, immediate = true, credits = {"chloe_cromslor"} },
     j_8_ball = {}, -- todo: animate when triggered. if succesful, one animation, if failed, another one
-    j_misprint = { frames_per_row = 11, frames = 66, credits = {"Chloe"} },
-    j_dusk = { frames_per_row = 13, frames = 78, fps = 5, credits = {"Chloe"} },
+    j_misprint = { frames_per_row = 11, frames = 66, credits = {"chloe_cromslor"} },
+    j_dusk = { frames_per_row = 13, frames = 78, fps = 5, credits = {"chloe_cromslor"} },
     j_raised_fist = { frames_per_row = 6, frames = 36, fps = 15, credits = {"MRTorres"} },
-    j_chaos = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
+    j_chaos = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
     j_fibonacci = { frames_per_row = 8, frames = 32, credits = {"MRTorres"} },
-    j_steel_joker = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
+    j_steel_joker = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
     j_scary_face = {},
     j_abstract = {},
     j_delayed_grat = {}, -- todo: animate when primed. constant backround animation. flip clock when triggered, but empty when failed
     j_hack = { frames_per_row = 8, frames = 64, credits = {"rattlingssnow353"} },
     j_pareidolia = { frames_per_row = 5, frames = 20, credits = {"SadCube"} },
     j_gros_michel = {frames = 13, extra = { frames = 18, fps = 15, individual = true }, credits = {"MightyKingVideo"} },
-    j_even_steven = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_odd_todd = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_scholar = { frames_per_row = 11, frames = 22, extra = { frames_per_row = 9, frames = 45 } , credits = {"Chloe", "MRTorres"} },
+    j_even_steven = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
+    j_odd_todd = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
+    j_scholar = { frames_per_row = 11, frames = 22, extra = { frames_per_row = 9, frames = 45 } , credits = {"chloe_cromslor", "MRTorres"} },
     j_business = { frames_per_row = 13, frames = 120, credits = {"Mincoiin"} },
     j_supernova = {}, -- todo: an explosion animation that triggers each time it gives mult, and shows an amount of frames proportional to the mult given. framerate proportional to amount of frames to keep duration constant.
     j_ride_the_bus = { frames_per_row = 9, frames = 36, credits = {"Grassy353"} }, 
-    j_space = { frames = 61, start_frame = 23, frames_per_row = 96, individual = true, extra = { frames_per_row = 11, frames = 22 }, credits = {"Bard", "Chloe"} },
+    j_space = { frames = 61, start_frame = 23, frames_per_row = 96, individual = true, extra = { frames_per_row = 11, frames = 22 }, credits = {"Bard", "chloe_cromslor"} },
     j_egg = { frames_per_row = 4, frames = 8, individual = true, credits = {"MRTorres"} },
-    j_burglar = { frames = 76, individual = true, verticframes = 22, credits = {"Chloe"} },
-    j_blackboard = { frames = 49, individual = true, verticframes = 22, credits = {"Comet_System", "Grassy311", "Chloe"} },
-    j_runner = { frames_per_row = 10, frames = 110, credits = {"Chloe", "MRTorres"} },
+    j_burglar = { frames = 76, individual = true, verticframes = 22, credits = {"chloe_cromslor"} },
+    j_blackboard = { frames = 49, individual = true, verticframes = 22, credits = {"Comet_System", "Grassy311", "chloe_cromslor"} },
+    j_runner = { frames_per_row = 10, frames = 110, credits = {"chloe_cromslor", "MRTorres"} },
     j_ice_cream = { frames = 6, individual = true, verticframes = 13, credits = {"MightyKingVideo"} }, --todo: add extra frames in between
     j_dna = { frames = 11, credits = {"SadCube"} },
     j_splash = {},
     j_blue_joker = { frames_per_row = 11, frames = 22 },
-    j_sixth_sense = { verticframes = 22, frames = 39, individual = true, credits = {"Grassy353", "Chloe", "MRTorres"} },
-    j_constellation = { frames_per_row = 6, frames = 66, credits = {"Chloe"} },
-    j_hiker = { frames_per_row = 11, frames = 22, credits = {"MRTorres", "Chloe"} },
+    j_sixth_sense = { verticframes = 22, frames = 39, individual = true, credits = {"Grassy353", "chloe_cromslor", "MRTorres"} },
+    j_constellation = { frames_per_row = 6, frames = 66, credits = {"chloe_cromslor"} },
+    j_hiker = { frames_per_row = 11, frames = 22, credits = {"MRTorres", "chloe_cromslor"} },
     j_faceless = { frames_per_row = 4, frames = 24, credits = {"rattlingssnow353"} },
-    j_green_joker = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
+    j_green_joker = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
     j_superposition = { frames = 20, verticframes = 6, verticfps = 8, individual = true, credits = {"MRTorres"} },
     j_todo_list = { frames_per_row = 12, frames = 96, credits = {"RadicaAprils"} }, -- todo: show hand that needs to be played & animate on trigger. each hand played crosses out an item from the list, when all are crossed or round ends, pass page and write new list.
     j_cavendish = {},
     j_card_sharp = { frames = 6, target = 0, verticframes = 11, verticfps = 5, credits = {"MRTorres"} },
     j_red_card = { frames_per_row = 19, frames = 349, credits = {"Bard"} },
     j_madness = {}, -- Idea: randomize the time between laughs/eye twitches
-    j_square = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
+    j_square = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
     j_seance = {}, -- todo: animate when triggered
-    j_riff_raff = { frames_per_row = 14, frames = 490, credits = {"Chloe"} },
-    j_vampire = { frames_per_row = 11, frames = 22, extra = { frames_per_row = 6, frames = 30 }, credits = {"Mincoiin", "Chloe"} },
+    j_riff_raff = { frames_per_row = 14, frames = 490, credits = {"chloe_cromslor"} },
+    j_vampire = { frames_per_row = 11, frames = 22, extra = { frames_per_row = 6, frames = 30 }, credits = {"Mincoiin", "chloe_cromslor"} },
     j_shortcut = {},
-    j_hologram = { frames = 1, extrasoul = true, extra = { frames_per_row = 22, frames = 22, start_frame = 198 }, credits = {"Chloe"} }, -- the texture needs to be this big so the scanlines are vanilla acurate.
+    j_hologram = { frames = 1, extrasoul = true, extra = { frames_per_row = 22, frames = 22, start_frame = 198 }, credits = {"chloe_cromslor"} }, -- the texture needs to be this big so the scanlines are vanilla acurate.
     j_vagabond = { frames = 30, fps = 5, credits = {"Kitty"} },
-    j_baron = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
+    j_baron = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
     j_cloud_9 = {},
     j_rocket = { frames_per_row = 11, frames = 87, fps = 10, individual = true, extra = { frames = 5, individual = true, immediate = true }, credits = {"MRTorres"} }, --todo: add thruster animation on the verticframes
     j_obelisk = {}, -- todo: animate when promoted / show hand that needs to not be played
     j_midas_mask = {},
-    j_luchador = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
+    j_luchador = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
     j_photograph = { frames = 48, credits = {"Grassy331"} },
     j_gift = {},
     j_turtle_bean = { frames_per_row = 7, frames = 14, extra = { verticframes = 14, verticfps = 8 }, credits = {"MRTorres"} },--extra = frames = 6, individual = true -- todo: add the diferent stages of eaten/roten
@@ -128,15 +119,15 @@ AnimatedJokers = {
     j_mail = { frames_per_row = 5, frames = 15, target = 14, immediate = true, credits = {"MRTorres"} },
     j_to_the_moon = { frames = 40, fps = 8, target = 0, verticframes = 40, verticfps = 8, credits = {"MRTorres"} },
     j_hallucination = {},
-    j_fortune_teller = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
+    j_fortune_teller = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
     j_juggler = { frames = 22, verticframes = 14, verticfps = 13, credits = {"MRTorres"} },
     j_drunkard = { frames = 22, verticframes = 14, verticfps = 13, credits = {"MRTorres"} },
-    j_stone = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_golden = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
+    j_stone = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
+    j_golden = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
     j_lucky_cat = { frames = 8, individual = true, verticframes = 29, credits = {"MightyKingVideo"} },
     j_baseball = {},
     j_bull = {},
-    j_diet_cola = { frames = 20, credits = {"SadCube", "Chloe"} },
+    j_diet_cola = { frames = 20, credits = {"SadCube", "chloe_cromslor"} },
     j_trading = { frames = 96, frames_per_row = 12, individual = true, immediate = true, pos_x = 10, credits = {"MightyKingVideo", "Willow"} }, -- todo: needs more frames
     j_flash = { frames_per_row = 13, frames = 26, individual = true, immediate = true, pos_x = 9, credits = {"Grassy331"} },
     j_popcorn = { frames = 5, individual = true, credits = {"MRTorres"} },
@@ -146,48 +137,48 @@ AnimatedJokers = {
     j_walkie_talkie = {},
     j_selzer = { verticframes = 15, start_frame = 3, frames = 51, individual = true, credits = {"MRTorres"} },
     j_castle = { frames_per_row = 9, frames = 69, start_frame = 0, extra = { frames = 9, target = 3, immediate = true, verticframes = 5, verticfps = 5 }, credits = {"Bard"} },
-    j_smiley = { frames_per_row = 13, frames = 150, credits = {"SadCube", "Chloe"} },
+    j_smiley = { frames_per_row = 13, frames = 150, credits = {"SadCube", "chloe_cromslor"} },
     j_campfire = {}, -- todo: animate fire, which gets bigger the more you burn, returning to normal when resetting
     j_ticket = {},
-    j_mr_bones = { frames_per_row = 11, frames = 22, credits = {"Chloe"} }, -- todo: destroy animation? (if done, with the laugh as verticframes)
+    j_mr_bones = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} }, -- todo: destroy animation? (if done, with the laugh as verticframes)
     j_acrobat = {},
     j_sock_and_buskin = { frames_per_row = 5, frames = 30, credits = {"MRTorres"} },
-    j_swashbuckler = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
+    j_swashbuckler = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
     j_troubadour = {},
-    j_certificate = { frames_per_row = 7, frames = 28, individual = true, extra = { frames_per_row = 6, frames = 13, individual = true, immediate = true }, credits = {"Chloe", "MightyKingVideo"} },
-    j_smeared = { frames_per_row = 11, frames = 22, extra = { frames = 10 }, credits = {"SadCube", "Chloe"} },
-    j_throwback = { verticframes = 18, frames = 100, extra = { frames_per_row = 11, frames = 22 }, credits = {"Chloe", "MRTorres"} }, -- todo: animate when promoted (if done, on extra layer, with the laugh as verticframes)
+    j_certificate = { frames_per_row = 7, frames = 28, individual = true, extra = { frames_per_row = 6, frames = 13, individual = true, immediate = true }, credits = {"chloe_cromslor"} },--, "MightyKingVideo", "SadCube"
+    j_smeared = { frames_per_row = 11, frames = 22, extra = { frames = 10 }, credits = {"SadCube", "chloe_cromslor"} },
+    j_throwback = { verticframes = 18, frames = 100, extra = { frames_per_row = 11, frames = 22 }, credits = {"chloe_cromslor", "MRTorres"} }, -- todo: animate when promoted (if done, on extra layer, with the laugh as verticframes)
     j_hanging_chad = {},
     j_rough_gem = {},
     j_bloodstone = {},
     j_arrowhead = {},
     j_onyx_agate = {},
-    j_glass = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_ring_master = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
+    j_glass = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
+    j_ring_master = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
     j_flower_pot = { frames = 24, credits = {"Bard"} },
-    j_blueprint = { frames = 31, individual = true, verticframes = 22, credits = {"Grassy331", "Chloe"} },
-    j_wee = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
+    j_blueprint = { frames = 31, individual = true, verticframes = 22, credits = {"Grassy331", "chloe_cromslor"} },
+    j_wee = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
     j_merry_andy = { frames_per_row = 11, frames = 22 },
     j_oops = { frames_per_row = 5, frames = 10, extra = { frames = 5, fps = 15, target = 0 }, credits = {"SadCube", "MRTorres"} }, -- todo: create stilized smear frames
     j_idol = { frames_per_row = 15, frames = 150, immediate = true, target = 51, extra = { frames_per_row = 6, frames = 6, fps = 3, target = 3 }, credits = {"MRTorres"} }, -- todo: fix broken code for custom suit icons
     j_seeing_double = { frames_per_row = 13, frames = 150, extra = { frames_per_row = 4, frames = 8, individual = true }, credits = {"SadCube"} },
-    j_matador = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
+    j_matador = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
     j_hit_the_road = { frames = 10, individual = true, credits = {"MRTorres"} }, -- todo: create a true animation with pespective and not just the 2d car
     j_duo = { extra = { frames_per_row = 11, frames = 22 }, credits = {"SadCube"} },
     j_trio = { extra = { frames_per_row = 11, frames = 22 }, credits = {"SadCube"} },
     j_family = { extra = { frames_per_row = 11, frames = 22 }, credits = {"SadCube"} },
     j_order = { extra = { frames_per_row = 11, frames = 22 }, credits = {"SadCube"} },
     j_tribe = { extra = { frames_per_row = 11, frames = 22 }, credits = {"SadCube"} },
-    j_stuntman = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_invisible = { frames = 11, fps = 5, individual = true, verticframes = 22, credits = {"Chloe"} },
-    j_brainstorm = { frames = 39, individual = true, verticframes = 22, credits = {"Grassy331", "Chloe"} },
+    j_stuntman = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
+    j_invisible = { frames = 11, fps = 5, individual = true, verticframes = 22, credits = {"chloe_cromslor"} },
+    j_brainstorm = { frames = 39, individual = true, verticframes = 22, credits = {"Grassy331", "chloe_cromslor"} },
     j_satellite = {},
     j_shoot_the_moon = { frames_per_row = 11, frames = 22, credits = {"MRTorres"} },
     j_drivers_license = { frames = 2, target = 0, immediate = true, credits = {"Grassy331"} },
-    j_cartomancer = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_astronomer = { frames = 29, extra = { frames = 6, fps = 2, verticframes = 22 }, credits = {"Chloe"} },
+    j_cartomancer = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
+    j_astronomer = { frames = 29, extra = { frames = 6, fps = 2, verticframes = 22 }, credits = {"chloe_cromslor"} },
     j_burnt = {}, -- todo: animate when primed?
-    j_bootstraps = { frames_per_row = 19, frames = 38, credits = {"Chloe", "MRTorres"} },
+    j_bootstraps = { frames_per_row = 19, frames = 38, credits = {"chloe_cromslor", "MRTorres"} },
     j_caino = {}, -- todo: add animations
     j_triboulet = {}, -- todo: add animations
     j_yorick = {}, -- todo: add animations
@@ -253,7 +244,7 @@ AnimatedVouchers = {
     v_overstock_plus = {},
     v_clearance_sale = {},
     v_liquidation = {},
-    v_hone = { frames = 24, frames_per_row = 12, credits = {"Chloe"} },
+    v_hone = { frames = 24, frames_per_row = 12, credits = {"chloe_cromslor"} },
     v_glow_up = {},
     v_reroll_surplus = { frames = 11, credits = {"SadCube"} },
     v_reroll_glut = { frames = 8 },
@@ -263,11 +254,11 @@ AnimatedVouchers = {
     v_observatory = {},
     v_grabber = { frames_per_row = 12, frames = 48, credits = {"GhostSalt"} },
     v_nacho_tong = {},
-    v_wasteful = { frames = 9, credits = {"Chloe"} },
+    v_wasteful = { frames = 9, credits = {"chloe_cromslor"} },
     v_recyclomancy = { frames = 9, credits = {"MRTorres"} },
-    v_tarot_merchant = { frames = 12, credits = {"Chloe"} },
+    v_tarot_merchant = { frames = 12, credits = {"chloe_cromslor"} },
     v_tarot_tycoon = {},
-    v_planet_merchant = { frames = 12, credits = {"Chloe"} },
+    v_planet_merchant = { frames = 12, credits = {"chloe_cromslor"} },
     v_planet_tycoon = {},
     v_seed_money = {},
     v_money_tree = {},
@@ -388,6 +379,9 @@ function Aura.add_individual(card, loaded)
         end
         card.config.center = center_copy
         card:set_sprites(card.config.center)
+        if anim.extra then
+            card.children.front.sprite_pos = center_copy.animpos.extra
+        end
     end
 end
 
@@ -565,8 +559,6 @@ if SMODS.Atlas then
                 animpos = { x = 0, y = 0 },
                 anim = v,
             },not SMODS.Mods["Aura"].config.Animation_Credits)
-        else
-            SMODS.Tag:take_ownership(k, {}, true)
         end
     end
 end
