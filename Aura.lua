@@ -289,7 +289,7 @@ AnimatedTags = {
     tag_buffoon = { frames_per_row = 11, frames = 22, credits = {"Willow"} },
     tag_handy = { frames = 18, credits = {"Willow"} },
     tag_garbage = { frames = 19, credits = {"Willow"} },
-    tag_ethereal = {},
+    tag_ethereal = { frames_per_row = 5, frames = 20, credits = {"SadCube"} },
     tag_coupon = { frames = 18, credits = {"SadCube"} },
     tag_double = { frames = 26, credits = {"SadCube"} },
     tag_juggle = { frames = 11, credits = {"MightyKingVideo"} },
