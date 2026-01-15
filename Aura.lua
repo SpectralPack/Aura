@@ -1792,7 +1792,7 @@ function Card:calculate_joker(context)
     end
 
     --Ramen
-    if self.ability.name == "Ramen" and context.discard and not context.blueprint then
+    --[[if self.ability.name == "Ramen" and context.discard and not context.blueprint then
         G.E_MANAGER:add_event(Event({
             func = (function()
                 Aura.add_individual(self)
@@ -1800,7 +1800,7 @@ function Card:calculate_joker(context)
                 return true
             end)
         }))
-    end
+    end]]
 
     --Popcorn
     if self.ability.name == "Popcorn" and context.end_of_round and not context.blueprint then
