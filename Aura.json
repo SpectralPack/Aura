@@ -1,0 +1,10 @@
+{
+	"id":"Aura",
+	"name": "Aura",
+	"author": ["MathIsFun_","MRTorres", "ChromaPIE", "Bard", "TwoBlueDogs"],
+	"description": "Adds animations to Jokers and many more. Art by: chloe_cromslor, SadCube, MRTorres, Bard, MightyKingVideo, Grassy311, Willow, RattlingSnow353, Mincoiin, Kitty, GhostSalt, T3rragon, Comet_System, RadicaAprils, Solace & Cebee",
+	"prefix": "aura",
+	"main_file": "Aura.lua",
+	"badge_colour": "3469ab",
+	"version": "0.501.5",
+}

@@ -1,12 +1,3 @@
---- STEAMODDED HEADER
---- MOD_NAME: Aura
---- MOD_ID: Aura
---- MOD_AUTHOR: [MRTorres, MathIsFun_, ChromaPIE, Bard, TwoBlueDogs]
---- MOD_DESCRIPTION: Adds animations to Jokers. Art by: Bard, Grassy311, RattlingSnow353, Solace, RadicaAprils, chloe_cromslor, SadCube, Mincoiin, Flowr and MRTorres
---- CONFLICTS: [Malverk]
---- BADGE_COLOUR: 3469ab
---- VERSION: 0.501
-
 SMODS.Atlas { -- The Icon for the mod
   key = 'modicon',
   px = 32,
@@ -43,101 +34,101 @@ SMODS.Mods.Aura.config_tab = function() -- Add a config tab to the mod for toggl
 end
 
 AnimatedJokers = {
-    j_joker = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_greedy_joker = { frames_per_row = 6, frames = 12, extra = { frames_per_row = 11, frames = 22 }, credits = {"Bard", "Chloe"} },
-    j_lusty_joker = { frames_per_row = 5, frames = 20, extra = { frames_per_row = 11, frames = 22 }, credits = {"Bard", "Chloe"} },
-    j_wrathful_joker = { frames_per_row = 5, frames = 18, extra = { frames_per_row = 11, frames = 22 }, credits = {"Bard", "Chloe"} },
-    j_gluttenous_joker = { frames_per_row = 6, frames = 12, extra = { frames_per_row = 11, frames = 22 }, credits = {"Bard", "Chloe"} },
-    j_jolly = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_zany = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_mad = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_crazy = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_droll = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_sly = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_wily = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_clever = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_devious = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_crafty = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_half = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_stencil = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
+    j_joker = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
+    j_greedy_joker = { frames_per_row = 6, frames = 12, extra = { frames_per_row = 11, frames = 22 }, credits = {"Bard", "chloe_cromslor"} },
+    j_lusty_joker = { frames_per_row = 5, frames = 20, extra = { frames_per_row = 11, frames = 22 }, credits = {"Bard", "chloe_cromslor"} },
+    j_wrathful_joker = { frames_per_row = 5, frames = 18, extra = { frames_per_row = 11, frames = 22 }, credits = {"Bard", "chloe_cromslor"} },
+    j_gluttenous_joker = { frames_per_row = 6, frames = 12, extra = { frames_per_row = 11, frames = 22 }, credits = {"Bard", "chloe_cromslor"} },
+    j_jolly = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
+    j_zany = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
+    j_mad = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
+    j_crazy = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
+    j_droll = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
+    j_sly = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
+    j_wily = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
+    j_clever = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
+    j_devious = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
+    j_crafty = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
+    j_half = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
+    j_stencil = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
     j_four_fingers = {},
     j_mime = {},
     j_credit_card = {},
     j_ceremonial = {},
     j_banner = {},
     j_mystic_summit = {},
-    j_marble = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_loyalty_card = { frames = 7, individual = true, immediate = true, credits = {"Chloe"} },
+    j_marble = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
+    j_loyalty_card = { frames = 7, individual = true, immediate = true, credits = {"chloe_cromslor"} },
     j_8_ball = {}, -- todo: animate when triggered. if succesful, one animation, if failed, another one
-    j_misprint = { frames_per_row = 11, frames = 66, credits = {"Chloe"} },
-    j_dusk = { frames_per_row = 13, frames = 78, fps = 5, credits = {"Chloe"} },
+    j_misprint = { frames_per_row = 11, frames = 66, credits = {"chloe_cromslor"} },
+    j_dusk = { frames_per_row = 13, frames = 78, fps = 5, credits = {"chloe_cromslor"} },
     j_raised_fist = { frames_per_row = 6, frames = 36, fps = 15, credits = {"MRTorres"} },
-    j_chaos = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
+    j_chaos = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
     j_fibonacci = { frames_per_row = 8, frames = 32, credits = {"MRTorres"} },
-    j_steel_joker = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
+    j_steel_joker = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
     j_scary_face = {},
     j_abstract = {},
     j_delayed_grat = {}, -- todo: animate when primed. constant backround animation. flip clock when triggered, but empty when failed
     j_hack = { frames_per_row = 8, frames = 64, credits = {"rattlingssnow353"} },
     j_pareidolia = { frames_per_row = 5, frames = 20, credits = {"SadCube"} },
-    j_gros_michel = {frames = 13, extra = { frames = 18, fps = 15, individual = true }, credits = {"MightyKingJoker"} },
-    j_even_steven = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_odd_todd = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_scholar = { frames_per_row = 11, frames = 22, extra = { frames_per_row = 9, frames = 45 } , credits = {"Chloe", "MRTorres"} },
+    j_gros_michel = {frames = 13, extra = { frames = 18, fps = 15, individual = true }, credits = {"MightyKingVideo"} },
+    j_even_steven = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
+    j_odd_todd = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
+    j_scholar = { frames_per_row = 11, frames = 22, extra = { frames_per_row = 9, frames = 45 } , credits = {"chloe_cromslor", "MRTorres"} },
     j_business = { frames_per_row = 13, frames = 120, credits = {"Mincoiin"} },
     j_supernova = {}, -- todo: an explosion animation that triggers each time it gives mult, and shows an amount of frames proportional to the mult given. framerate proportional to amount of frames to keep duration constant.
     j_ride_the_bus = { frames_per_row = 9, frames = 36, credits = {"Grassy353"} }, 
-    j_space = { frames = 61, start_frame = 23, frames_per_row = 96, individual = true, extra = { frames_per_row = 11, frames = 22 }, credits = {"Bard", "Chloe"} },
+    j_space = { frames = 61, start_frame = 23, frames_per_row = 96, individual = true, extra = { frames_per_row = 11, frames = 22 }, credits = {"Bard", "chloe_cromslor"} },
     j_egg = { frames_per_row = 4, frames = 8, individual = true, credits = {"MRTorres"} },
-    j_burglar = { frames = 76, individual = true, verticframes = 22, credits = {"Chloe"} },
-    j_blackboard = { frames = 49, individual = true, verticframes = 22, credits = {"Comet_System", "Grassy311", "Chloe"} },
-    j_runner = { frames_per_row = 10, frames = 110, credits = {"Chloe", "MRTorres"} },
-    j_ice_cream = { frames = 6, individual = true, verticframes = 13, credits = {"MightyKingJoker"} }, --todo: add extra frames in between
+    j_burglar = { frames = 76, individual = true, verticframes = 22, credits = {"chloe_cromslor"} },
+    j_blackboard = { frames = 49, individual = true, verticframes = 22, credits = {"Comet_System", "Grassy311", "chloe_cromslor"} },
+    j_runner = { frames_per_row = 10, frames = 110, credits = {"chloe_cromslor", "MRTorres"} },
+    j_ice_cream = { frames = 6, individual = true, verticframes = 13, credits = {"MightyKingVideo"} }, --todo: add extra frames in between
     j_dna = { frames = 11, credits = {"SadCube"} },
     j_splash = {},
     j_blue_joker = { frames_per_row = 11, frames = 22 },
-    j_sixth_sense = { verticframes = 22, frames = 39, individual = true, credits = {"Grassy353", "Chloe", "MRTorres"} },
-    j_constellation = { frames_per_row = 6, frames = 66, credits = {"Chloe"} },
-    j_hiker = { frames_per_row = 11, frames = 22, credits = {"MRTorres", "Chloe"} },
+    j_sixth_sense = { verticframes = 22, frames = 39, individual = true, credits = {"Grassy353", "chloe_cromslor", "MRTorres"} },
+    j_constellation = { frames_per_row = 6, frames = 66, credits = {"chloe_cromslor"} },
+    j_hiker = { frames_per_row = 11, frames = 22, credits = {"MRTorres", "chloe_cromslor"} },
     j_faceless = { frames_per_row = 4, frames = 24, credits = {"rattlingssnow353"} },
-    j_green_joker = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
+    j_green_joker = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
     j_superposition = { frames = 20, verticframes = 6, verticfps = 8, individual = true, credits = {"MRTorres"} },
     j_todo_list = { frames_per_row = 12, frames = 96, credits = {"RadicaAprils"} }, -- todo: show hand that needs to be played & animate on trigger. each hand played crosses out an item from the list, when all are crossed or round ends, pass page and write new list.
     j_cavendish = {},
     j_card_sharp = { frames = 6, target = 0, verticframes = 11, verticfps = 5, credits = {"MRTorres"} },
     j_red_card = { frames_per_row = 19, frames = 349, credits = {"Bard"} },
     j_madness = {}, -- Idea: randomize the time between laughs/eye twitches
-    j_square = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
+    j_square = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
     j_seance = {}, -- todo: animate when triggered
-    j_riff_raff = { frames_per_row = 14, frames = 490, credits = {"Chloe"} },
-    j_vampire = { frames_per_row = 11, frames = 22, extra = { frames_per_row = 6, frames = 30 }, credits = {"Mincoiin", "Chloe"} },
+    j_riff_raff = { frames_per_row = 14, frames = 490, credits = {"chloe_cromslor"} },
+    j_vampire = { frames_per_row = 11, frames = 22, extra = { frames_per_row = 6, frames = 30 }, credits = {"Mincoiin", "chloe_cromslor"} },
     j_shortcut = {},
-    j_hologram = { frames = 1, extrasoul = true, extra = { frames_per_row = 22, frames = 22, start_frame = 198 }, credits = {"Chloe"} }, -- the texture needs to be this big so the scanlines are vanilla acurate.
+    j_hologram = { frames = 1, extrasoul = true, extra = { frames_per_row = 22, frames = 22, start_frame = 198 }, credits = {"chloe_cromslor"} }, -- the texture needs to be this big so the scanlines are vanilla acurate.
     j_vagabond = { frames = 30, fps = 5, credits = {"Kitty"} },
-    j_baron = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
+    j_baron = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
     j_cloud_9 = {},
     j_rocket = { frames_per_row = 11, frames = 87, fps = 10, individual = true, extra = { frames = 5, individual = true, immediate = true }, credits = {"MRTorres"} }, --todo: add thruster animation on the verticframes
     j_obelisk = {}, -- todo: animate when promoted / show hand that needs to not be played
     j_midas_mask = {},
-    j_luchador = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
+    j_luchador = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
     j_photograph = { frames = 48, credits = {"Grassy331"} },
     j_gift = {},
     j_turtle_bean = { frames_per_row = 7, frames = 14, extra = { verticframes = 14, verticfps = 8 }, credits = {"MRTorres"} },--extra = frames = 6, individual = true -- todo: add the diferent stages of eaten/roten
     j_erosion = {},
-    j_reserved_parking = { frames_per_row = 6, frames = 36, credits = {"MightyKingJoker"} },
+    j_reserved_parking = { frames_per_row = 6, frames = 36, credits = {"MightyKingVideo"} },
     j_mail = { frames_per_row = 5, frames = 15, target = 14, immediate = true, credits = {"MRTorres"} },
     j_to_the_moon = { frames = 40, fps = 8, target = 0, verticframes = 40, verticfps = 8, credits = {"MRTorres"} },
     j_hallucination = {},
-    j_fortune_teller = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
+    j_fortune_teller = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
     j_juggler = { frames = 22, verticframes = 14, verticfps = 13, credits = {"MRTorres"} },
     j_drunkard = { frames = 22, verticframes = 14, verticfps = 13, credits = {"MRTorres"} },
-    j_stone = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_golden = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_lucky_cat = { frames = 8, individual = true, verticframes = 29, credits = {"MightyKingJoker"} },
+    j_stone = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
+    j_golden = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
+    j_lucky_cat = { frames = 8, individual = true, verticframes = 29, credits = {"MightyKingVideo"} },
     j_baseball = {},
     j_bull = {},
-    j_diet_cola = { frames = 20, credits = {"SadCube", "Chloe"} },
-    j_trading = { frames = 96, frames_per_row = 12, individual = true, immediate = true, pos_x = 10, credits = {"MightyKingJoker"} }, -- todo: needs more frames
+    j_diet_cola = { frames = 20, credits = {"SadCube", "chloe_cromslor"} },
+    j_trading = { frames = 96, frames_per_row = 12, individual = true, immediate = true, pos_x = 10, credits = {"MightyKingVideo", "Willow"} }, -- todo: needs more frames
     j_flash = { frames_per_row = 13, frames = 26, individual = true, immediate = true, pos_x = 9, credits = {"Grassy331"} },
     j_popcorn = { frames = 5, individual = true, credits = {"MRTorres"} },
     j_trousers = { frames_per_row = 4, frames = 12, extra = { frames_per_row = 4, frames = 16, fps = 8 }, credits = {"Solace"} },
@@ -146,48 +137,48 @@ AnimatedJokers = {
     j_walkie_talkie = {},
     j_selzer = { verticframes = 15, start_frame = 3, frames = 51, individual = true, credits = {"MRTorres"} },
     j_castle = { frames_per_row = 9, frames = 69, start_frame = 0, extra = { frames = 9, target = 3, immediate = true, verticframes = 5, verticfps = 5 }, credits = {"Bard"} },
-    j_smiley = { frames_per_row = 13, frames = 150, credits = {"SadCube", "Chloe"} },
+    j_smiley = { frames_per_row = 13, frames = 150, credits = {"SadCube", "chloe_cromslor"} },
     j_campfire = {}, -- todo: animate fire, which gets bigger the more you burn, returning to normal when resetting
     j_ticket = {},
-    j_mr_bones = { frames_per_row = 11, frames = 22, credits = {"Chloe"} }, -- todo: destroy animation? (if done, with the laugh as verticframes)
+    j_mr_bones = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} }, -- todo: destroy animation? (if done, with the laugh as verticframes)
     j_acrobat = {},
     j_sock_and_buskin = { frames_per_row = 5, frames = 30, credits = {"MRTorres"} },
-    j_swashbuckler = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
+    j_swashbuckler = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
     j_troubadour = {},
-    j_certificate = { frames_per_row = 7, frames = 28, individual = true, extra = { frames = 5, individual = true, immediate = true }, credits = {"Chloe"} },
-    j_smeared = { frames_per_row = 11, frames = 22, extra = { frames = 10 }, credits = {"SadCube", "Chloe"} },
-    j_throwback = { verticframes = 18, frames = 100, extra = { frames_per_row = 11, frames = 22 }, credits = {"Chloe", "MRTorres"} }, -- todo: animate when promoted (if done, on extra layer, with the laugh as verticframes)
+    j_certificate = { frames_per_row = 7, frames = 28, individual = true, extra = { frames_per_row = 6, frames = 13, individual = true, immediate = true }, credits = {"chloe_cromslor"} },--, "MightyKingVideo", "SadCube"
+    j_smeared = { frames_per_row = 11, frames = 22, extra = { frames = 10 }, credits = {"SadCube", "chloe_cromslor"} },
+    j_throwback = { verticframes = 18, frames = 100, extra = { frames_per_row = 11, frames = 22 }, credits = {"chloe_cromslor", "MRTorres"} }, -- todo: animate when promoted (if done, on extra layer, with the laugh as verticframes)
     j_hanging_chad = {},
     j_rough_gem = {},
     j_bloodstone = {},
     j_arrowhead = {},
     j_onyx_agate = {},
-    j_glass = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_ring_master = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
+    j_glass = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
+    j_ring_master = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
     j_flower_pot = { frames = 24, credits = {"Bard"} },
-    j_blueprint = { frames = 31, individual = true, verticframes = 22, credits = {"Grassy331", "Chloe"} },
-    j_wee = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
+    j_blueprint = { frames = 31, individual = true, verticframes = 22, credits = {"Grassy331", "chloe_cromslor"} },
+    j_wee = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
     j_merry_andy = { frames_per_row = 11, frames = 22 },
     j_oops = { frames_per_row = 5, frames = 10, extra = { frames = 5, fps = 15, target = 0 }, credits = {"SadCube", "MRTorres"} }, -- todo: create stilized smear frames
     j_idol = { frames_per_row = 15, frames = 150, immediate = true, target = 51, extra = { frames_per_row = 6, frames = 6, fps = 3, target = 3 }, credits = {"MRTorres"} }, -- todo: fix broken code for custom suit icons
     j_seeing_double = { frames_per_row = 13, frames = 150, extra = { frames_per_row = 4, frames = 8, individual = true }, credits = {"SadCube"} },
-    j_matador = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
+    j_matador = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
     j_hit_the_road = { frames = 10, individual = true, credits = {"MRTorres"} }, -- todo: create a true animation with pespective and not just the 2d car
-    j_duo = {},
-    j_trio = {},
-    j_family = {},
-    j_order = {},
-    j_tribe = {},
-    j_stuntman = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_invisible = { frames = 11, fps = 5, individual = true, verticframes = 22, credits = {"Chloe"} },
-    j_brainstorm = { frames = 39, individual = true, verticframes = 22, credits = {"Grassy331", "Chloe"} },
+    j_duo = { extra = { frames_per_row = 11, frames = 22 }, credits = {"SadCube"} },
+    j_trio = { extra = { frames_per_row = 11, frames = 22 }, credits = {"SadCube"} },
+    j_family = { extra = { frames_per_row = 11, frames = 22 }, credits = {"SadCube"} },
+    j_order = { extra = { frames_per_row = 11, frames = 22 }, credits = {"SadCube"} },
+    j_tribe = { extra = { frames_per_row = 11, frames = 22 }, credits = {"SadCube"} },
+    j_stuntman = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
+    j_invisible = { frames = 11, fps = 5, individual = true, verticframes = 22, credits = {"chloe_cromslor"} },
+    j_brainstorm = { frames = 39, individual = true, verticframes = 22, credits = {"Grassy331", "chloe_cromslor"} },
     j_satellite = {},
     j_shoot_the_moon = { frames_per_row = 11, frames = 22, credits = {"MRTorres"} },
     j_drivers_license = { frames = 2, target = 0, immediate = true, credits = {"Grassy331"} },
-    j_cartomancer = { frames_per_row = 11, frames = 22, credits = {"Chloe"} },
-    j_astronomer = { frames = 29, extra = { frames = 6, fps = 2, verticframes = 22 }, credits = {"Chloe"} },
+    j_cartomancer = { frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
+    j_astronomer = { frames = 29, extra = { frames = 6, fps = 2, verticframes = 22 }, credits = {"chloe_cromslor"} },
     j_burnt = {}, -- todo: animate when primed?
-    j_bootstraps = { frames_per_row = 19, frames = 38, credits = {"Chloe", "MRTorres"} },
+    j_bootstraps = { frames_per_row = 19, frames = 38, credits = {"chloe_cromslor", "MRTorres"} },
     j_caino = {}, -- todo: add animations
     j_triboulet = {}, -- todo: add animations
     j_yorick = {}, -- todo: add animations
@@ -246,14 +237,14 @@ AnimatedConsumeables = {
     c_medium = {},
     c_cryptid = {},
     c_soul = {},
-    c_black_hole = { frames_per_row = 24, frames = 144, credits = {"SadCube", "MRTorres"} },
+    c_black_hole = { frames_per_row = 24, frames = 144, credits = {"SadCube", "MRTorres"} }
 }
 AnimatedVouchers = {
     v_overstock_norm = { frames = 5, credits = {"MRTorres"} },
     v_overstock_plus = {},
     v_clearance_sale = {},
     v_liquidation = {},
-    v_hone = { frames = 24, frames_per_row = 12, credits = {"Chloe"} },
+    v_hone = { frames = 24, frames_per_row = 12, credits = {"chloe_cromslor"} },
     v_glow_up = {},
     v_reroll_surplus = { frames = 11, credits = {"SadCube"} },
     v_reroll_glut = { frames = 8 },
@@ -261,18 +252,18 @@ AnimatedVouchers = {
     v_omen_globe = { frames = 150, frames_per_row = 13, credits = {"SadCube"} },
     v_telescope = {},
     v_observatory = {},
-    v_grabber = {},
+    v_grabber = { frames_per_row = 12, frames = 48, credits = {"GhostSalt"} },
     v_nacho_tong = {},
-    v_wasteful = { frames = 9, credits = {"Chloe"} },
-    v_recyclomancy = { frames = 9 },
-    v_tarot_merchant = { frames = 12, credits = {"Chloe"} },
+    v_wasteful = { frames = 9, credits = {"chloe_cromslor"} },
+    v_recyclomancy = { frames = 9, credits = {"MRTorres"} },
+    v_tarot_merchant = { frames = 12, credits = {"chloe_cromslor"} },
     v_tarot_tycoon = {},
-    v_planet_merchant = { frames = 12, credits = {"Chloe"} },
+    v_planet_merchant = { frames = 12, credits = {"chloe_cromslor"} },
     v_planet_tycoon = {},
     v_seed_money = {},
     v_money_tree = {},
-    v_blank = { frames = 23, credits = {"SadCube"} },
-    v_antimatter = {},
+    v_blank = { frames = 30, fps = (20/3), verticframes = 23, credits = {"SadCube"} },
+    v_antimatter = { frames = 30, fps = (20/3), verticframes = 23, credits = {"T3rragon"} },
     v_magic_trick = { frames = 9, credits = {"MRTorres"} },
     v_illusion = { frames = 18, frames_per_row = 9, credits = {"MRTorres"} },
     v_hieroglyph = {},
@@ -283,40 +274,57 @@ AnimatedVouchers = {
     v_palette = {}
 }
 AnimatedTags = {
-    tag_uncommon = { frames_per_row = 11, frames = 22, credits = {"MightyKingJoker"} },
-    tag_rare = { frames_per_row = 11, frames = 22, credits = {"MightyKingJoker"} },
-    tag_negative = { frames = 19, credits = {"MightyKingJoker"} },
-    tag_foil = { frames = 19, credits = {"MightyKingJoker"} },
-    tag_holo = { frames = 19, credits = {"MightyKingJoker"} },
-    tag_polychrome = { frames = 19, credits = {"MightyKingJoker"} },
-    tag_investment = { frames = 20, credits = {"MightyKingJoker"} },
-    tag_voucher = {},
+    tag_uncommon = { frames_per_row = 11, frames = 22, credits = {"MightyKingVideo"} },
+    tag_rare = { frames_per_row = 11, frames = 22, credits = {"MightyKingVideo"} },
+    tag_negative = { frames = 19, credits = {"MightyKingVideo"} },
+    tag_foil = { frames = 19, credits = {"MightyKingVideo"} },
+    tag_holo = { frames = 19, credits = {"MightyKingVideo"} },
+    tag_polychrome = { frames = 19, credits = {"MightyKingVideo"} },
+    tag_investment = { frames = 20, credits = {"MightyKingVideo"} },
+    tag_voucher = { frames_per_row = 19, frames  = 57, credits = {"MightyKingVideo"} },
     tag_boss = { frames = 10, credits = {"SadCube"} },
-    tag_standard = {},
+    tag_standard = { frames = 18, credits = {"SadCube"} },
     tag_charm = { frames = 13, credits = {"Cebee"} },
-    tag_meteor = {},
+    tag_meteor = { frames_per_row = 8, frames = 16, fps = 5, credits = {"SadCube", "MRTorres"} },
     tag_buffoon = { frames_per_row = 11, frames = 22, credits = {"Willow"} },
     tag_handy = { frames = 18, credits = {"Willow"} },
     tag_garbage = { frames = 19, credits = {"Willow"} },
-    tag_ethereal = {},
+    tag_ethereal = { frames_per_row = 5, frames = 20, credits = {"SadCube"} },
     tag_coupon = { frames = 18, credits = {"SadCube"} },
     tag_double = { frames = 26, credits = {"SadCube"} },
-    tag_juggle = { frames = 11, credits = {"MightyKingJoker"} },
-    tag_d_six = { frames_per_row = 4, frames = 24, credits = {"MightyKingJoker"} },
-    tag_top_up = {},
-    tag_skip = {},
-    tag_orbital = { frames = 12, credits = {"MightyKingJoker"} },
-    tag_economy = { frames = 10, fps = 10, credits = {"SadCube"} }
+    tag_juggle = { frames = 11, credits = {"MightyKingVideo"} },
+    tag_d_six = { frames_per_row = 4, frames = 24, credits = {"MightyKingVideo"} },
+    tag_top_up = { frames_per_row = 5, frames = 19, credits = {"MightyKingVideo"} },
+    tag_skip = { frames = 10, credits = {"SadCube"} },
+    tag_orbital = { frames = 12, credits = {"MightyKingVideo"} },
+    tag_economy = { frames = 10, credits = {"SadCube"} }
+}
+
+AnimatedEnchancements = {
+    m_bonus = { frames = 13, fps = 20, individual = true, credits = {"MRTorres"} },
+    m_mult = { frames_per_row = 13, frames = 65, fps = 20, individual = true, credits = {"MRTorres"} },
+    m_wild = {},
+    m_glass = {},
+    m_steel = {},
+    m_stone = {},
+    m_gold = {},
+    m_lucky= {}
 }
 
 AuraTradingCards = {
-    [11] = {class = "JOKER", name = "The Joker of Poker", credits = {"MightyKingJoker"}},
-    [15] = {class = "JOKER", name = "Applause for Acrobats", credits = {"MightyKingJoker"}},
+    [11] = {class = "JOKER", name = "The Joker of Poker", credits = {"LocalThunk"}, EX = {credits = {"MightyKingVideo"}, pos = 12}},
+    [15] = {class = "JOKER", name = "Applause for Acrobats", credits = {"MightyKingVideo"}},
     [17] = {class = "JOKER", name = "Mind Over Madness", credits = {"Willow"}},
-    [41] = {class = "JOKER", name = "Riff Raff Rumble", credits = {"MightyKingJoker"}},
-    [66] = {class = "SPELL", name = "Frightful Face of Fear", credits = {"MightyKingJoker"}},
-    [79] = {class = "ITEM",  name = "Generous Gift", credits = {"MightyKingJoker"}},
-    [95] = {class = "SPELL", name = "Interplanetary Alignment", credits = {"MightyKingJoker"}}
+    [21] = {class = "JOKER", name = "At Evens & Odds", credits = {"Willow"}},
+    [22] = {class = "JOKER", name = "Despair Trousers!!", credits = {"MightyKingVideo"}},
+    [41] = {class = "JOKER", name = "Riff Raff Rumble", credits = {"MightyKingVideo"}, EX = {pos = 42}},
+    [51] = {class = "SPELL", name = "Dangerous Dunce-like DNA", credits = {"Willow"}},
+    [61] = {class = "SPELL", name = "Paralleling Pyres of Plasma", credits = {"MightyKingVideo"}, EX = {pos = 62}},
+    [66] = {class = "SPELL", name = "Frightful Face of Fear", credits = {"MightyKingVideo"}},
+    [70] = {class = "LAND",  name = "Constellation Station", credits = {"MightyKingVideo"}},
+    [71] = {class = "LAND",  name = "No Jack's Land", credits = {"MightyKingVideo"}},
+    [79] = {class = "ITEM",  name = "Generous Gift", credits = {"MightyKingVideo"}},
+    [95] = {class = "SPELL", name = "Interplanetary Alignment", credits = {"MightyKingVideo"}},
 }
 
 AnimatedDeckSkins = {
@@ -356,6 +364,7 @@ function Aura.add_individual(card, loaded)
         for k, v in pairs(card.config.center) do
             center_copy[k] = v
         end
+        center_copy.animation = card.animation
         if anim.individual then
             center_copy.animpos = {x = card.config.center.animpos.x, y = card.config.center.animpos.y}
         else
@@ -370,7 +379,7 @@ function Aura.add_individual(card, loaded)
         end
         card.config.center = center_copy
         card:set_sprites(card.config.center)
-        if card.children and card.children.front and anim.extra then
+        if anim.extra then
             card.children.front.sprite_pos = center_copy.animpos.extra
         end
     end
@@ -413,13 +422,11 @@ if SMODS.Atlas then
                 }
             end
             --joker override
-            SMODS[v.set or "Joker"]:take_ownership(k, {
+            SMODS.Joker:take_ownership(k, {
                 atlas = k,
                 animpos = { x = v.pos_x or posx or 0, y = posy or 0, extra = v.extra and {x = v.extra.pos_x or posex or 0, y = v.extra.pos_y or posey or 0, atlas = "aura_"..k.."_extra"} },
                 anim = v,
             }, not SMODS.Mods["Aura"].config.Animation_Credits)
-        else
-            SMODS[v and v.set or "Joker"]:take_ownership(k, {}, true)
         end
     end
     --Register all Planets/Sprites
@@ -441,7 +448,7 @@ if SMODS.Atlas then
                 posey = math.floor(v.extra.start_frame / (v.extra.frames_per_row or v.extra.frames))
             end
         end
-        if v.frames then
+        if v and next(v) then
             --sprite
             SMODS.Atlas {
                 key = k,
@@ -458,13 +465,11 @@ if SMODS.Atlas then
                 }
             end
             --planet override
-            SMODS[v.set or "Consumable"]:take_ownership(k, {
+            SMODS.Consumable:take_ownership(k, {
                 atlas = k,
                 animpos = { x = v.pos_x or posx or 0, y = v.pos_y or posy or 0, extra = v.extra and {x = v.extra.pos_x or posex or 0, y = v.extra.pos_y or posey or 0, atlas = "aura_"..k.."_extra"} },
                 anim = v,
             },not SMODS.Mods["Aura"].config.Animation_Credits)
-        else
-            SMODS[v and v.set or "Consumable"]:take_ownership(k, {}, true)
         end
     end
     --Register all Vouchers/Sprites
@@ -486,7 +491,7 @@ if SMODS.Atlas then
                 posey = math.floor(v.extra.start_frame / (v.extra.frames_per_row or v.extra.frames))
             end
         end
-        if v.frames then
+        if v and next(v) then
             --sprite
             SMODS.Atlas {
                 key = k,
@@ -503,13 +508,39 @@ if SMODS.Atlas then
                 }
             end
             --voucher override
-            SMODS[v.set or "Voucher"]:take_ownership(k, {
+            SMODS.Voucher:take_ownership(k, {
                 atlas = k,
                 animpos = { x = v.pos_x or posx or 0, y = v.pos_y or posy or 0, extra = v.extra and {x = v.extra.pos_x or posex or 0, y = v.extra.pos_y or posey or 0, atlas = "aura_"..k.."_extra"} },
                 anim = v,
             },not SMODS.Mods["Aura"].config.Animation_Credits)
-        else
-            SMODS[v and v.set or "Voucher"]:take_ownership(k, {}, true)
+        end
+    end
+
+    --Register all enchancements/Sprites
+    for k, v in pairs(AnimatedEnchancements) do
+        local posx, posy, posex, posey
+        if v.start_frame then
+            posx = v.start_frame%(v.frames_per_row or v.frames)
+            if v.verticframes and v.start_verticframe then
+                posy = v.start_verticframe
+            else
+                posy = math.floor(v.start_frame / (v.frames_per_row or v.frames))
+            end
+        end
+        if v.frames then
+            --sprite
+            SMODS.Atlas {
+                key = k,
+                path = k .. ".png",
+                px = v.px or 71,
+                py = v.py or 95
+            }
+            --enchancement override
+            SMODS.Enhancement:take_ownership(k, {
+                atlas = k,
+                animpos = { x = v.pos_x or posx or 0, y = v.pos_y or posy or 0 },
+                anim = v,
+            },not SMODS.Mods["Aura"].config.Animation_Credits)
         end
     end
     --Register all Tags/Sprites
@@ -528,8 +559,6 @@ if SMODS.Atlas then
                 animpos = { x = 0, y = 0 },
                 anim = v,
             },not SMODS.Mods["Aura"].config.Animation_Credits)
-        else
-            SMODS.Tag:take_ownership(k, {}, true)
         end
     end
 end
@@ -574,11 +603,20 @@ function SMODS.create_mod_badges(obj, badges)
 			local scale_fac = {}
 			local min_scale_fac = 1
 			local strings = { "Aura" }
-			for i = 1, #Aura_credits do
-				if #Aura_credits > 1 then
-					strings[#strings + 1] = "Animators: "..Aura_credits[i]
-				else
-					strings[#strings + 1] = "Animator: "..Aura_credits[i]
+            if obj.key ~= "j_trading" then
+                for i = 1, #Aura_credits do
+                    if #Aura_credits > 1 then
+                        strings[#strings + 1] = "Animators: "..Aura_credits[i]
+                    else
+                        strings[#strings + 1] = "Animator: "..Aura_credits[i]
+                    end
+                end
+            else
+                local tradingNumber = (obj.animation and obj.animation.trading_order and obj.animation.trading_order[obj.animation.trading_index]) or 11
+                local trading_card = AuraTradingCards[tradingNumber]
+                local trading_credits = (obj.animation and obj.animation.EX and AuraTradingCards[tradingNumber].EX and AuraTradingCards[tradingNumber].EX.credits) or AuraTradingCards[tradingNumber].credits
+                for i = 1, #trading_credits do
+                    strings[#strings + 1] = "Art #"..tostring(tradingNumber)..(obj.animation and obj.animation.EX and " EX" or "").." by: "..trading_credits[i]
 				end
 			end
 			for i = 1, #strings do
@@ -651,9 +689,50 @@ function SMODS.create_mod_badges(obj, badges)
 	end
 end
 
+local chpop = G.UIDEF.card_h_popup
+function G.UIDEF.card_h_popup(card)
+    if card.ability_UIBox_table and card.config and card.config.center and card.config.center.key == "j_trading" then
+        local tradingNumber = card.animation and card.animation.trading_order[card.animation.trading_index] or 11
+        local trading_name = AuraTradingCards[tradingNumber].name or "Unknown Trading Card"
+        trading_name = '"'..trading_name..(card.animation and card.animation.EX and ' EX"' or '"')
+        card.ability_UIBox_table.name[2] = {
+            n = G.UIT.R,
+            config = { align = "cm" },
+            nodes = {
+                {
+                    n = G.UIT.R,
+                    config = {
+                        padding = 0.03,
+                        align = "cm",
+                        res = 0.15,
+                        r = 0.05,
+                    },
+                    nodes = {
+                        {
+                            n = G.UIT.O,
+                            config = {
+                                object = DynaText({
+                                    string = trading_name,
+                                    colours = {G.C.WHITE},
+                                    silent = true,
+                                    float = true,
+                                    shadow = true,
+                                    offset_y = -0.03,
+                                    spacing = 1,
+                                    scale = 0.35,
+                                }),
+                            },
+                        },
+                    },
+                },
+            },
+        }
+    end
+    return chpop(card)
+end
+
 --fix edition shaders ignoring front layer. FIX MADE BY LARSWIJN
 --In theory, this fix will be added natively to Steamodded, but until then, it will be here.
-
 if SMODS.DrawStep then
 	-- drawsteps are "only" supported since 0423a
 	SMODS.DrawStep:take_ownership("front",
@@ -696,272 +775,274 @@ local upd = Game.update
 function Aura.update_frame(dt, k, obj, jkr)
     local anim = obj and obj.anim
     local animpos = obj and obj.animpos
-    if anim.frames then
-        local frames_passed = 0
-        if jkr then
-            if anim.individual then
-                if anim.immediate then
-                    if jkr.target and (animpos.x + (not anim.verticframes and (animpos.y*(anim.frames_per_row or anim.frames)) or 0)) ~= jkr.target then
-                            frames_passed = 1
-                        end    
-                    else
-                    jkr.t = jkr.t or (anim.t and (anim.t - dt)) or 0
-                    jkr.t = jkr.t + dt
-                    frames_passed = math.floor(jkr.t / (1/(jkr.fps or anim.fps or 10)))
-                    if frames_passed > 0 then
-                        jkr.t = jkr.t - frames_passed/(jkr.fps or anim.fps or 10)
-                    end
-                end
-            end
-        else
-            if anim.immediate and anim.target then
-                if (animpos.x + (not anim.verticframes and (animpos.y*(anim.frames_per_row or anim.frames)) or 0)) ~= anim.target and not anim.individual then
-                    frames_passed = 1
-                end
-            else
-                anim.t = anim.t or 0
-                anim.t = anim.t + dt
-                frames_passed = math.floor(anim.t / (1/(anim.fps or 10)))
-                if frames_passed > 0 then
-                    anim.t = anim.t - frames_passed/(anim.fps or 10)
-                    if anim.individual then
-                        frames_passed = 0
-                    end
-                end
-            end
-        end
-        if frames_passed > 0 then
-            local loc = animpos.x
-            if not anim.verticframes then
-                loc = loc + animpos.y*(anim.frames_per_row or anim.frames)
-            end
-            loc = loc - ((jkr and jkr.start_frame) or anim.start_frame or 0)
-            if jkr and (jkr.target or jkr.fps or jkr.frames) and anim.individual then
-                if jkr.target then
-                    if anim.immediate then
-                        loc = jkr.target
-                    else
-                        local til_target = jkr.target - loc
-                        if til_target < 0 then
-                            til_target = til_target + (jkr.frames or anim.frames)
-                        end
-                        if til_target >= frames_passed then
-                            loc = loc + frames_passed
-                        else
-                            if jkr.remaining_triggers then
-                                local targets_passed = math.floor((frames_passed - til_target) / (jkr.frames or anim.frames)) + 1
-                                if targets_passed > jkr.remaining_triggers then
-                                    loc = jkr.target
-                                    jkr.remaining_triggers = nil
-                                else
-                                    loc = loc + (frames_passed % (jkr.frames or anim.frames))
-                                    jkr.remaining_triggers = jkr.remaining_triggers - targets_passed
-                                end
-                            elseif jkr.escape_target and til_target == 0 then
-                                loc = loc + math.min(frames_passed, jkr.frames or anim.frames)
-                            else
-                                loc = jkr.target
-                            end
-                            if jkr.remaining_triggers and jkr.remaining_triggers <= 0 then jkr.remaining_triggers = nil end
-                            jkr.escape_target = false
-                        end
-                    end
-                else
-                    loc = loc + frames_passed
-                end
-            elseif anim.target then
-                if anim.immediate then
-                    loc = anim.target
-                else
-                    local til_target = anim.target - loc
-                    if til_target < 0 then
-                        til_target = til_target + anim.frames
-                    end
-                    if til_target >= frames_passed then
-                        loc = loc + frames_passed
-                    else
-                        if anim.remaining_triggers then
-                            local targets_passed = math.floor((frames_passed - til_target) / anim.frames) + 1
-                            if targets_passed > anim.remaining_triggers then
-                                loc = anim.target
-                                anim.remaining_triggers = nil
-                            else
-                                loc = loc + (frames_passed % anim.frames)
-                                anim.remaining_triggers = anim.remaining_triggers - targets_passed
-                            end
-                        elseif anim.escape_target and til_target == 0 then
-                            loc = loc + math.min(frames_passed, anim.frames)
-                        else
-                            loc = anim.target
-                        end
-                        if anim.remaining_triggers and anim.remaining_triggers <= 0 then anim.remaining_triggers = nil end
-                        anim.escape_target = false
-                    end
-                end
-            elseif not anim.individual then
-                loc = loc + frames_passed
-            end
-            if loc >= ((jkr and jkr.frames) or anim.frames) then 
-                loc = loc % ((jkr and jkr.frames) or anim.frames)
-                if k == "j_ancient" then Aura.update_ancient() end
-            end
-            loc = loc + ((jkr and jkr.start_frame) or anim.start_frame or 0)
-            animpos.x = loc%(anim.frames_per_row or anim.frames)
-            if not anim.verticframes then
-                animpos.y = math.floor(loc / (anim.frames_per_row or anim.frames))
-            end
-        end
-    end
-    if anim.verticframes then
-        if not jkr then
-            anim.verticframest = anim.verticframest or (anim.t and (anim.t - dt)) or 0
-            anim.verticframest = anim.verticframest + dt
-            local frames_passed = math.floor(anim.verticframest / (1/(anim.verticfps or 10)))
-            if frames_passed > 0 then
-                anim.verticframest = anim.verticframest - frames_passed/(anim.verticfps or 10)
-                anim.verticloc = anim.verticloc or start_verticframe or 0
-                anim.verticloc = anim.verticloc + frames_passed
-                if anim.verticloc >= anim.verticframes + (anim.start_verticframe or 0) then anim.verticloc = anim.start_verticframe or 0 end
-            end
-        end
-        animpos.y = anim.verticloc
-    end
-    if anim.extra then
-        if anim.extra.frames then
+    if anim and animpos then
+        if anim.frames then
             local frames_passed = 0
             if jkr then
-                if anim.extra.individual then
-                    jkr.extra = jkr.extra or {}
-                    if anim.extra.immediate then
-                        if jkr.extra.target and (animpos.extra.x + (not anim.extra.verticframes and animpos.extra.y*(anim.extra.frames_per_row or anim.extra.frames) or 0)) ~= jkr.extra.target then
-                            frames_passed = 1
-                        end
-                    else
-                        if jkr.extra then
-                            jkr.extra.t = jkr.extra.t or (anim.extra.t and (anim.extra.t - dt)) or (anim.t and (anim.t - dt)) or 0
-                            jkr.extra.t = jkr.extra.t + dt
-                            frames_passed = math.floor(jkr.extra.t / (1/(jkr.extra.fps or anim.extra.fps or 10)))
-                            if frames_passed > 0 then
-                                jkr.extra.t = jkr.extra.t - frames_passed/(jkr.extra.fps or anim.extra.fps or 10)
-                            end
+                if anim.individual then
+                    if anim.immediate then
+                        if jkr.target and (animpos.x + (not anim.verticframes and (animpos.y*(anim.frames_per_row or anim.frames)) or 0)) ~= jkr.target then
+                                frames_passed = 1
+                            end    
+                        else
+                        jkr.t = jkr.t or (anim.t and (anim.t - dt)) or 0
+                        jkr.t = jkr.t + dt
+                        frames_passed = math.floor(jkr.t / (1/(jkr.fps or anim.fps or 10)))
+                        if frames_passed > 0 then
+                            jkr.t = jkr.t - frames_passed/(jkr.fps or anim.fps or 10)
                         end
                     end
                 end
             else
-                if anim.extra.immediate then
-                    if animpos.extra and animpos.extra.x ~= anim.extra.target and not anim.extra.individual then
+                if anim.immediate and anim.target then
+                    if (animpos.x + (not anim.verticframes and (animpos.y*(anim.frames_per_row or anim.frames)) or 0)) ~= anim.target and not anim.individual then
                         frames_passed = 1
-                end
+                    end
                 else
-                anim.extra.t = anim.extra.t or (anim.t and (anim.t - dt)) or 0
-                anim.extra.t = anim.extra.t + dt
-                frames_passed = math.floor(anim.extra.t / (1/(anim.extra.fps or 10)))
-                if frames_passed > 0 then
-                    anim.extra.t = anim.extra.t - frames_passed/(anim.extra.fps or 10)
-                        if anim.extra.individual then
+                    anim.t = anim.t or 0
+                    anim.t = anim.t + dt
+                    frames_passed = math.floor(anim.t / (1/(anim.fps or 10)))
+                    if frames_passed > 0 then
+                        anim.t = anim.t - frames_passed/(anim.fps or 10)
+                        if anim.individual then
                             frames_passed = 0
                         end
                     end
                 end
             end
-            if frames_passed > 0 then 
-                if not animpos.extra then--Custom fix to prevent crash in Balatro Multiplayer in a sandbox play- idk why oops_all_6s didnt have animpos.extra, but if I give it to it it works
-                    animpos.extra = {x = 0, y = 0, atlas = "aura_"..k.."_extra"}
+            if frames_passed > 0 then
+                local loc = animpos.x
+                if not anim.verticframes then
+                    loc = loc + animpos.y*(anim.frames_per_row or anim.frames)
                 end
-                local loc = animpos.extra.x
-                if not anim.extra.verticframes then
-                    loc = loc + animpos.extra.y*(anim.extra.frames_per_row or anim.extra.frames)
-                end
-                loc = loc - ((jkr and jkr.extra.start_frame) or anim.extra.start_frame or 0)
-                if jkr and jkr.extra and (jkr.extra.target or jkr.extra.fps) and anim.extra.individual then
-                    if jkr.extra.target then
-                        if anim.extra.immediate then
-                            loc = jkr.extra.target
-                            else
-                            local til_target = jkr.extra.target - loc
+                loc = loc - ((jkr and jkr.start_frame) or anim.start_frame or 0)
+                if jkr and (jkr.target or jkr.fps or jkr.frames) and anim.individual then
+                    if jkr.target then
+                        if anim.immediate then
+                            loc = jkr.target
+                        else
+                            local til_target = jkr.target - loc
                             if til_target < 0 then
-                                til_target = til_target + (jkr.extra.frames or anim.extra.frames)
+                                til_target = til_target + (jkr.frames or anim.frames)
                             end
                             if til_target >= frames_passed then
                                 loc = loc + frames_passed
                             else
-                                if jkr.extra.remaining_triggers then
-                                    local targets_passed = math.floor((frames_passed - til_target) / (jkr.extra.frames or anim.extra.frames)) + 1
-                                    if targets_passed > jkr.extra.remaining_triggers then
-                                        loc = jkr.extra.target
-                                        jkr.extra.remaining_triggers = nil
+                                if jkr.remaining_triggers then
+                                    local targets_passed = math.floor((frames_passed - til_target) / (jkr.frames or anim.frames)) + 1
+                                    if targets_passed > jkr.remaining_triggers then
+                                        loc = jkr.target
+                                        jkr.remaining_triggers = nil
                                     else
-                                        loc = loc + (frames_passed % (jkr.extra.frames or anim.extra.frames))
-                                        jkr.extra.remaining_triggers = jkr.extra.remaining_triggers - targets_passed
+                                        loc = loc + (frames_passed % (jkr.frames or anim.frames))
+                                        jkr.remaining_triggers = jkr.remaining_triggers - targets_passed
                                     end
-                                elseif jkr.extra.escape_target and til_target == 0 then
-                                    loc = loc + math.min(frames_passed, jkr.extra.frames or anim.extra.frames)
+                                elseif jkr.escape_target and til_target == 0 then
+                                    loc = loc + math.min(frames_passed, jkr.frames or anim.frames)
                                 else
-                                    loc = jkr.extra.target
+                                    loc = jkr.target
                                 end
-                                if jkr.extra.remaining_triggers and jkr.extra.remaining_triggers <= 0 then jkr.extra.remaining_triggers = nil end
-                                jkr.extra.escape_target = false
+                                if jkr.remaining_triggers and jkr.remaining_triggers <= 0 then jkr.remaining_triggers = nil end
+                                jkr.escape_target = false
                             end
                         end
                     else
                         loc = loc + frames_passed
                     end
-                elseif anim.extra.target then
-                    if anim.extra.immediate then
-                        loc = anim.extra.target
+                elseif anim.target then
+                    if anim.immediate then
+                        loc = anim.target
                     else
-                        local til_target = anim.extra.target - loc
+                        local til_target = anim.target - loc
                         if til_target < 0 then
-                            til_target = til_target + anim.extra.frames
+                            til_target = til_target + anim.frames
                         end
                         if til_target >= frames_passed then
                             loc = loc + frames_passed
                         else
-                            if anim.extra.remaining_triggers then
-                                local targets_passed = math.floor((frames_passed - til_target) / anim.extra.frames) + 1
-                                if targets_passed > anim.extra.remaining_triggers then
-                                    loc = anim.extra.target
-                                    anim.extra.remaining_triggers = nil
+                            if anim.remaining_triggers then
+                                local targets_passed = math.floor((frames_passed - til_target) / anim.frames) + 1
+                                if targets_passed > anim.remaining_triggers then
+                                    loc = anim.target
+                                    anim.remaining_triggers = nil
                                 else
-                                    loc = loc + (frames_passed % anim.extra.frames)
-                                    anim.extra.remaining_triggers = anim.extra.remaining_triggers - targets_passed
+                                    loc = loc + (frames_passed % anim.frames)
+                                    anim.remaining_triggers = anim.remaining_triggers - targets_passed
                                 end
-                            elseif anim.extra.escape_target and til_target == 0 then
-                                loc = loc + math.min(frames_passed, anim.extra.frames)
+                            elseif anim.escape_target and til_target == 0 then
+                                loc = loc + math.min(frames_passed, anim.frames)
                             else
-                                loc = anim.extra.target
+                                loc = anim.target
                             end
-                            if anim.extra.remaining_triggers and anim.extra.remaining_triggers <= 0 then anim.extra.remaining_triggers = nil end
-                            anim.extra.escape_target = false
+                            if anim.remaining_triggers and anim.remaining_triggers <= 0 then anim.remaining_triggers = nil end
+                            anim.escape_target = false
                         end
                     end
-                elseif not anim.extra.individual then
+                elseif not anim.individual then
                     loc = loc + frames_passed
                 end
-                if loc >= (jkr and jkr.extra and jkr.extra.frames or anim.extra.frames) then
-                    loc = loc % (jkr and jkr.extra and jkr.extra.frames or anim.extra.frames)
-                    if k == "j_idol" then Aura.update_idol() end
+                if loc >= ((jkr and jkr.frames) or anim.frames) then 
+                    loc = loc % ((jkr and jkr.frames) or anim.frames)
+                    if k == "j_ancient" then Aura.update_ancient() end
                 end
-                loc = loc + ((jkr and jkr.extra.start_frame) or anim.extra.start_frame or 0)
-                animpos.extra.x = loc%(anim.extra.frames_per_row or anim.extra.frames)
-                if not anim.extra.verticframes then
-                    animpos.extra.y = math.floor(loc / (anim.extra.frames_per_row or anim.extra.frames))
+                loc = loc + ((jkr and jkr.start_frame) or anim.start_frame or 0)
+                animpos.x = loc%(anim.frames_per_row or anim.frames)
+                if not anim.verticframes then
+                    animpos.y = math.floor(loc / (anim.frames_per_row or anim.frames))
                 end
             end
         end
-        if anim.extra.verticframes then
+        if anim.verticframes then
             if not jkr then
-                anim.extra.verticframest = anim.extra.verticframest or (anim.extra.t and (anim.extra.t - dt)) or (anim.t and (anim.t - dt)) or 0
-                anim.extra.verticframest = anim.extra.verticframest + dt
-                local frames_passed = math.floor(anim.extra.verticframest / (1/(anim.extra.verticfps or 10)))
+                anim.verticframest = anim.verticframest or (anim.t and (anim.t - dt)) or 0
+                anim.verticframest = anim.verticframest + dt
+                local frames_passed = math.floor(anim.verticframest / (1/(anim.verticfps or 10)))
                 if frames_passed > 0 then
-                    anim.extra.verticframest = anim.extra.verticframest - frames_passed/(anim.extra.verticfps or 10)
-                    anim.extra.verticloc = anim.extra.verticloc or 0
-                    anim.extra.verticloc = anim.extra.verticloc + frames_passed
-                    if anim.extra.verticloc >= anim.extra.verticframes + (anim.extra.start_verticframe or 0) then anim.extra.verticloc = anim.extra.start_verticframe or 0 end
+                    anim.verticframest = anim.verticframest - frames_passed/(anim.verticfps or 10)
+                    anim.verticloc = anim.verticloc or start_verticframe or 0
+                    anim.verticloc = anim.verticloc + frames_passed
+                    if anim.verticloc >= anim.verticframes + (anim.start_verticframe or 0) then anim.verticloc = anim.start_verticframe or 0 end
                 end
             end
-            animpos.extra.y = anim.extra.verticloc
+            animpos.y = anim.verticloc
+        end
+        if anim.extra then
+            if anim.extra.frames then
+                local frames_passed = 0
+                if jkr then
+                    if anim.extra.individual then
+                        jkr.extra = jkr.extra or {}
+                        if anim.extra.immediate then
+                            if jkr.extra.target and (animpos.extra.x + (not anim.extra.verticframes and animpos.extra.y*(anim.extra.frames_per_row or anim.extra.frames) or 0)) ~= jkr.extra.target then
+                                frames_passed = 1
+                            end
+                        else
+                            if jkr.extra then
+                                jkr.extra.t = jkr.extra.t or (anim.extra.t and (anim.extra.t - dt)) or (anim.t and (anim.t - dt)) or 0
+                                jkr.extra.t = jkr.extra.t + dt
+                                frames_passed = math.floor(jkr.extra.t / (1/(jkr.extra.fps or anim.extra.fps or 10)))
+                                if frames_passed > 0 then
+                                    jkr.extra.t = jkr.extra.t - frames_passed/(jkr.extra.fps or anim.extra.fps or 10)
+                                end
+                            end
+                        end
+                    end
+                else
+                    if anim.extra.immediate then
+                        if animpos.extra and animpos.extra.x ~= anim.extra.target and not anim.extra.individual then
+                            frames_passed = 1
+                    end
+                    else
+                    anim.extra.t = anim.extra.t or (anim.t and (anim.t - dt)) or 0
+                    anim.extra.t = anim.extra.t + dt
+                    frames_passed = math.floor(anim.extra.t / (1/(anim.extra.fps or 10)))
+                    if frames_passed > 0 then
+                        anim.extra.t = anim.extra.t - frames_passed/(anim.extra.fps or 10)
+                            if anim.extra.individual then
+                                frames_passed = 0
+                            end
+                        end
+                    end
+                end
+                if frames_passed > 0 then 
+                    if not animpos.extra then--Custom fix to prevent crash in Balatro Multiplayer in a sandbox play- idk why oops_all_6s didnt have animpos.extra, but if I give it to it it works
+                        animpos.extra = {x = 0, y = 0, atlas = "aura_"..k.."_extra"}
+                    end
+                    local loc = animpos.extra.x
+                    if not anim.extra.verticframes then
+                        loc = loc + animpos.extra.y*(anim.extra.frames_per_row or anim.extra.frames)
+                    end
+                    loc = loc - ((jkr and jkr.extra.start_frame) or anim.extra.start_frame or 0)
+                    if jkr and jkr.extra and (jkr.extra.target or jkr.extra.fps) and anim.extra.individual then
+                        if jkr.extra.target then
+                            if anim.extra.immediate then
+                                loc = jkr.extra.target
+                                else
+                                local til_target = jkr.extra.target - loc
+                                if til_target < 0 then
+                                    til_target = til_target + (jkr.extra.frames or anim.extra.frames)
+                                end
+                                if til_target >= frames_passed then
+                                    loc = loc + frames_passed
+                                else
+                                    if jkr.extra.remaining_triggers then
+                                        local targets_passed = math.floor((frames_passed - til_target) / (jkr.extra.frames or anim.extra.frames)) + 1
+                                        if targets_passed > jkr.extra.remaining_triggers then
+                                            loc = jkr.extra.target
+                                            jkr.extra.remaining_triggers = nil
+                                        else
+                                            loc = loc + (frames_passed % (jkr.extra.frames or anim.extra.frames))
+                                            jkr.extra.remaining_triggers = jkr.extra.remaining_triggers - targets_passed
+                                        end
+                                    elseif jkr.extra.escape_target and til_target == 0 then
+                                        loc = loc + math.min(frames_passed, jkr.extra.frames or anim.extra.frames)
+                                    else
+                                        loc = jkr.extra.target
+                                    end
+                                    if jkr.extra.remaining_triggers and jkr.extra.remaining_triggers <= 0 then jkr.extra.remaining_triggers = nil end
+                                    jkr.extra.escape_target = false
+                                end
+                            end
+                        else
+                            loc = loc + frames_passed
+                        end
+                    elseif anim.extra.target then
+                        if anim.extra.immediate then
+                            loc = anim.extra.target
+                        else
+                            local til_target = anim.extra.target - loc
+                            if til_target < 0 then
+                                til_target = til_target + anim.extra.frames
+                            end
+                            if til_target >= frames_passed then
+                                loc = loc + frames_passed
+                            else
+                                if anim.extra.remaining_triggers then
+                                    local targets_passed = math.floor((frames_passed - til_target) / anim.extra.frames) + 1
+                                    if targets_passed > anim.extra.remaining_triggers then
+                                        loc = anim.extra.target
+                                        anim.extra.remaining_triggers = nil
+                                    else
+                                        loc = loc + (frames_passed % anim.extra.frames)
+                                        anim.extra.remaining_triggers = anim.extra.remaining_triggers - targets_passed
+                                    end
+                                elseif anim.extra.escape_target and til_target == 0 then
+                                    loc = loc + math.min(frames_passed, anim.extra.frames)
+                                else
+                                    loc = anim.extra.target
+                                end
+                                if anim.extra.remaining_triggers and anim.extra.remaining_triggers <= 0 then anim.extra.remaining_triggers = nil end
+                                anim.extra.escape_target = false
+                            end
+                        end
+                    elseif not anim.extra.individual then
+                        loc = loc + frames_passed
+                    end
+                    if loc >= (jkr and jkr.extra and jkr.extra.frames or anim.extra.frames) then
+                        loc = loc % (jkr and jkr.extra and jkr.extra.frames or anim.extra.frames)
+                        if k == "j_idol" then Aura.update_idol() end
+                    end
+                    loc = loc + ((jkr and jkr.extra.start_frame) or anim.extra.start_frame or 0)
+                    animpos.extra.x = loc%(anim.extra.frames_per_row or anim.extra.frames)
+                    if not anim.extra.verticframes then
+                        animpos.extra.y = math.floor(loc / (anim.extra.frames_per_row or anim.extra.frames))
+                    end
+                end
+            end
+            if anim.extra.verticframes then
+                if not jkr then
+                    anim.extra.verticframest = anim.extra.verticframest or (anim.extra.t and (anim.extra.t - dt)) or (anim.t and (anim.t - dt)) or 0
+                    anim.extra.verticframest = anim.extra.verticframest + dt
+                    local frames_passed = math.floor(anim.extra.verticframest / (1/(anim.extra.verticfps or 10)))
+                    if frames_passed > 0 then
+                        anim.extra.verticframest = anim.extra.verticframest - frames_passed/(anim.extra.verticfps or 10)
+                        anim.extra.verticloc = anim.extra.verticloc or 0
+                        anim.extra.verticloc = anim.extra.verticloc + frames_passed
+                        if anim.extra.verticloc >= anim.extra.verticframes + (anim.extra.start_verticframe or 0) then anim.extra.verticloc = anim.extra.start_verticframe or 0 end
+                    end
+                end
+                animpos.extra.y = anim.extra.verticloc
+            end
         end
     end
 end
@@ -972,6 +1053,7 @@ function Game:update(dt)
         AnimatedJokers,
         AnimatedConsumeables,
         AnimatedVouchers,
+        AnimatedEnchancements,
     }
     for _, AnimDict in pairs(AnimatedDictionaries) do
         for k, v in pairs(AnimDict) do
@@ -1044,7 +1126,7 @@ local css = Card.set_sprites
 function Card:set_sprites(c, f)
     css(self, c, f)
     local anim = self.config.center.anim
-    if next(anim or {}) ~= nil then
+    if next(anim or {}) ~= nil and (self.config.center.discovered or self.bypass_discovery_center) then
         anim.IncorrectAtlas = CheckAtlas(self.config.center)
         if not anim.IncorrectAtlas then
             self.children.center:set_sprite_pos(self.config.center.animpos)
@@ -1056,7 +1138,7 @@ function Card:set_sprites(c, f)
                 self.children.floating_sprite.states.drag = self.states.drag
                 self.children.floating_sprite.states.collide.can = false
             end
-            if self.config.center and self.config.center.animpos and self.config.center.animpos.extra and self.config.center.animpos.extra.atlas and (self.config.center.discovered or self.bypass_discovery_center) and not (self.children.front or anim.extrasoul) then
+            if self.config.center and self.config.center.animpos and self.config.center.animpos.extra and self.config.center.animpos.extra.atlas and not (self.children.front or anim.extrasoul) then
                 self.children.front = Sprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ASSET_ATLAS[self.config.center.animpos.extra.atlas], self.config.center.animpos.extra)
                 self.children.front.states.hover = self.states.hover
                 self.children.front.states.click = self.states.click
@@ -1226,6 +1308,13 @@ function Card:init(x,y,w,h,card,center,params)
     if self.config.center_key == "j_drivers_license" then
         Aura.update_drivers_license(true)
     end
+    if self.config.center_key == "j_trading" then
+        if pseudorandom("aura_trading_EX") < 1/10 then
+            Aura.add_individual(self)
+            self.animation.target = AuraTradingCards[11].EX.pos-1
+            self.animation.EX = true
+        end
+    end
 end
 
 --Castle, Mail, Ancient & Idol
@@ -1262,12 +1351,38 @@ end
 function Aura.seal_sprite_order(seal)
     if seal == "Gold" then
         return 1
-    elseif seal == 'Purple' then
+    elseif seal == "Purple" then
         return 2
-    elseif seal == 'Red' then
+    elseif seal == "Red" then
         return 3
-    elseif seal == 'Blue' then
+    elseif seal == "Blue" then
         return 4
+    elseif seal == "poke_pink_seal" then
+        return 5
+    elseif seal == "poke_silver" then
+        return 6
+    elseif seal == "artb_brick" then
+        return 7
+    elseif seal == "artb_button" then
+        return 8
+    elseif seal == "artb_ouroboros" then
+        return 9
+    elseif seal == "cry_green" then
+        return 10
+    elseif seal == "cry_azure" then
+        return 11
+    elseif seal == "unstb_spades" then
+        return 12
+    elseif seal == "unstb_hearts" then
+        return 13
+    elseif seal == "unstb_clubs" then
+        return 14
+    elseif seal == "unstb_diamonds" then
+        return 15
+    elseif seal == "unstb_face" then
+        return 16
+    elseif seal == "unstb_heal" then
+        return 17
     else
         return 0
     end
@@ -1291,9 +1406,14 @@ end
 function Aura.update_trading(self, StartNumber)
     local anim_order = {}
     local count = 0
+    local isEX = false
     for k, v in pairs(AuraTradingCards) do
         anim_order[count] = k
         count = count + 1
+        if v.EX and v.EX.pos and v.EX.pos == StartNumber then
+            StartNumber = k
+            isEX = true
+        end
     end
     pseudoshuffle(anim_order, pseudoseed("aura_trading"))
     --force StartNumber to be first
@@ -1302,7 +1422,8 @@ function Aura.update_trading(self, StartNumber)
             anim_order[0], anim_order[i] = anim_order[i], anim_order[0]
         end
     end
-    self.animation = {target = anim_order[0] and anim_order[0] - 1 or 10, trading_index = 0, trading_order = anim_order}
+    local trading_target = isEX and AuraTradingCards[StartNumber].EX.pos -1 or StartNumber -1
+    self.animation = {target = trading_target, trading_index = 0, trading_order = anim_order, EX = isEX}
 end
 
 function Aura.update_castle()
@@ -1577,7 +1698,14 @@ function Card:calculate_joker(context)
                 Aura.add_individual(self)
                 self.animation.trading_index = self.animation.trading_index + 1
                 if self.animation.trading_index > #self.animation.trading_order then self.animation.trading_index = 0 end
-                self.animation.target = self.animation.trading_order[self.animation.trading_index] and self.animation.trading_order[self.animation.trading_index] - 1 or 10
+                local trading_target = self.animation.trading_order[self.animation.trading_index] and self.animation.trading_order[self.animation.trading_index] or 11
+                if AuraTradingCards[trading_target].EX and (pseudorandom("aura_trading_EX") < 1/10) then
+                    trading_target = AuraTradingCards[trading_target].EX.pos
+                    self.animation.EX = true
+                else
+                    self.animation.EX = false
+                end
+                self.animation.target = trading_target - 1
                 self:juice_up(0.3, 0.3)
                 delay(0.075*G.SPEEDFACTOR)
                 self:flip()
@@ -1664,7 +1792,7 @@ function Card:calculate_joker(context)
     end
 
     --Ramen
-    if self.ability.name == "Ramen" and context.discard and not context.blueprint then
+    --[[if self.ability.name == "Ramen" and context.discard and not context.blueprint then
         G.E_MANAGER:add_event(Event({
             func = (function()
                 Aura.add_individual(self)
@@ -1672,7 +1800,7 @@ function Card:calculate_joker(context)
                 return true
             end)
         }))
-    end
+    end]]
 
     --Popcorn
     if self.ability.name == "Popcorn" and context.end_of_round and not context.blueprint then
@@ -1821,8 +1949,23 @@ function Card:set_seal(seal, silent, immediate)
     Aura.ss(self,seal,silent,immediate)
 end
 
---Detecting Lucky Cards for oops
 
+--Cleaning animation data when changing enhancements
+local csa = Card.set_ability
+function Card:set_ability(center, initial, delay_sprites)
+    csa(self, center, initial, delay_sprites)
+    if (not center.anim or center.key == ("m_bonus" or "m_mult")) and self.animation then
+        self.animation = nil
+        for i = 1, #AnimatedIndividuals do
+            if AnimatedIndividuals[i] == self then
+                table.remove(AnimatedIndividuals, i)
+            end
+        end
+    end
+end
+
+--Detecting Lucky Cards for oops
+--And load Mult Cards
 local gcm = Card.get_chip_mult
 
 function Card:get_chip_mult()
@@ -1830,6 +1973,49 @@ function Card:get_chip_mult()
     if self.ability.effect == "Lucky Card" then
         Aura.Trigger_oops_all_6s()
     end
+    if self.ability.effect == "Mult Card" then
+        Aura.add_individual(self)
+        self.animation.animation_loaded = true
+    end
+    return ret
+end
+
+--Loading Bonus Cards
+local gcb = Card.get_chip_bonus
+function Card:get_chip_bonus()
+    local ret = gcb(self)
+    if self.ability.effect == "Bonus Card" then
+        Aura.add_individual(self)
+        self.animation.animation_loaded = true
+    end
+    return ret
+end
+
+--Triggering Mult and Bonus Cards
+local cest = card_eval_status_text
+function card_eval_status_text(c, eval_type, a, p, d, e)
+    if c.animation and c.animation.animation_loaded then
+        if eval_type == "chips" and c.ability.effect == "Bonus Card" then
+            G.E_MANAGER:add_event(Event({
+                func = (function()
+                    Aura.add_individual(c)
+                    c.animation = {target = 0, remaining_triggers = (c.animation.remaining_triggers or 0) + 1, fps = 16*(G.SPEEDFACTOR) }
+                    return true
+                end)
+            }))
+            c.animation.animation_loaded = false
+        elseif eval_type == "mult" and c.ability.effect == "Mult Card" then
+            G.E_MANAGER:add_event(Event({
+                func = (function()
+                    Aura.add_individual(c)
+                    c.animation = {target = (((c.config.center.animpos.y or 0) + 1 ) % 5) * 13, fps = 16*(G.SPEEDFACTOR) }
+                    return true
+                end)
+            }))
+            c.animation.animation_loaded = false
+        end
+    end
+    local ret = cest(c, eval_type, a, p, d, e)
     return ret
 end
 
