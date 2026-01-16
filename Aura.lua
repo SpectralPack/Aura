@@ -1768,18 +1768,6 @@ function Card:calculate_joker(context)
         self.animation = { target = math.min( 10, math.floor((self.ability.invis_rounds * (AnimatedJokers.j_invisible.frames-1) / self.ability.extra) + 0.5)) }
     end
 
-    --Turtle Bean
-    if self.ability.name == "Turtle Bean" and context.end_of_round and not context.blueprint then
-        G.E_MANAGER:add_event(Event({
-            func = (function()
-                Aura.add_individual(self)
-                self.animation = { extra = { target =  5 - self.ability.extra.h_size } }
-                return true
-            end)
-        }))
-
-    end
-
     --Ice Cream
     if self.ability.name == "Ice Cream" and context.cardarea == G.jokers and context.after and not context.blueprint then
         G.E_MANAGER:add_event(Event({
