@@ -1871,6 +1871,7 @@ function Card:calculate_joker(context)
             func = (function()
                 Aura.add_individual(self)
                 self.animation = { target = 0, remaining_triggers = (self.animation and self.animation.remaining_triggers or 0) + 1, fps = 10*(G.SPEEDFACTOR/G.SETTINGS.GAMESPEED) }
+                return true
             end)
         }))
     end
