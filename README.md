@@ -8,13 +8,13 @@ Aura is a mod that seeks to add animations to every Joker in Balatro.
 **1/18** Spectral completed,
 **2/8** Enhancedments completed,
 **24/24** Tags completed,
+**1/24** Collabs completed
+
+Aura doesnt require [Malverk](https://github.com/Eremel/Malverk) to work, but if installed it behave like any other texture pack and allow you disable and enable any animation one by one.
+Currently the interace for selecting which animation to enable has a formating error and most of the options fall outside the screen, but it will be fixed soon.
 
 More info on the completed animations in the [wiki](https://balatromods.miraheze.org/wiki/Aura).
 
 If you want to contribute or if you have any questions, there is a [discord channel](https://discord.com/channels/1116389027176787968/1249486500811378718) on the official balatro server.
-
-Known Bugs:
-- Crashes when opening [Malverk](https://github.com/Eremel/Malverk) settings
-  - May animate cards improperly/which shouldn't animate with Malverk
 
 Artists and progress for each Joker are detailed [here](https://docs.google.com/spreadsheets/d/174gWOyMyTUSuESsiqWSt5OYEr8mcDdAM2Ig9oDxMTlQ/edit?gid=0#gid=0).
