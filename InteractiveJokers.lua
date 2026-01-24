@@ -188,10 +188,17 @@ function Card:calculate_joker(context)
                 self.animation.trading_index = self.animation.trading_index + 1
                 if self.animation.trading_index > #self.animation.trading_order then self.animation.trading_index = 0 end
                 local trading_target = self.animation.trading_order[self.animation.trading_index] and self.animation.trading_order[self.animation.trading_index] or 11
+                --Update atlas if needed
+                if (AuraTradingCards[trading_target].atlas or (Malverk and "alt_tex_" or "").."aura_j_trading") ~= self.config.center.atlas then
+                    self.config.center.atlas = AuraTradingCards[trading_target].atlas or (Malverk and "alt_tex_" or "").."aura_j_trading"
+                    self:set_sprites(self.config.center)
+                end
+                --Determine if EX or regular version is obtained
                 if AuraTradingCards[trading_target].EX and (pseudorandom("aura_trading_EX") < 1/10) then --10% chance for EX version only if EX version exists
                     trading_target = AuraTradingCards[trading_target].EX.pos
                     self.animation.EX = true
                 else
+                    trading_target = AuraTradingCards[trading_target].pos and AuraTradingCards[trading_target].pos or trading_target
                     self.animation.EX = false
                 end
                 self.animation.target = trading_target - 1
