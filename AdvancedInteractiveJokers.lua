@@ -74,29 +74,36 @@ function Aura.update_flash(self, StartLetter)
     self.animation = {target = anim_order[0], flash_index = 0, flash_order = anim_order}
 end
 --Function for setting Trading card order. Called in Aura.AddIndividual()
-function Aura.update_trading(self, StartNumber)
+function Aura.update_trading(self, StartPos, StartAtlas)
     --Gather all trading cards positions
     local anim_order = {}
     local count = 0
     local isEX = false
+    local FirstCard = StartPos
     for k, v in pairs(AuraTradingCards) do
         anim_order[count] = k
         count = count + 1
-        if v.EX and v.EX.pos and v.EX.pos == StartNumber then -- If starting card is the EX of another, set original one as starting card
-            StartNumber = k
+        --Detect which card is the starting one
+        if StartAtlas == (v.atlas or (Malverk and "alt_tex_" or "").."aura_j_trading") then -- Matching atlases in case another mod injects its own cards
+            if v.EX and v.EX.pos and v.EX.pos == StartPos then
+                FirstCard = k
             isEX = true
+            end
+            if v.pos == StartPos then
+                FirstCard = k
+            end
         end
     end
     --Shuffle them
     pseudoshuffle(anim_order, pseudoseed("aura_trading"))
-    --Force StartNumber to be first (it will be 11 when a new Trading card is created, and whatever number it had when cloned)
+    --Force FirstCard to be first (it will be 11 when a new Trading card is created, and whatever number it had when cloned)
     for i = 1, #anim_order do
-        if anim_order[i] == StartNumber then
+        if anim_order[i] == FirstCard then
             anim_order[0], anim_order[i] = anim_order[i], anim_order[0]
         end
     end
     --Store animation data. This includes if the starting card is an EX
-    local trading_target = isEX and AuraTradingCards[StartNumber].EX.pos -1 or StartNumber -1
+    local trading_target = ((isEX and AuraTradingCards[FirstCard].EX.pos) or (AuraTradingCards[FirstCard].pos and AuraTradingCards[FirstCard].pos) or StartPos) - 1
     self.animation = {target = trading_target, trading_index = 0, trading_order = anim_order, EX = isEX}
 end
 

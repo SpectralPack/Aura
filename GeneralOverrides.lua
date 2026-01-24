@@ -69,9 +69,10 @@ function Card:init(x,y,w,h,card,center,params)
     end
     --Check if Trading Card gets an EX animation on creation, do not animate if not
     if self.config.center_key == "j_trading" then
-        if pseudorandom("aura_trading_EX") < 1/10 then
+        local default_num = self.config.center.animpos.x + (self.config.center.animpos.y * AnimatedJokers.j_trading.frames_per_row)
+        if AuraTradingCards[default_num].EX and pseudorandom("aura_trading_EX") < 1/10 then
             Aura.add_individual(self)
-            self.animation.target = AuraTradingCards[11].EX.pos-1
+            self.animation.target = AuraTradingCards[default_num].EX.pos-1
             self.animation.EX = true
         end
     end
@@ -419,10 +420,6 @@ function SMODS.create_mod_badges(obj, badges)
             --Replace old badge with new one
             badges[Our_badge].nodes[1].nodes[2].config.object:remove()
             badges[Our_badge] = Aura_badge
-        else
-            --Remove badge if no credits to show
-            badges[Our_badge].nodes[1].nodes[2].config.object:remove()
-            table.remove(badges, Our_badge)
         end
 	end
 end

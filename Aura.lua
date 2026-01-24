@@ -571,11 +571,15 @@ function Aura.add_individual(card, loaded)
                 Aura.update_flash(card, (card.config.center.animpos.x + (13*card.config.center.animpos.y)))
             end
         end
-        if card.config.center.key == "j_trading" and not loaded then
-            if card.animation then
-                Aura.update_trading(card, card.animation.trading_order[card.animation.trading_index])
+        if card.config.center.key == "j_trading" then
+            --If not loaded from a save, randomize the order. If loaded, make sure it has the correct target and most importantly atlas (if another mod injects its own cards)
+            if not loaded then
+                Aura.update_trading(card, (card.config.center.animpos.x + (12*card.config.center.animpos.y) + 1), card.config.center.atlas)
             else
-                Aura.update_trading(card, (card.config.center.animpos.x + (12*card.config.center.animpos.y) + 1))
+                local trading_target = card.animation.trading_order[card.animation.trading_index] and card.animation.trading_order[card.animation.trading_index] or 11
+                card.config.center.atlas = AuraTradingCards[trading_target].atlas or (Malverk and "alt_tex_" or "").."aura_j_trading"
+                card:set_sprites(card.config.center)
+                card.animation.target = ((card.animation.EX and AuraTradingCards[trading_target].EX.pos) or (AuraTradingCards[trading_target].pos and AuraTradingCards[trading_target].pos) or trading_target) - 1
             end
         end
         --Find what kind of animaiton is suposed to have
