@@ -69,7 +69,7 @@ function Card:init(x,y,w,h,card,center,params)
     end
     --Check if Trading Card gets an EX animation on creation, do not animate if not
     if self.config.center_key == "j_trading" then
-        local default_num = self.config.center.animpos.x + (self.config.center.animpos.y * AnimatedJokers.j_trading.frames_per_row)
+        local default_num = self.config.center.animpos.x + (self.config.center.animpos.y * AnimatedJokers.j_trading.frames_per_row) + 1
         if AuraTradingCards[default_num].EX and pseudorandom("aura_trading_EX") < 1/10 then
             Aura.add_individual(self)
             self.animation.target = AuraTradingCards[default_num].EX.pos-1
