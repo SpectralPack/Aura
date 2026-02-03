@@ -10,7 +10,9 @@ function Aura.suit_sprite_order(suit)
     elseif suit == "six_Stars" then return 5 -- From Six Suits mod
     elseif suit == "paperback_Crowns" then return 6 -- From Paperback mod
     elseif suit == "paperback_Stars" then return 7 -- From Paperback mod
-    else return 8 end -- Unknown suit
+    elseif suit == "bunc_Fleurons" then return 8 -- From Bunco mod
+    elseif suit == "bunc_Halberds" then return 9 -- From Bunco mod
+    else return 10 end -- Unknown suit
 end
 --Rank Order for Mail & Idol
 function Aura.rank_sprite_order(rank)

@@ -232,7 +232,7 @@ function Card:calculate_joker(context)
         G.E_MANAGER:add_event(Event({
             func = (function()
                 Aura.add_individual(self)
-                self.animation = { target = math.floor((100 - self.ability.extra.chips) / 20) } --Divide frames for each 20 chips 
+                self.animation = { target = math.floor((100 - self.ability.extra.chips) / 5) } --Divide frames for each 20 chips 
                 return true
             end)
         }))
@@ -331,7 +331,6 @@ function Card:calculate_joker(context)
             func = (function()
                 Aura.add_individual(self)
                 self.animation = { target = 0, remaining_triggers = (self.animation and self.animation.remaining_triggers or 0) + 1, fps = 10*(G.SPEEDFACTOR/G.SETTINGS.GAMESPEED) } --Adapt fps to SpeedFactor but not to Game Speed
-                sendDebugMessage("Lucky Cat triggered animation. remaining_triggers: "..tostring(self.animation.remaining_triggers))
                 return true
             end)
         }))
@@ -343,7 +342,7 @@ function Card:calculate_joker(context)
             func = (function()
                 Aura.add_individual(self)
                 -- Toggle between idle frame 0 and 4
-                if self.config.center.animpos.extra.y == 0 then
+                if self.config.center.animpos_extra.y == 0 then
                     self.animation = { extra = { target = 4 } }
                 else
                     self.animation = { extra = { target = 0 } }
@@ -357,7 +356,6 @@ function Card:calculate_joker(context)
     if self.ability.name == "Hit the Road" and context.discard and not context.other_card.debuff and context.other_card:get_id() == 11 and not self.debuff and not context.blueprint then
         Aura.add_individual(self)
         self.animation = { target = 0, remaining_triggers = (self.animation and self.animation.remaining_triggers or 0) + 1 }
-        sendDebugMessage("Hit the Road animation triggered with "..(self.animation.remaining_triggers or 0).." remaining triggers.")
     end
 
     --Detect various jokers with probabilities that trigger Oops All 6s animation

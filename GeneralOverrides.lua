@@ -19,9 +19,9 @@ function Game:start_run(args)
             card.animation.t = nil
         end
         if card.animation and card.animation.extra and card.animation.extra.target and anim.extra.individual then
-            card.config.center.animpos.extra.x = ((anim.extra.start_frame or 0) + card.animation.extra.target)%(anim.extra.frames_per_row or anim.extra.frames)
+            card.config.center.animpos_extra.x = ((anim.extra.start_frame or 0) + card.animation.extra.target)%(anim.extra.frames_per_row or anim.extra.frames)
             if not anim.extra.verticframes then
-                card.config.center.animpos.extra.y = math.floor( ((anim.extra.start_frame or 0) + card.animation.extra.target) / (anim.extra.frames_per_row or anim.extra.frames) )
+                card.config.center.animpos_extra.y = math.floor( ((anim.extra.start_frame or 0) + card.animation.extra.target) / (anim.extra.frames_per_row or anim.extra.frames) )
             end
             card.animation.extra.t = nil
         end
@@ -69,7 +69,7 @@ function Card:init(x,y,w,h,card,center,params)
     end
     --Check if Trading Card gets an EX animation on creation, do not animate if not
     if self.config.center_key == "j_trading" then
-        local default_num = self.config.center.animpos.x + (self.config.center.animpos.y * AnimatedJokers.j_trading.frames_per_row)
+        local default_num = self.config.center.animpos.x + (self.config.center.animpos.y * AnimatedJokers.j_trading.frames_per_row) + 1
         if AuraTradingCards[default_num].EX and pseudorandom("aura_trading_EX") < 1/10 then
             Aura.add_individual(self)
             self.animation.target = AuraTradingCards[default_num].EX.pos-1
@@ -167,7 +167,7 @@ function Card:set_sprites(c, f)
             self.children.center:set_sprite_pos(self.config.center.animpos)
             --Set soul sprite data if needed. soul instead of extra
             if anim.extrasoul then
-                self.children.floating_sprite = Sprite(self.children.floating_sprite.T.x, self.children.floating_sprite.T.y, self.children.floating_sprite.T.w, self.children.floating_sprite.T.h, G.ASSET_ATLAS[self.config.center.animpos.extra.atlas], self.config.center.animpos.extra)
+                self.children.floating_sprite = Sprite(self.children.floating_sprite.T.x, self.children.floating_sprite.T.y, self.children.floating_sprite.T.w, self.children.floating_sprite.T.h, G.ASSET_ATLAS[self.config.center.atlas_extra], self.config.center.animpos_extra)
                 self.children.floating_sprite.role.draw_major = self
                 self.children.floating_sprite.states.hover = self.states.hover
                 self.children.floating_sprite.states.click = self.states.click
@@ -175,8 +175,8 @@ function Card:set_sprites(c, f)
                 self.children.floating_sprite.states.collide.can = false
             end
             --Set extra layer if needed and has not already been set
-            if self.config.center and self.config.center.animpos and self.config.center.animpos.extra and self.config.center.animpos.extra.atlas and not (self.children.front or anim.extrasoul) then
-                self.children.front = Sprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ASSET_ATLAS[self.config.center.animpos.extra.atlas], self.config.center.animpos.extra)
+            if self.config.center and self.config.center.animpos_extra and self.config.center.atlas_extra and not (self.children.front or anim.extrasoul) then
+                self.children.front = Sprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ASSET_ATLAS[self.config.center.atlas_extra], self.config.center.animpos_extra)
                 self.children.front.states.hover = self.states.hover
                 self.children.front.states.click = self.states.click
                 self.children.front.states.drag = self.states.drag
@@ -230,8 +230,8 @@ local cd = Card.draw
 function Card:draw(layer)
     if self.config.center.anim and self.config.center.anim.extrasoul then
         local x, y, w, h = self.children.floating_sprite.sprite:getViewport()
-        if x ~= (self.config.center.animpos.extra.x * 71) or y ~= (self.config.center.animpos.extra.y * 95) then
-            self.children.floating_sprite.sprite:setViewport( self.config.center.animpos.extra.x * 71, self.config.center.animpos.extra.y * 95, 71, 95 )
+        if x ~= (self.config.center.animpos_extra.x * 71) or y ~= (self.config.center.animpos_extra.y * 95) then
+            self.children.floating_sprite.sprite:setViewport( self.config.center.animpos_extra.x * 71, self.config.center.animpos_extra.y * 95, 71, 95 )
         end
     end
     cd(self,layer)--Original Card:draw function call
@@ -244,22 +244,11 @@ if Malverk then
         local card = ctc(area, texture_pack) --Original create_texture_card function call
         --Find what texture is being used
         local texture = AltTextures[TexturePacks[texture_pack].textures[1]]
-        if TexturePacks[texture_pack].dynamic_display and Malverk.config.texture_configs[texture_pack] then
-            local textures = SMODS.merge_lists({TexturePacks[texture_pack].textures, TexturePacks[texture_pack].toggle_textures})
-            local i = 1
-            while (not Malverk.config.texture_configs[texture_pack][textures[i]]) and i < #textures do
-                i = i + 1
-                if AltTextures[textures[i]].display_pos then texture = AltTextures[textures[i]] end
-            end
-        end
         --Find what pos corresponds to that texture
         local game_table = AltTextures_Utils.game_table[texture.set] or 'P_CENTERS'
         --If the texture was supoused to be animated, set the animpos
         if texture_pack == "texpack_aura_animated_jokers" then
-            card.children.center:set_sprite_pos(G[game_table][texture.display_pos or texture.keys[1]].animpos)
-        else
-            --If not, set the default pos
-            card.children.center:set_sprite_pos(G[game_table][texture.display_pos or texture.keys[1]].default_pos or G[game_table][texture.display_pos or texture.keys[1]].pos)
+            card.children.center:set_sprite_pos(G[game_table][--[[texture.display_pos or ]]texture.keys[1]].animpos)
         end
         return card
     end
@@ -420,6 +409,10 @@ function SMODS.create_mod_badges(obj, badges)
             --Replace old badge with new one
             badges[Our_badge].nodes[1].nodes[2].config.object:remove()
             badges[Our_badge] = Aura_badge
+        else
+            if obj and obj.anim and obj.anim.IncorrectAtlas then
+                badges[Our_badge] = nil --Remove badge if it isnt animated
+            end
         end
 	end
 end
