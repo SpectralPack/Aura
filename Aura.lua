@@ -54,7 +54,7 @@ AnimatedJokers = {
     j_clever = { order = 13, frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
     j_devious = { order = 14, frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
     j_crafty = { order = 15, frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
-    j_half = { order = 16, frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
+    j_half = { order = 16, py = 62, frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
     j_stencil = { order = 17, frames_per_row = 11, frames = 22, credits = {"chloe_cromslor", "SadCube"} },
     j_four_fingers = {},
     j_mime = {},
@@ -103,7 +103,7 @@ AnimatedJokers = {
     j_card_sharp = { order = 62, frames = 6, target = 0, verticframes = 11, verticfps = 5, credits = {"MRTorres"} },
     j_red_card = { order = 63, frames_per_row = 19, frames = 349, credits = {"Bard"} },
     j_madness = {}, -- Idea: randomize the time between laughs/eye twitches
-    j_square = { order = 65, frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
+    j_square = { order = 65, py = 71, frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
     j_seance = {}, -- todo: animate when triggered
     j_riff_raff = { order = 67, frames_per_row = 14, frames = 490, credits = {"chloe_cromslor"} },
     j_vampire = { order = 68, frames_per_row = 11, frames = 22, extra = { frames_per_row = 6, frames = 30 }, credits = {"Mincoiin", "chloe_cromslor"} },
@@ -377,6 +377,22 @@ SMODS.DeckSkins.collab_AU:add_palette({
     loc_txt = "High Contrast Animated",
     hc_default = true,
 })
+
+--Atlas for the backside of Half and Square Joker.
+SMODS.Atlas {
+    key = 'j_half_back',
+    px = 71,
+    py = 62,
+    disable_mipmap = true,
+    path = 'j_half_back.png'
+}
+SMODS.Atlas {
+    key = 'j_square_back',
+    px = 71,
+    py = 62,
+    disable_mipmap = true,
+    path = 'j_square_back.png'
+}
 
 --SETTING UP THE ATLASES FOR EVERYTHING
 
