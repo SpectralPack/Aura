@@ -219,7 +219,7 @@ function Card:calculate_joker(context)
                 Aura.add_individual(self)
                 self.animation = { target = 5 - (self.ability.loyalty_remaining or 0) }
                 self:juice_up(0.2,0.2)
-                play_sound("goldseal") --This sounds can be interpreted as a hole being punched in the card
+                play_sound("gold_seal") --This sounds can be interpreted as a hole being punched in the card
             end
         else
             Aura.add_individual(self)

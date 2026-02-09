@@ -50,6 +50,9 @@ function Card:load(cardTable, other_card)
         self.animation = cardTable.animation
         Aura.add_individual(self, true)
     end
+    if self.config.center.name == "Half Joker" and not AnimatedJokers.j_half.incorrectAtlas then
+        self.T.h = self.T.h * 1.7 / (95/62) --Fix half height when the card is loaded
+    end
 end
 
 --Detecting card being created to trigger various animations
@@ -163,6 +166,20 @@ function Card:set_sprites(c, f)
         --Check if atlas is correct
         anim.IncorrectAtlas = Aura.CheckAtlas(self.config.center)
         if not anim.IncorrectAtlas then
+            --Change the back side of half and square to custom ones
+            if self.config.center_key == 'j_half' then
+                --The vanilla correction isnt needed as the atlas has been made with the reduced height in mind
+                self.children.center.scale.y = self.children.center.scale.y * 1.7
+                --Change it only if it is from a vanilla deck
+                if self.children.back.atlas.name == "centers" then
+                    self.children.back.atlas = G.ASSET_ATLAS["aura_j_half_back"]
+                end
+            elseif self.config.center_key == 'j_square' then
+                --Change it only if it is from a vanilla deck
+                if self.children.back.atlas.name == "centers" then
+                    self.children.back.atlas = G.ASSET_ATLAS["aura_j_square_back"]
+                end
+            end
             --Set sprite position for animation
             self.children.center:set_sprite_pos(self.config.center.animpos)
             --Set soul sprite data if needed. soul instead of extra
@@ -235,6 +252,14 @@ function Card:draw(layer)
         end
     end
     cd(self,layer)--Original Card:draw function call
+end
+--Function for fixing the height of Half Joker from 55.88 relative pixels to 62 so the texture isnt stretched.
+local csa = Card.set_ability
+function Card:set_ability(c,i,ds)
+    csa(self,c,i,ds) --Original Card:set_ability function call
+    if c.name == "Half Joker" and not AnimatedJokers.j_half.incorrectAtlas then
+        self.T.h = self.T.h * 1.7 / (95/62)
+    end
 end
 
 --Funtion to make sure that the texture menu of Malverk shows the correct pos for all cards after animation messed it up
