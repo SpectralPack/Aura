@@ -4,12 +4,12 @@
 local gsr = Game.start_run
 function Game:start_run(args)
     --Make sure no Individual from previous runs are carried over
-    AnimatedIndividuals = {}
-    --Original Game:start_run function call. It loads the saved AnimatedIndividuals if loading a saved run
+    Aura.AnimatedIndividuals = {}
+    --Original Game:start_run function call. It loads the saved Aura.AnimatedIndividuals if loading a saved run
     gsr(self,args)
     --Resetting all animated individuals to their targets
-    for i = 1, #AnimatedIndividuals do
-        local card = AnimatedIndividuals[i]
+    for i = 1, #Aura.AnimatedIndividuals do
+        local card = Aura.AnimatedIndividuals[i]
         local anim = card.config.center.anim
         if card.animation and card.animation.target and anim.individual then
             card.config.center.animpos.x = ((anim.start_frame or 0) + card.animation.target)%(anim.frames_per_row or anim.frames)
@@ -50,7 +50,7 @@ function Card:load(cardTable, other_card)
         self.animation = cardTable.animation
         Aura.add_individual(self, true)
     end
-    if self.config.center.name == "Half Joker" and not AnimatedJokers.j_half.incorrectAtlas then
+    if self.config.center.name == "Half Joker" and not Aura.AnimatedJokers.j_half.incorrectAtlas then
         self.T.h = self.T.h * 1.7 / (95/62) --Fix half height when the card is loaded
     end
 end
@@ -72,10 +72,10 @@ function Card:init(x,y,w,h,card,center,params)
     end
     --Check if Trading Card gets an EX animation on creation, do not animate if not
     if self.config.center_key == "j_trading" then
-        local default_num = self.config.center.animpos.x + (self.config.center.animpos.y * AnimatedJokers.j_trading.frames_per_row) + 1
-        if AuraTradingCards[default_num].EX and pseudorandom("aura_trading_EX") < 1/10 then
+        local default_num = self.config.center.animpos.x + (self.config.center.animpos.y * Aura.AnimatedJokers.j_trading.frames_per_row) + 1
+        if Aura.TradingCards[default_num].EX and pseudorandom("aura_trading_EX") < 1/10 then
             Aura.add_individual(self)
-            self.animation.target = AuraTradingCards[default_num].EX.pos-1
+            self.animation.target = Aura.TradingCards[default_num].EX.pos-1
             self.animation.EX = true
         end
     end
@@ -111,14 +111,14 @@ function copy_card(other, new_card, card_scale, playing_card, strip_edition)
     Aura.update_drivers_license()
     return ret_card
 end
---Make sure that when removing a card, it is also removed from AnimatedIndividuals if it had individual animation. Also update Driver's License in case an enhancement was removed
+--Make sure that when removing a card, it is also removed from Aura.AnimatedIndividuals if it had individual animation. Also update Driver's License in case an enhancement was removed
 local cr = Card.remove
 function Card:remove()
     cr(self)
     if self.animation then
-        for i = 1, #AnimatedIndividuals do
-            if AnimatedIndividuals[i] == self then
-                table.remove(AnimatedIndividuals, i)
+        for i = 1, #Aura.AnimatedIndividuals do
+            if Aura.AnimatedIndividuals[i] == self then
+                table.remove(Aura.AnimatedIndividuals, i)
             end
         end
     end
@@ -191,9 +191,15 @@ function Card:set_sprites(c, f)
                 self.children.floating_sprite.states.drag = self.states.drag
                 self.children.floating_sprite.states.collide.can = false
             end
-            --Set extra layer if needed and has not already been set
-            if self.config.center and self.config.center.animpos_extra and self.config.center.atlas_extra and not (self.children.front or anim.extrasoul) then
-                self.children.front = Sprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ASSET_ATLAS[self.config.center.atlas_extra], self.config.center.animpos_extra)
+            --Set extra layer if needed and has not already been set. For Certificate, set apropiate seal instead.
+            if (self.config.center and self.config.center.animpos_extra and self.config.center.atlas_extra and not (self.children.front or anim.extrasoul)) or self.config.center_key == "j_certificate" then
+                local atlas = self.config.center.atlas_extra
+                local pos = self.config.center.animpos_extra
+                if self.config.center_key == "j_certificate" then
+                    local seal = self.animation and self.animation.current_seal or nil
+                    atlas, pos = Aura.CertificateSeals(seal)
+                end
+                self.children.front = Sprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ASSET_ATLAS[atlas], pos)
                 self.children.front.states.hover = self.states.hover
                 self.children.front.states.click = self.states.click
                 self.children.front.states.drag = self.states.drag
@@ -227,15 +233,15 @@ function get_front_spriteinfo(_front)
     if _front and _front.suit and G.SETTINGS.CUSTOM_DECK and G.SETTINGS.CUSTOM_DECK.Collabs then
 		local collab = G.SETTINGS.CUSTOM_DECK.Collabs[_front.suit]
         --Check if it has to be animated
-        if collab and AnimatedDeckSkins[collab] then
+        if collab and Aura.AnimatedDeckSkins[collab] then
             local value = _front.value
-            if AnimatedDeckSkins[collab][value] then
+            if Aura.AnimatedDeckSkins[collab][value] then
                 --If the "atlas" is a table, each key within it corresponds to a palette. If it is a string, it aplies to all palettes
-                local new_atlas = AnimatedDeckSkins[collab][value].atlas[G.SETTINGS.colour_palettes[_front.suit]] or (type(AnimatedDeckSkins[collab][value].atlas) == "string" and AnimatedDeckSkins[collab][value].atlas or nil)
-                if new_atlas and AnimatedDeckSkins[collab][value].animpos then
+                local new_atlas = Aura.AnimatedDeckSkins[collab][value].atlas[G.SETTINGS.colour_palettes[_front.suit]] or (type(Aura.AnimatedDeckSkins[collab][value].atlas) == "string" and Aura.AnimatedDeckSkins[collab][value].atlas or nil)
+                if new_atlas and Aura.AnimatedDeckSkins[collab][value].animpos then
                     --Set atlas and animpos
                     atlas = G.ASSET_ATLAS[new_atlas]
-                    pos = AnimatedDeckSkins[collab][value].animpos
+                    pos = Aura.AnimatedDeckSkins[collab][value].animpos
                 end
             end
         end
@@ -245,7 +251,7 @@ end
 --As the soul pos was never made to be changed, it is necesary to update manually its viewport when changing frames
 local cd = Card.draw
 function Card:draw(layer)
-    if self.config.center.anim and self.config.center.anim.extrasoul then
+    if self.config.center.anim and self.config.center.anim.extrasoul and not self.config.center.anim.IncorrectAtlas then
         local x, y, w, h = self.children.floating_sprite.sprite:getViewport()
         if x ~= (self.config.center.animpos_extra.x * 71) or y ~= (self.config.center.animpos_extra.y * 95) then
             self.children.floating_sprite.sprite:setViewport( self.config.center.animpos_extra.x * 71, self.config.center.animpos_extra.y * 95, 71, 95 )
@@ -257,7 +263,7 @@ end
 local csa = Card.set_ability
 function Card:set_ability(c,i,ds)
     csa(self,c,i,ds) --Original Card:set_ability function call
-    if c.name == "Half Joker" and not AnimatedJokers.j_half.incorrectAtlas then
+    if c.name == "Half Joker" and not Aura.AnimatedJokers.j_half.incorrectAtlas then
         self.T.h = self.T.h * 1.7 / (95/62)
     end
 end
@@ -375,8 +381,8 @@ function SMODS.create_mod_badges(obj, badges)
             else
                 --Trading card has special credits, as each art has its own artist
                 local tradingNumber = (obj.animation and obj.animation.trading_order and obj.animation.trading_order[obj.animation.trading_index]) or 11
-                local trading_card = AuraTradingCards[tradingNumber]
-                local trading_credits = (obj.animation and obj.animation.EX and AuraTradingCards[tradingNumber].EX and AuraTradingCards[tradingNumber].EX.credits) or AuraTradingCards[tradingNumber].credits
+                local trading_card = Aura.TradingCards[tradingNumber]
+                local trading_credits = (obj.animation and obj.animation.EX and Aura.TradingCards[tradingNumber].EX and Aura.TradingCards[tradingNumber].EX.credits) or Aura.TradingCards[tradingNumber].credits
                 for i = 1, #trading_credits do
                     strings[#strings + 1] = "Art #"..tostring(tradingNumber)..(obj.animation and obj.animation.EX and " EX" or "").." by: "..trading_credits[i]
                 end
@@ -445,10 +451,10 @@ end
 local chpop = G.UIDEF.card_h_popup
 function G.UIDEF.card_h_popup(card)
     --Check if it is trading card
-    if card.ability_UIBox_table and card.config and card.config.center and card.config.center.key == "j_trading" and not AnimatedJokers.j_trading.IncorrectAtlas and card.config.center.discovered then
+    if card.ability_UIBox_table and card.config and card.config.center and card.config.center.key == "j_trading" and not Aura.AnimatedJokers.j_trading.IncorrectAtlas and card.config.center.discovered then
         --Find which name to show. Add EX to the end if needed
         local tradingNumber = card.animation and card.animation.trading_order[card.animation.trading_index] or 11
-        local trading_name = AuraTradingCards[tradingNumber].name or "Unknown Trading Card"
+        local trading_name = Aura.TradingCards[tradingNumber].name or "Unknown Trading Card"
         trading_name = '"'..trading_name..(card.animation and card.animation.EX and ' EX"' or '"')
         --set the name just bellow the original name
         card.ability_UIBox_table.name[2] = {
