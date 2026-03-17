@@ -218,13 +218,13 @@ Aura.AnimatedTarots = {
 Aura.AnimatedPlanets = {
     c_mercury = { order = 1, frames = 24, credits = {"Bard"} },
     c_venus = { order = 2, frames = 24, credits = {"Bard"} },
-    c_earth = { order = 3, frames = 24, credits = {"Bard"} },
+    c_earth = { order = 3, frames = 24, verticframes = 16, credits = {"Hoja", "Bard"} },
     c_mars = { order = 4, frames = 24, credits = {"Bard"} },
     c_jupiter = { order = 5, frames = 24, credits = {"Bard"} },
     c_saturn = { order = 6, frames = 24, credits = {"Bard"} },
-    c_uranus = { order = 7, frames = 24, credits = {"Bard"} },
+    c_uranus = { order = 7, frames = 24, verticframes = 19, credits = {"Hoja", "Bard"} },
     c_neptune = { order = 8, frames = 24, credits = {"Bard"} },
-    c_pluto = { order = 9, frames = 24, credits = {"Bard"} },
+    c_pluto = { order = 9, frames = 24, verticframes = 15, credits = {"Hoja", "Bard"} },
     c_planet_x = { order = 10, frames = 24, credits = {"Bard"} },
     c_ceres = { order = 11, frames = 24, credits = {"Bard"} },
     c_eris = { order = 12, frames = 24, credits = {"Bard"} }
