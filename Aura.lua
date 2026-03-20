@@ -1118,5 +1118,7 @@ assert(SMODS.load_file('InteractiveJokers.lua'))()
 --Functions for jokers that require more information to determine their animation
 assert(SMODS.load_file('AdvancedInteractiveJokers.lua'))()
 
---Ugly fix for the extra layers in malverk. Needs improving
-assert(SMODS.load_file('MalverkExtraFixUgly.lua'))()
+if Malverk then
+    --Ugly fix for the extra layers in malverk. Needs improving
+    assert(SMODS.load_file('MalverkExtraFixUgly.lua'))()
+end
