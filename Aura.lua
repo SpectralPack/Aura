@@ -36,9 +36,10 @@ SMODS.Mods.Aura.config_tab = function()
 	}
 end
 
-
+--Dictionary to store shots of animation related stuff
+Aura = {}
 --DICTIONARIES FOR ALL THE ANIMATION DATA
-AnimatedJokers = {
+Aura.AnimatedJokers = {
     j_joker = { order = 1, frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
     j_greedy_joker = { order = 2, frames_per_row = 6, frames = 12, extra = { frames_per_row = 11, frames = 22 }, credits = {"Bard", "chloe_cromslor"} },
     j_lusty_joker = { order = 3, frames_per_row = 5, frames = 20, extra = { frames_per_row = 11, frames = 22 }, credits = {"Bard", "chloe_cromslor"} },
@@ -150,7 +151,7 @@ AnimatedJokers = {
     j_sock_and_buskin = { order = 108, frames_per_row = 5, frames = 30, credits = {"MRTorres"} },
     j_swashbuckler = { order = 109, frames_per_row = 11, frames = 22, credits = {"chloe_cromslor"} },
     j_troubadour = {},
-    j_certificate = { order = 111, frames_per_row = 7, frames = 28, individual = true, extra = { frames_per_row = 6, frames = 13, individual = true, immediate = true }, credits = {"chloe_cromslor"} },--, "MightyKingVideo", "SadCube"
+    j_certificate = { order = 111, frames_per_row = 7, frames = 28, individual = true, extra = {}, credits = {"chloe_cromslor"} },--, "MightyKingVideo", "SadCube"
     j_smeared = { order = 112, frames_per_row = 11, frames = 22, extra = { frames = 10 }, credits = {"SadCube", "chloe_cromslor"} },
     j_throwback = { order = 113, verticframes = 18, frames = 100, extra = { frames_per_row = 11, frames = 22 }, credits = {"chloe_cromslor", "MRTorres"} }, -- todo: animate when promoted (if done, on extra layer, with the laugh as verticframes)
     j_hanging_chad = {},
@@ -190,7 +191,7 @@ AnimatedJokers = {
     j_chicot = {}, -- todo: add animations
     j_perkeo = {} -- todo: add animations
 }
-AnimatedTarots = {
+Aura.AnimatedTarots = {
     c_fool = {},
     c_magician = {},
     c_high_priestess = {},
@@ -214,21 +215,21 @@ AnimatedTarots = {
     c_judgement = {},
     c_world = {}
 }
-AnimatedPlanets = {
+Aura.AnimatedPlanets = {
     c_mercury = { order = 1, frames = 24, credits = {"Bard"} },
     c_venus = { order = 2, frames = 24, credits = {"Bard"} },
-    c_earth = { order = 3, frames = 24, credits = {"Bard"} },
+    c_earth = { order = 3, frames = 24, verticframes = 16, credits = {"Hoja", "Bard"} },
     c_mars = { order = 4, frames = 24, credits = {"Bard"} },
     c_jupiter = { order = 5, frames = 24, credits = {"Bard"} },
     c_saturn = { order = 6, frames = 24, credits = {"Bard"} },
-    c_uranus = { order = 7, frames = 24, credits = {"Bard"} },
+    c_uranus = { order = 7, frames = 24, verticframes = 19, credits = {"Hoja", "Bard"} },
     c_neptune = { order = 8, frames = 24, credits = {"Bard"} },
-    c_pluto = { order = 9, frames = 24, credits = {"Bard"} },
+    c_pluto = { order = 9, frames = 24, verticframes = 15, credits = {"Hoja", "Bard"} },
     c_planet_x = { order = 10, frames = 24, credits = {"Bard"} },
     c_ceres = { order = 11, frames = 24, credits = {"Bard"} },
     c_eris = { order = 12, frames = 24, credits = {"Bard"} }
 }
-AnimatedSpectrals = {
+Aura.AnimatedSpectrals = {
     c_familiar = {},
     c_grim = {},
     c_incantation = {},
@@ -248,7 +249,7 @@ AnimatedSpectrals = {
     c_soul = {},
     c_black_hole = { order = 18, frames_per_row = 24, frames = 144, credits = {"SadCube", "MRTorres"} }
 }
-AnimatedVouchers = {
+Aura.AnimatedVouchers = {
     v_overstock_norm = { order = 1, frames = 5, credits = {"MRTorres"} },
     v_overstock_plus = {},
     v_clearance_sale = {},
@@ -282,7 +283,7 @@ AnimatedVouchers = {
     v_paint_brush = {},
     v_palette = {}
 }
-AnimatedTags = {
+Aura.AnimatedTags = {
     tag_uncommon = { order = 1, frames_per_row = 11, frames = 22, credits = {"MightyKingVideo"} },
     tag_rare = { order = 2, frames_per_row = 11, frames = 22, credits = {"MightyKingVideo"} },
     tag_negative = { order = 3, frames = 19, credits = {"MightyKingVideo"} },
@@ -308,7 +309,7 @@ AnimatedTags = {
     tag_orbital = { order = 23, frames = 12, credits = {"MightyKingVideo"} },
     tag_economy = { order = 24, frames = 10, credits = {"SadCube"} }
 }
-AnimatedEnchancements = {
+Aura.AnimatedEnchancements = {
     m_bonus = { order = 1, frames = 13, fps = 20, individual = true, credits = {"MRTorres"} },
     m_mult = { order = 2, frames_per_row = 13, frames = 65, fps = 20, individual = true, credits = {"MRTorres"} },
     m_wild = {},
@@ -318,31 +319,13 @@ AnimatedEnchancements = {
     m_gold = {},
     m_lucky= {}
 }
-AuraTradingCards = {
-    [11] = {class = "JOKER", name = "The Joker of Poker", credits = {"LocalThunk"}, EX = {credits = {"MightyKingVideo"}, pos = 12}},
-    [15] = {class = "JOKER", name = "Applause for Acrobats", credits = {"MightyKingVideo"}},
-    [17] = {class = "JOKER", name = "Mind Over Madness", credits = {"Willow"}},
-    [21] = {class = "JOKER", name = "At Evens & Odds", credits = {"Willow"}},
-    [22] = {class = "JOKER", name = "Despair Trousers!!", credits = {"MightyKingVideo"}},
-    [41] = {class = "JOKER", name = "Riff Raff Rumble", credits = {"MightyKingVideo"}, EX = {pos = 42}},
-    [51] = {class = "SPELL", name = "Dangerous Dunce-like DNA", credits = {"Willow"}},
-    [61] = {class = "SPELL", name = "Paralleling Pyres of Plasma", credits = {"MightyKingVideo"}, EX = {pos = 62}},
-    [66] = {class = "SPELL", name = "Frightful Face of Fear", credits = {"MightyKingVideo"}},
-    [70] = {class = "LAND",  name = "Constellation Station", credits = {"MightyKingVideo"}},
-    [71] = {class = "LAND",  name = "No Jack's Land", credits = {"MightyKingVideo"}},
-    [79] = {class = "ITEM",  name = "Generous Gift", credits = {"MightyKingVideo"}},
-    [95] = {class = "SPELL", name = "Interplanetary Alignment", credits = {"MightyKingVideo"}},
-}
-AnimatedDeckSkins = {
+Aura.AnimatedDeckSkins = {
     collab_AU = { King = { anim = { frames_per_row = 13, frames = 34, start_frame = 0 }, atlas = { lc_anim = "aura_collab_AU_lc", hc_anim = "aura_collab_AU_hc" }, animpos = { x = 0, y = 0 }, credits = {"Hoja"} },
                 Queen = { anim = { frames_per_row = 13, frames = 40, start_frame = 34 }, atlas = { lc_anim = "aura_collab_AU_lc", hc_anim = "aura_collab_AU_hc" }, animpos = { x = 8, y = 2 }, credits = {"Hoja"} },
                 Jack = { anim = { frames_per_row = 13, frames = 4, start_frame = 74 }, atlas = { lc_anim = "aura_collab_AU_lc", hc_anim = "aura_collab_AU_hc" }, animpos = { x = 9, y = 5 }, credits = {"Hoja"} } },
 }
 --Dictionary to store all cards that get individual animations
-AnimatedIndividuals = {}
---Dictionary to store various animation related functions
-Aura = {}
-
+Aura.AnimatedIndividuals = {}
 
 --SETTING UP EVERYTHIN NEEDED FOR THE ANIMATED DECK SKINS, RIGHT NOW IS ALL MANUAL BUT FUTURE UPDATES MAY AUTOMATIZE IT
 
@@ -401,11 +384,11 @@ if SMODS.Atlas then
     local malverk_items = {}
     --The key are the sets where the centers are being stored, the values have the animation data
     local animated_dictionaries = {
-        {set = "Joker", dict = AnimatedJokers},
-        {set = "Tarot", dict = AnimatedTarots},
-        {set = "Planet", dict = AnimatedPlanets},
-        {set = "Spectral", dict = AnimatedSpectrals},
-        {set = "Voucher", dict = AnimatedVouchers}
+        {set = "Joker", dict = Aura.AnimatedJokers},
+        {set = "Tarot", dict = Aura.AnimatedTarots},
+        {set = "Planet", dict = Aura.AnimatedPlanets},
+        {set = "Spectral", dict = Aura.AnimatedSpectrals},
+        {set = "Voucher", dict = Aura.AnimatedVouchers}
     }
 
     for _, set_dict in pairs(animated_dictionaries) do
@@ -442,12 +425,22 @@ if SMODS.Atlas then
                         posey = math.floor(v.extra.start_frame / (v.extra.frames_per_row or v.extra.frames))
                     end
                 end
+                --If needed, make the atlas for the extra layer
+                if v.extra then
+                    SMODS.Atlas {
+                        key = k.."_extra",
+                        path = k .. "_extra.png",
+                        px = v.px or 71,
+                        py = v.py or 95
+                    }
+                end
                 --Making the atlas for the main layer. Malverk creates its own atlas if it used
                 if Malverk then
                     AltTexture({
                         key = k,
                         set = set,
                         path = k .. ".png",
+                        atlas_extra = v.extra and "aura_"..k.."_extra" or nil,
                         keys = { k },
                         loc_txt = { name = G.P_CENTERS[k] and G.P_CENTERS[k].name or k }, --The name for the menu where you can deactivate certain animations
                         px = v.px or 71,
@@ -462,16 +455,9 @@ if SMODS.Atlas then
                         py = v.py or 95
                     }
                 end
-                --If needed, make the atlas for the extra layer
-                if v.extra then
-                    SMODS.Atlas {
-                        key = k.."_extra",
-                        path = k .. "_extra.png",
-                        px = v.px or 71,
-                        py = v.py or 95
-                    }
-                end
                 --Overeinding the center to set the new atlas and store the position used if animated
+                v.modded_atlases = v.modded_atlases or {}
+                if v.extra then v.extra.modded_atlases = v.extra.modded_atlases or {} end
                 SMODS[set]:take_ownership(k, {
                     atlas = not Malverk and k or nil, --If Malverk is used, don't touch the atlas
                     animpos = { x = v.pos_x or posx or 0, y = v.pos_y or posy or 0 }, --the pos are custom, auromaticly determined or 0,0. The extra dict stores all relevant info for the extra layer. Don't forget the prefix
@@ -485,7 +471,7 @@ if SMODS.Atlas then
     end
     --The same for enhancements. But enhancements can't have extra layers
     local shorted_list = {}
-    for k, v in pairs(AnimatedEnchancements) do
+    for k, v in pairs(Aura.AnimatedEnchancements) do
         if v.order then
             shorted_list[v.order] = k
         else
@@ -493,7 +479,7 @@ if SMODS.Atlas then
         end
     end
     for _, k in pairs(shorted_list) do
-        local v = AnimatedEnchancements[k]
+        local v = Aura.AnimatedEnchancements[k]
         if v.frames then
             --Determine if the starting position isn't 0,0
             local posx, posy, posex, posey
@@ -526,6 +512,7 @@ if SMODS.Atlas then
                 }
             end
             --Overriding the center to set the new atlas and store the position used if animated
+            v.modded_atlases = v.modded_atlases or {}
             SMODS.Enhancement:take_ownership(k, {
                 atlas = not Malverk and k or nil, --If Malverk is used, don't touch the atlas
                 animpos = { x = v.pos_x or posx or 0, y = v.pos_y or posy or 0 }, --the pos are custom, auromaticly determined or 0,0
@@ -534,7 +521,7 @@ if SMODS.Atlas then
         end
     end
     --The same for tags. But with a different default size
-    for k, v in pairs(AnimatedTags) do
+    for k, v in pairs(Aura.AnimatedTags) do
         if v.frames then
             --Make the atlas. Malverk creates its own atlas if it used
             if Malverk then
@@ -557,6 +544,7 @@ if SMODS.Atlas then
                 }
             end
             --Overriding the center to set the new atlas and store the position used if animated
+            v.modded_atlases = v.modded_atlases or {}
             SMODS.Tag:take_ownership(k, {
                 atlas = not Malverk and k or nil, --If Malverk is used, don't touch the atlas
                 animpos = { x = 0, y = 0 },
@@ -586,15 +574,15 @@ end
 function Aura.add_individual(card, loaded)
     --Check if the card is already in the list
     local is_in_individual = false
-    for i = 1, #AnimatedIndividuals do
-        if AnimatedIndividuals[i] == card then
+    for i = 1, #Aura.AnimatedIndividuals do
+        if Aura.AnimatedIndividuals[i] == card then
             is_in_individual = true
             break
         end
     end
     --If not, add it and set up its individual animation parameters
     if not is_in_individual then
-        AnimatedIndividuals[#AnimatedIndividuals+1] = card
+        Aura.AnimatedIndividuals[#Aura.AnimatedIndividuals+1] = card
         --If the card is Flash or Trading, randomize the their orders while keeping the current frame
         if card.config.center.key == "j_flash" and not loaded then
             if card.animation then
@@ -609,9 +597,9 @@ function Aura.add_individual(card, loaded)
                 Aura.update_trading(card, (card.config.center.animpos.x + (12*card.config.center.animpos.y) + 1), card.config.center.atlas)
             else
                 local trading_target = card.animation.trading_order[card.animation.trading_index] and card.animation.trading_order[card.animation.trading_index] or 11
-                card.config.center.atlas = AuraTradingCards[trading_target].atlas or (Malverk and "alt_tex_" or "").."aura_j_trading"
+                card.config.center.atlas = Aura.TradingCards[trading_target].atlas or (Malverk and "alt_tex_" or "").."aura_j_trading"
                 card:set_sprites(card.config.center)
-                card.animation.target = ((card.animation.EX and AuraTradingCards[trading_target].EX.pos) or (AuraTradingCards[trading_target].pos and AuraTradingCards[trading_target].pos) or trading_target) - 1
+                card.animation.target = ((card.animation.EX and Aura.TradingCards[trading_target].EX.pos) or (Aura.TradingCards[trading_target].pos and Aura.TradingCards[trading_target].pos) or trading_target) - 1
             end
         end
         --Find what kind of animaiton is suposed to have
@@ -716,12 +704,12 @@ function Game:update(dt)
     upd(self, dt)
     --Updating all animated objects
     local AnimatedDictionaries = {
-        AnimatedJokers,
-        AnimatedTarots,
-        AnimatedPlanets,
-        AnimatedSpectrals,
-        AnimatedVouchers,
-        AnimatedEnchancements,
+        Aura.AnimatedJokers,
+        Aura.AnimatedTarots,
+        Aura.AnimatedPlanets,
+        Aura.AnimatedSpectrals,
+        Aura.AnimatedVouchers,
+        Aura.AnimatedEnchancements,
     }
     for _, AnimDict in pairs(AnimatedDictionaries) do
         for k, v in pairs(AnimDict) do
@@ -734,20 +722,20 @@ function Game:update(dt)
         end
     end
     --Tags are not stored in P_CENTERS, so they need a different loop
-    for k, v in pairs(AnimatedTags) do
-        if next(AnimatedTags[k] or {}) ~= nil then
-            if AnimatedTags[k].IncorrectAtlas == nil then --When the game starts, check every atlas
-                AnimatedTags[k].IncorrectAtlas = Aura.CheckAtlas(G.P_TAGS[k])
+    for k, v in pairs(Aura.AnimatedTags) do
+        if next(Aura.AnimatedTags[k] or {}) ~= nil then
+            if Aura.AnimatedTags[k].IncorrectAtlas == nil then --When the game starts, check every atlas
+                Aura.AnimatedTags[k].IncorrectAtlas = Aura.CheckAtlas(G.P_TAGS[k])
             end
             Aura.update_frame(dt, k, G.P_TAGS[k]) 
         end
     end
     --Updating all individual animated cards
-    for _, v in pairs(AnimatedIndividuals) do
+    for _, v in pairs(Aura.AnimatedIndividuals) do
         Aura.update_frame(dt, v.config.center_key, v.config.center, v.animation)
     end
     --Updating all animated deck skins
-    for k, v in pairs(AnimatedDeckSkins) do
+    for k, v in pairs(Aura.AnimatedDeckSkins) do
         for kv, vv in pairs(v) do
             Aura.update_frame(dt, k.."_"..kv, vv)
         end
@@ -1129,3 +1117,8 @@ assert(SMODS.load_file('InteractiveJokers.lua'))()
 
 --Functions for jokers that require more information to determine their animation
 assert(SMODS.load_file('AdvancedInteractiveJokers.lua'))()
+
+if Malverk then
+    --Ugly fix for the extra layers in malverk. Needs improving
+    assert(SMODS.load_file('MalverkExtraFixUgly.lua'))()
+end

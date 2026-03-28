@@ -9,10 +9,10 @@ function Card:set_ability(center, initial, delay_sprites)
     if (not center.anim or center.key == ("m_bonus" or "m_mult")) and self.animation then
         --Clean animation data
         self.animation = nil
-        --Remove from AnimatedIndividuals list
-        for i = 1, #AnimatedIndividuals do
-            if AnimatedIndividuals[i] == self then
-                AnimatedIndividuals[i] = nil
+        --Remove from Aura.AnimatedIndividuals list
+        for i = 1, #Aura.AnimatedIndividuals do
+            if Aura.AnimatedIndividuals[i] == self then
+                Aura.AnimatedIndividuals[i] = nil
             end
         end
     end

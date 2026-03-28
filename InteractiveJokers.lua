@@ -23,9 +23,9 @@ function update_hand_text(config, vals)
     if config.immediate and not config.volume and vals.handname ~= nil then
         --Check if the selected hand has already been played this round and set Card Sharp animation target accordingly
         if G.GAME.hands[vals.handname] and G.GAME.hands[vals.handname].played_this_round > 0 then
-            AnimatedJokers.j_card_sharp.target = 3
+            Aura.AnimatedJokers.j_card_sharp.target = 3
         else
-            AnimatedJokers.j_card_sharp.target = 0
+            Aura.AnimatedJokers.j_card_sharp.target = 0
         end
     end
     return true
@@ -52,7 +52,7 @@ function add_round_eval_row(config)
                 trigger = 'after',
                 blocking = false,
                 func = (function()
-                    AnimatedJokers.j_to_the_moon.escape_target = true
+                    Aura.AnimatedJokers.j_to_the_moon.escape_target = true
                     return true
                 end)
             }))
@@ -66,8 +66,8 @@ function Aura.Trigger_oops_all_6s()
     --Add animation inside an event
     G.E_MANAGER:add_event(Event({
         func = (function()
-            AnimatedJokers.j_oops.extra.fps = 10*(G.SPEEDFACTOR/G.SETTINGS.GAMESPEED) --Adapt fps to game speed
-            AnimatedJokers.j_oops.extra.remaining_triggers = (AnimatedJokers.j_oops.extra.remaining_triggers or 0) + 1
+            Aura.AnimatedJokers.j_oops.extra.fps = 10*(G.SPEEDFACTOR/G.SETTINGS.GAMESPEED) --Adapt fps to game speed
+            Aura.AnimatedJokers.j_oops.extra.remaining_triggers = (Aura.AnimatedJokers.j_oops.extra.remaining_triggers or 0) + 1
             return true
         end)
     }))
@@ -115,7 +115,7 @@ function Card:calculate_joker(context)
         --Trigger Oops All 6s animation
         Aura.Trigger_oops_all_6s()
         --Use peek_pseudorandom to see the next value without altering it and know if it will extinguish
-        if peek_pseudorandom('gros_michel') < G.GAME.probabilities.normal/self.ability.extra.odds and not AnimatedJokers.j_gros_michel.IncorrectAtlas then
+        if peek_pseudorandom('gros_michel') < G.GAME.probabilities.normal/self.ability.extra.odds and not Aura.AnimatedJokers.j_gros_michel.IncorrectAtlas then
             G.E_MANAGER:add_event(Event({
                 delay = 1*G.SPEEDFACTOR, --Delay to let the animation play before destroying the card
                 trigger = 'before',
@@ -133,7 +133,7 @@ function Card:calculate_joker(context)
       context.destroying_card and not context.blueprint and not self.debuff and
       #context.full_hand == 1 and context.full_hand[1]:get_id() == 6 and G.GAME.current_round.hands_played == 0 and
       #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit and
-      not AnimatedJokers.j_sixth_sense.IncorrectAtlas then --It is important to not add delay if sixth sense is not animated
+      not Aura.AnimatedJokers.j_sixth_sense.IncorrectAtlas then --It is important to not add delay if sixth sense is not animated
         G.E_MANAGER:add_event(Event({ delay = 1.6*G.SETTINGS.GAMESPEED, --Delay the "+1 spectral" pop up to sync it with the flash
         trigger = 'before',
         func = (function()
@@ -153,7 +153,7 @@ function Card:calculate_joker(context)
     local ret = cj(self, context)
 
     --Detecting when Flash Card is upgraded to trigger animation
-    if self.ability.name == "Flash Card" and context.reroll_shop and not context.blueprint and not AnimatedJokers.j_flash.IncorrectAtlas then
+    if self.ability.name == "Flash Card" and context.reroll_shop and not context.blueprint and not Aura.AnimatedJokers.j_flash.IncorrectAtlas then
         G.E_MANAGER:add_event(Event({
             func = (function()
                 --Flip Flash Card away
@@ -176,7 +176,7 @@ function Card:calculate_joker(context)
     end
 
     --Detecting when Trading Card activates to trigger animation
-    if self.ability.name == "Trading Card" and ret and ret.message and not context.blueprint and not AnimatedJokers.j_trading.IncorrectAtlas then --ret.message carrying info means will show the money pop up
+    if self.ability.name == "Trading Card" and ret and ret.message and not context.blueprint and not Aura.AnimatedJokers.j_trading.IncorrectAtlas then --ret.message carrying info means will show the money pop up
         G.E_MANAGER:add_event(Event({
             func = (function()
                 --Flip Trading Card away
@@ -189,16 +189,16 @@ function Card:calculate_joker(context)
                 if self.animation.trading_index > #self.animation.trading_order then self.animation.trading_index = 0 end
                 local trading_target = self.animation.trading_order[self.animation.trading_index] and self.animation.trading_order[self.animation.trading_index] or 11
                 --Update atlas if needed
-                if (AuraTradingCards[trading_target].atlas or (Malverk and "alt_tex_" or "").."aura_j_trading") ~= self.config.center.atlas then
-                    self.config.center.atlas = AuraTradingCards[trading_target].atlas or (Malverk and "alt_tex_" or "").."aura_j_trading"
+                if (Aura.TradingCards[trading_target].atlas or (Malverk and "alt_tex_" or "").."aura_j_trading") ~= self.config.center.atlas then
+                    self.config.center.atlas = Aura.TradingCards[trading_target].atlas or (Malverk and "alt_tex_" or "").."aura_j_trading"
                     self:set_sprites(self.config.center)
                 end
                 --Determine if EX or regular version is obtained
-                if AuraTradingCards[trading_target].EX and (pseudorandom("aura_trading_EX") < 1/10) then --10% chance for EX version only if EX version exists
-                    trading_target = AuraTradingCards[trading_target].EX.pos
+                if Aura.TradingCards[trading_target].EX and (pseudorandom("aura_trading_EX") < 1/10) then --10% chance for EX version only if EX version exists
+                    trading_target = Aura.TradingCards[trading_target].EX.pos
                     self.animation.EX = true
                 else
-                    trading_target = AuraTradingCards[trading_target].pos and AuraTradingCards[trading_target].pos or trading_target
+                    trading_target = Aura.TradingCards[trading_target].pos and Aura.TradingCards[trading_target].pos or trading_target
                     self.animation.EX = false
                 end
                 self.animation.target = trading_target - 1
@@ -249,7 +249,7 @@ function Card:calculate_joker(context)
         G.E_MANAGER:add_event(Event({
             func = (function()
                 Aura.add_individual(self)
-                self.animation = { target =  5 - self.ability.mult/4 } --Divide frames for each 4 mult
+                self.animation = { target = 5 - self.ability.mult/4 } --Divide frames for each 4 mult
                 return true
             end)
         }))
@@ -260,7 +260,7 @@ function Card:calculate_joker(context)
         G.E_MANAGER:add_event(Event({
             func = (function()
                 Aura.add_individual(self)
-                self.animation = { target =  AnimatedJokers.j_selzer.frames-1 - math.floor(((self.ability.extra*(AnimatedJokers.j_selzer.frames-1)/10)) + 0.5 ) } --Automaticly divide frames (except first one) between al stages
+                self.animation = { target = Aura.AnimatedJokers.j_selzer.frames-1 - math.floor(((self.ability.extra*(Aura.AnimatedJokers.j_selzer.frames-1)/10)) + 0.5 ) } --Automaticly divide frames (except first one) between al stages
                 return true
             end)
         }))
@@ -269,7 +269,7 @@ function Card:calculate_joker(context)
     --Update Invisible Joker animation according to remaining rounds
     if self.ability.name == "Invisible Joker" and context.end_of_round and not context.blueprint then
         Aura.add_individual(self)
-        self.animation = { target = math.min( 10, math.floor((self.ability.invis_rounds * (AnimatedJokers.j_invisible.frames-1) / self.ability.extra) + 0.5)) } --Automaticly divide frames between al stages
+        self.animation = { target = math.min( 10, math.floor((self.ability.invis_rounds * (Aura.AnimatedJokers.j_invisible.frames-1) / self.ability.extra) + 0.5)) } --Automaticly divide frames between al stages
     end
 
     --Detect when Space Joker activates to trigger animation

@@ -32,28 +32,47 @@ function Aura.rank_sprite_order(rank)
     elseif rank == "paperback_Apostle" then return 13 -- From Paperback mod
     else return 14 end
 end
---Seal Order for Certificate
-function Aura.seal_sprite_order(seal)
-    if seal == "Gold" then return 1
-    elseif seal == "Purple" then return 2
-    elseif seal == "Red" then return 3
-    elseif seal == "Blue" then return 4
-    elseif seal == "poke_pink_seal" then return 5 -- From Pokermon mod
-    elseif seal == "poke_silver" then return 6 -- From Pokermon mod
-    elseif seal == "artb_brick" then return 7 -- From ArtBox mod
-    elseif seal == "artb_button" then return 8 -- From ArtBox mod
-    elseif seal == "artb_ouroboros" then return 9 -- From ArtBox mod
-    elseif seal == "cry_green" then return 10 -- From Cryptid mod
-    elseif seal == "cry_azure" then return 11 -- From Cryptid mod
-    elseif seal == "unstb_spades" then return 12 -- From Unstable mod -- Will never occur on Certificate
-    elseif seal == "unstb_hearts" then return 13 -- From Unstable mod -- Will never occur on Certificate
-    elseif seal == "unstb_clubs" then return 14 -- From Unstable mod -- Will never occur on Certificate
-    elseif seal == "unstb_diamonds" then return 15 -- From Unstable mod -- Will never occur on Certificate
-    elseif seal == "unstb_face" then return 16 -- From Unstable mod -- Will never occur on Certificate
-    elseif seal == "unstb_heal" then return 17 -- From Unstable mod -- Will never occur on Certificate
-    else return 0 end
+--Dictionary with Certificate seals
+Aura.CertificateSealsTable = {
+    Gold   = {pos = { x = 1, y = 0 }},
+    Purple = {pos = { x = 2, y = 0 }},
+    Red    = {pos = { x = 3, y = 0 }},
+    Blue   = {pos = { x = 4, y = 0 }},
+    poke_pink_seal = {pos = { x = 5, y = 0 }}, -- From Pokermon mod
+    poke_silver    = {pos = { x = 0, y = 1 }}, -- From Pokermon mod
+    artb_button    = {pos = { x = 1, y = 1 }}, -- From ArtBox mod
+    artb_brick     = {pos = { x = 2, y = 1 }}, -- From ArtBox mod
+    artb_ouroboros = {pos = { x = 3, y = 1 }}, -- From ArtBox mod
+    cry_green      = {pos = { x = 4, y = 1 }}, -- From Cryptid mod
+    cry_azure      = {pos = { x = 5, y = 1 }}, -- From Cryptid mod
+    unstb_spades   = {pos = { x = 0, y = 2 }}, -- From Unstable mod -- Will never occur on Certificate
+    unstb_hearts   = {pos = { x = 1, y = 2 }}, -- From Unstable mod -- Will never occur on Certificate
+    unstb_clubs    = {pos = { x = 2, y = 2 }}, -- From Unstable mod -- Will never occur on Certificate
+    unstb_diamonds = {pos = { x = 3, y = 2 }}, -- From Unstable mod -- Will never occur on Certificate
+    unstb_face     = {pos = { x = 4, y = 2 }}, -- From Unstable mod -- Will never occur on Certificate
+    unstb_heal     = {pos = { x = 5, y = 2 }}, -- From Unstable mod -- Will never occur on Certificate
+}
+function Aura.CertificateSeals(seal)
+    local atlas = Aura.CertificateSealsTable[seal] and Aura.CertificateSealsTable[seal].atlas or "aura_j_certificate_extra"
+    local pos = Aura.CertificateSealsTable[seal] and Aura.CertificateSealsTable[seal].pos or { x = 0, y = 0 }
+    return atlas, pos
 end
-
+--Dictionary with finished Trading Cards
+Aura.TradingCards = {
+    [11] = {class = "JOKER", name = "The Joker of Poker", credits = {"LocalThunk"}, EX = {credits = {"MightyKingVideo"}, pos = 12}},
+    [15] = {class = "JOKER", name = "Applause for Acrobats", credits = {"MightyKingVideo"}},
+    [17] = {class = "JOKER", name = "Mind Over Madness", credits = {"Willow"}},
+    [21] = {class = "JOKER", name = "At Evens & Odds", credits = {"Willow"}},
+    [22] = {class = "JOKER", name = "Despair Trousers!!", credits = {"MightyKingVideo"}},
+    [41] = {class = "JOKER", name = "Riff Raff Rumble", credits = {"MightyKingVideo"}, EX = {pos = 42}},
+    [51] = {class = "SPELL", name = "Dangerous Dunce-like DNA", credits = {"Willow"}},
+    [61] = {class = "SPELL", name = "Paralleling Pyres of Plasma", credits = {"MightyKingVideo"}, EX = {pos = 62}},
+    [66] = {class = "SPELL", name = "Frightful Face of Fear", credits = {"MightyKingVideo"}},
+    [70] = {class = "LAND",  name = "Constellation Station", credits = {"MightyKingVideo"}},
+    [71] = {class = "LAND",  name = "No Jack's Land", credits = {"MightyKingVideo"}},
+    [79] = {class = "ITEM",  name = "Generous Gift", credits = {"MightyKingVideo"}},
+    [95] = {class = "SPELL", name = "Interplanetary Alignment", credits = {"MightyKingVideo"}},
+}
 
 --FUNCTIONS FOR FLASH CARD AND TRADING CARD ANIMATIONS
 
@@ -82,7 +101,7 @@ function Aura.update_trading(self, StartPos, StartAtlas)
     local count = 0
     local isEX = false
     local FirstCard = StartPos
-    for k, v in pairs(AuraTradingCards) do
+    for k, v in pairs(Aura.TradingCards) do
         anim_order[count] = k
         count = count + 1
         --Detect which card is the starting one
@@ -105,7 +124,7 @@ function Aura.update_trading(self, StartPos, StartAtlas)
         end
     end
     --Store animation data. This includes if the starting card is an EX
-    local trading_target = ((isEX and AuraTradingCards[FirstCard].EX.pos) or (AuraTradingCards[FirstCard].pos and AuraTradingCards[FirstCard].pos) or StartPos) - 1
+    local trading_target = ((isEX and Aura.TradingCards[FirstCard].EX.pos) or (Aura.TradingCards[FirstCard].pos and Aura.TradingCards[FirstCard].pos) or StartPos) - 1
     self.animation = {target = trading_target, trading_index = 0, trading_order = anim_order, EX = isEX}
 end
 
@@ -116,18 +135,18 @@ end
 function Aura.update_castle()
     --Find current castle suit position an set it as target
     local new_suit = G.GAME.current_round.castle_card.suit or nil
-    AnimatedJokers.j_castle.extra.target = Aura.suit_sprite_order(new_suit)
+    Aura.AnimatedJokers.j_castle.extra.target = Aura.suit_sprite_order(new_suit)
     --Detect if sky should be Day or Night and update animation data accordingly
     if (new_suit == "six_Moons" or new_suit == "six_Stars" or new_suit == "paperback_Stars") then
-        if AnimatedJokers.j_castle.start_frame ~= 72 then --Only update if needed
-            AnimatedJokers.j_castle.start_frame = 72
-            AnimatedJokers.j_castle.frames = 22
+        if Aura.AnimatedJokers.j_castle.start_frame ~= 72 then --Only update if needed
+            Aura.AnimatedJokers.j_castle.start_frame = 72
+            Aura.AnimatedJokers.j_castle.frames = 22
             G.P_CENTERS["j_castle"].animpos.y = 8
         end
     else
-        if AnimatedJokers.j_castle.start_frame ~= 0 then --Only update if needed
-            AnimatedJokers.j_castle.start_frame = 0
-            AnimatedJokers.j_castle.frames = 69
+        if Aura.AnimatedJokers.j_castle.start_frame ~= 0 then --Only update if needed
+            Aura.AnimatedJokers.j_castle.start_frame = 0
+            Aura.AnimatedJokers.j_castle.frames = 69
             G.P_CENTERS["j_castle"].animpos.y = 0
         end
     end
@@ -138,7 +157,7 @@ function reset_castle_card()
     --Original reset_castle_card function call
     rcc()
     --Detect if Castle is animated to flip all castle jokers to grab attention
-    if not AnimatedJokers.j_castle.IncorrectAtlas then
+    if not Aura.AnimatedJokers.j_castle.IncorrectAtlas then
         --Find all castle jokers
         local castlelist = {}
         for _, jkr in ipairs(G.jokers.cards) do
@@ -180,7 +199,7 @@ end
 --Function for setting Mail card to the current Rank. Called in reset_mail_rank(), Game.start_run() and when a Mail joker is created
 function Aura.update_mail()
     local rank = G.GAME.current_round.mail_card.rank or nil
-    AnimatedJokers.j_mail.target = Aura.rank_sprite_order(rank)
+    Aura.AnimatedJokers.j_mail.target = Aura.rank_sprite_order(rank)
 end
 --Detecting Mail rank change to update mail and flip all mail jokers
 local rmr = reset_mail_rank
@@ -188,7 +207,7 @@ function reset_mail_rank()
     --Original reset_mail_rank function call
     rmr()
     --Detect if Mail is animated to flip all mail jokers to grab attention
-    if not AnimatedJokers.j_mail.IncorrectAtlas then
+    if not Aura.AnimatedJokers.j_mail.IncorrectAtlas then
         --Find all mail jokers
         local maillist = {}
         for _, jkr in ipairs(G.jokers.cards) do
@@ -230,7 +249,7 @@ end
 function Aura.update_ancient()
     --Find current ancient suit position and set it as "target"
     local suit = Aura.suit_sprite_order(G.GAME.current_round.ancient_card.suit or nil)
-    AnimatedJokers.j_ancient.start_frame = suit * 6
+    Aura.AnimatedJokers.j_ancient.start_frame = suit * 6
     --Manually move ancient to the correct row
     G.P_CENTERS["j_ancient"].animpos.y = suit
 end
@@ -238,7 +257,7 @@ end
 local rac = reset_ancient_card
 function reset_ancient_card()
     rac() --Original reset_ancient_card function call
-    AnimatedJokers.j_ancient.escape_target = true
+    Aura.AnimatedJokers.j_ancient.escape_target = true
 end
 
 
@@ -248,13 +267,13 @@ end
 function Aura.update_idol()
     local suit = G.GAME.current_round.idol_card.suit or nil
     local rank = G.GAME.current_round.idol_card.rank or nil
-    AnimatedJokers.j_idol.target = (Aura.suit_sprite_order(suit) * AnimatedJokers.j_idol.frames_per_row) + Aura.rank_sprite_order(rank)
+    Aura.AnimatedJokers.j_idol.target = (Aura.suit_sprite_order(suit) * Aura.AnimatedJokers.j_idol.frames_per_row) + Aura.rank_sprite_order(rank)
 end
 --Detecting Idol suit or rank change and triggering animation. Inside update_frame() it is detected when the mouth is closed to update idol
 local ric = reset_idol_card
 function reset_idol_card()
     ric() --Original reset_idol_card function call
-    AnimatedJokers.j_idol.extra.escape_target = true
+    Aura.AnimatedJokers.j_idol.extra.escape_target = true
 end
 
 
@@ -270,16 +289,18 @@ function Card:set_seal(seal, silent, immediate)
             local selfjkr = G.jokers.cards[i]
             if selfjkr.config.center_key == "j_certificate" and not selfjkr.debuff and selfjkr.animation and selfjkr.animation.animation_loaded then
                 Aura.add_individual(selfjkr)
-                selfjkr.animation.animation_loaded = false --Disable to avoid retriggering the same if there are multiple Certificates
-                --Add animation inside an event
-                G.E_MANAGER:add_event(Event({ delay = 10*G.SPEEDFACTOR,
-                    func = (function()
-                        selfjkr.animation = { target = 27, escape_target = true, extra = { target = Aura.seal_sprite_order(seal) }, animation_loaded = selfjkr.animation.animation_loaded } --Trigger signature + set seal animation + not loosing loaded state
-                        sendDebugMessage(tostring(selfjkr))
-                        return true
-                    end)
-                }))
-                break --Only one Certificate should trigger per seal created
+                --Trigger signature + unloading in case there are multiple Certificates + storing seal so it can be set when reolading card
+                selfjkr.animation = { target = 27, escape_target = true, animation_loaded = false, current_seal = seal }
+                --Setting the seal in the extra layer
+                local atlas, pos = Aura.CertificateSeals(seal)
+                selfjkr.children.front = Sprite(selfjkr.T.x, selfjkr.T.y, selfjkr.T.w, selfjkr.T.h, G.ASSET_ATLAS[atlas], pos)
+                selfjkr.children.front.states.hover = selfjkr.states.hover
+                selfjkr.children.front.states.click = selfjkr.states.click
+                selfjkr.children.front.states.drag = selfjkr.states.drag
+                selfjkr.children.front.states.collide.can = false
+                selfjkr.children.front:set_role({major = selfjkr, role_type = 'Glued', draw_major = selfjkr})
+                --Only one Certificate should trigger per seal created
+                break
             end
         end
     end
@@ -298,14 +319,14 @@ function Aura.update_drivers_license(silent)
     end
     --Set new target if not already in correct state
     local target_frame = nil
-    if driver_tally >= 16 and AnimatedJokers.j_drivers_license.target == 0 then
+    if driver_tally >= 16 and Aura.AnimatedJokers.j_drivers_license.target == 0 then
         target_frame = 1
-    elseif driver_tally <= 15 and AnimatedJokers.j_drivers_license.target == 1 then
+    elseif driver_tally <= 15 and Aura.AnimatedJokers.j_drivers_license.target == 1 then
         target_frame = 0
     end
     if target_frame then
         --Detect if Driver's License is animated to flip all Drivers License jokers to grab attention
-        if not (silent or AnimatedJokers.j_drivers_license.IncorrectAtlas) then
+        if not (silent or Aura.AnimatedJokers.j_drivers_license.IncorrectAtlas) then
             --Find all Driver's License jokers
             local licenselist = {}
             for _, jkr in ipairs(G.jokers and G.jokers.cards or {}) do
@@ -323,7 +344,7 @@ function Aura.update_drivers_license(silent)
                     play_sound('card1')
                     --Update Driver's License once they are on the back side
                     delay(0.075*G.SPEEDFACTOR)
-                    AnimatedJokers.j_drivers_license.target = target_frame
+                    Aura.AnimatedJokers.j_drivers_license.target = target_frame
                     for _, jkr in pairs(licenselist) do
                         jkr:juice_up(0.3, 0.3) --Atract attention to the change
                     end
@@ -337,7 +358,7 @@ function Aura.update_drivers_license(silent)
                 end)
             }))
         else
-            AnimatedJokers.j_drivers_license.target = target_frame --update Driver's License anyway if not animated, or if silent
+            Aura.AnimatedJokers.j_drivers_license.target = target_frame --update Driver's License anyway if not animated, or if silent
         end
     end
 end
