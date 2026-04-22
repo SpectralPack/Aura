@@ -333,7 +333,7 @@ function SMODS.create_mod_badges(obj, badges)
 	cmb(obj, badges)
     --Find the credits to be shown
     local Aura_credits = obj and obj.anim and not obj.anim.IncorrectAtlas and obj.anim.credits
-    --Find what badge to modify
+    --Find if theres is badge to modify
     local Our_badge = nil
     local function eq_col(x, y) --Easiest way find our badge is by colour
 		for i = 1, 4 do
@@ -349,8 +349,49 @@ function SMODS.create_mod_badges(obj, badges)
 			break
 		end
 	end
+    --If there is no badge but it is needed, create it
+    if Aura_credits and not Our_badge and SMODS.Mods["Aura"].config.Animation_Credits then
+        Our_badge = #badges + 1
+        badges[#badges + 1] = {
+            n = G.UIT.R,
+            config = { align = "cm" },
+            nodes = {
+                {
+                    n = G.UIT.R,
+                    config = {
+                        align = "cm",
+                        colour = HEX("3469ab"),
+                        r = 0.1,
+                        minw = 2,
+                        minh = 0.36,
+                        emboss = 0.05,
+                        padding = 0.03 * 0.9,
+                    },
+                    nodes = {
+                        { n = G.UIT.B, config = { h = 0.1, w = 0.03 } },
+                        {
+                            n = G.UIT.O,
+                            config = {
+                                object = DynaText({
+                                    string = "Aura",
+                                    colours = { Aura_credits.text_colour or G.C.WHITE },
+                                    silent = true,
+                                    float = true,
+                                    shadow = true,
+                                    offset_y = -0.03,
+                                    spacing = 1,
+                                    scale = 0.33 * 0.9,
+                                }),
+                            },
+                        },
+                        { n = G.UIT.B, config = { h = 0.1, w = 0.03 } },
+                    },
+                },
+            },
+        }
+	end
 	if Our_badge then
-        if Aura_credits then
+        if Aura_credits and SMODS.Mods["Aura"].config.Animation_Credits then
             --Prepare to calculate scale factor for text
             local function calc_scale_fac(text)
                 local size = 0.9
@@ -368,11 +409,24 @@ function SMODS.create_mod_badges(obj, badges)
             end
             local scale_fac = {}
             local min_scale_fac = 1
-            --First show the mod name, then the credits. If there are more than one, show "Animators:" so the user knows they are multiple people
-            local strings = { "Aura" }
+            --if there are already credits, start with those, else start with the mod name
+            --If there are more than one, show "Animators:" so the user knows they are multiple people
+            local old_string = badges[Our_badge].nodes[1].nodes[2].config.object.strings
+            local strings = {}
+            if old_string then
+                for i = 1, #old_string do
+                    strings[#strings + 1] = old_string[i].string
+                    --if the original credits only had one animator, switch "Animator" to "Animators"
+                    if old_string[i].string:sub(1,10) == "Animator: " then
+                        strings[#strings] = "Animators: "..old_string[i].string:sub(11)
+                    end
+                end
+            else
+                strings[1] = "Aura"
+            end
             if obj.key ~= "j_trading" then
                 for i = 1, #Aura_credits do
-                    if #Aura_credits > 1 then
+                    if #Aura_credits > 1 or #strings > 1 then
                         strings[#strings + 1] = "Animators: "..Aura_credits[i]
                     else
                         strings[#strings + 1] = "Animator: "..Aura_credits[i]

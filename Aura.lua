@@ -21,7 +21,7 @@ SMODS.Mods.Aura.config_tab = function()
 		nodes = {
             create_toggle({
                 id = "Animation_Credits",
-                label = "Show animation credits in the mod tag of each card",
+                label = "Show mod tag and animation credits in each card",
                 ref_table = SMODS.Mods["Aura"].config,
                 ref_value = "Animation_Credits",
             }),
@@ -320,9 +320,9 @@ Aura.AnimatedEnchancements = {
     m_lucky= {}
 }
 Aura.AnimatedDeckSkins = {
-    collab_AU = { King = { anim = { frames_per_row = 13, frames = 34, start_frame = 0 }, atlas = { lc_anim = "aura_collab_AU_lc", hc_anim = "aura_collab_AU_hc" }, animpos = { x = 0, y = 0 }, credits = {"Hoja"} },
-                Queen = { anim = { frames_per_row = 13, frames = 40, start_frame = 34 }, atlas = { lc_anim = "aura_collab_AU_lc", hc_anim = "aura_collab_AU_hc" }, animpos = { x = 8, y = 2 }, credits = {"Hoja"} },
-                Jack = { anim = { frames_per_row = 13, frames = 4, start_frame = 74 }, atlas = { lc_anim = "aura_collab_AU_lc", hc_anim = "aura_collab_AU_hc" }, animpos = { x = 9, y = 5 }, credits = {"Hoja"} } },
+    collab_AU = { King = { anim = { frames_per_row = 13, frames = 34, start_frame = 0, credits = {"Hoja"}  }, atlas = { lc_anim = "aura_collab_AU_lc", hc_anim = "aura_collab_AU_hc" }, animpos = { x = 0, y = 0 } },
+                Queen = { anim = { frames_per_row = 13, frames = 40, start_frame = 34, credits = {"Hoja"} }, atlas = { lc_anim = "aura_collab_AU_lc", hc_anim = "aura_collab_AU_hc" }, animpos = { x = 8, y = 2 } },
+                Jack = { anim = { frames_per_row = 13, frames = 4, start_frame = 74, credits = {"Hoja"} }, atlas = { lc_anim = "aura_collab_AU_lc", hc_anim = "aura_collab_AU_hc" }, animpos = { x = 9, y = 5 } } },
 }
 --Dictionary to store all cards that get individual animations
 Aura.AnimatedIndividuals = {}
@@ -517,7 +517,7 @@ if SMODS.Atlas then
                 atlas = not Malverk and k or nil, --If Malverk is used, don't touch the atlas
                 animpos = { x = v.pos_x or posx or 0, y = v.pos_y or posy or 0 }, --the pos are custom, auromaticly determined or 0,0
                 anim = v,
-            },not SMODS.Mods["Aura"].config.Animation_Credits) --Disable mod badge if configured so
+            }, true)
         end
     end
     --The same for tags. But with a different default size
@@ -549,7 +549,7 @@ if SMODS.Atlas then
                 atlas = not Malverk and k or nil, --If Malverk is used, don't touch the atlas
                 animpos = { x = 0, y = 0 },
                 anim = v,
-            },not SMODS.Mods["Aura"].config.Animation_Credits) --Disable mod badge if configured so
+            }, true)
         end
     end
 
